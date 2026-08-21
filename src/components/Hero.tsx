@@ -3,6 +3,7 @@ import styles from "./Hero.module.css";
 export default function Hero() {
   return (
     <section id="hero" className={styles.hero}>
+      <span className={styles.glow} aria-hidden="true" />
       <span className={styles.badge}>Estúdio digital — LCS</span>
 
       <h1 className={styles.headline}>Sites que parecem feitos à mão, não gerados.</h1>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { projects } from "@/data/projects";
 import Reveal from "./Reveal";
 import styles from "./Work.module.css";
@@ -38,7 +39,13 @@ export default function Work() {
                 rel="noopener noreferrer"
                 aria-label={`Abrir ${project.title}`}
               >
-                <span className={styles.placeholder}>{project.title}</span>
+                <Image
+                  src={project.image}
+                  alt={`Captura de tela do site ${project.title}`}
+                  fill
+                  sizes="(max-width: 880px) 100vw, 50vw"
+                  className={styles.image}
+                />
               </a>
               <div className={styles.legend}>
                 <span>{project.plate}</span>
