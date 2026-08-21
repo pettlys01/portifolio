@@ -1,0 +1,37 @@
+.section {
+  padding: var(--space-section) var(--edge);
+  border-top: 1px solid var(--line);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 48px;
+}
+
+.label {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.statement {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  line-height: 1.25;
+  font-weight: 400;
+  max-width: 22ch;
+}
+
+.statement em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+@media (max-width: 880px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
