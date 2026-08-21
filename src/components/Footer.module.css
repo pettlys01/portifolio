@@ -1,5 +1,5 @@
 .footer {
-  padding: 48px var(--edge) 36px;
+  padding: 44px var(--edge) 32px;
   border-top: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
@@ -15,15 +15,12 @@
 }
 
 .mark {
-  font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
 }
 
 .tagline {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.03em;
+  font-size: 0.85rem;
   color: var(--fg-muted);
 }
 
@@ -32,20 +29,17 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   color: var(--fg-muted);
 }
 
 .links {
   display: flex;
   gap: 20px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
 .links a:hover {
-  color: var(--ink);
+  color: var(--fg);
 }
 
 @media (max-width: 640px) {

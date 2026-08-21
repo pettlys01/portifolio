@@ -1,97 +1,77 @@
 .hero {
+  position: relative;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  padding: 0 var(--edge);
-  position: relative;
+  text-align: center;
+  padding: 140px var(--edge) 80px;
 }
 
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(var(--line) 1px, transparent 1px);
+  background-size: 26px 26px;
+  background-position: center top;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 92%);
+  mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 92%);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-size: 0.82rem;
   color: var(--fg-muted);
-  margin-bottom: 22px;
   opacity: 0;
-  animation: rise 0.7s ease forwards;
+  animation: rise 0.6s ease forwards;
   animation-delay: 0.1s;
 }
 
 .headline {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(2.4rem, 6.4vw, 5.4rem);
-  line-height: 1.06;
-  max-width: 20ch;
-  letter-spacing: -0.005em;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 6vw, 4.6rem);
+  line-height: 1.08;
+  max-width: 18ch;
+  letter-spacing: -0.015em;
+  margin-top: 28px;
   opacity: 0;
-  animation: rise 0.8s ease forwards;
-  animation-delay: 0.25s;
-}
-
-.mark {
-  position: relative;
-  white-space: nowrap;
-}
-
-.mark svg {
-  position: absolute;
-  left: -2%;
-  bottom: -0.08em;
-  width: 104%;
-  height: 0.3em;
-  overflow: visible;
-}
-
-.mark path {
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-dasharray: 340;
-  stroke-dashoffset: 340;
-  animation: draw 0.9s ease forwards;
-  animation-delay: 1s;
+  animation: rise 0.7s ease forwards;
+  animation-delay: 0.22s;
 }
 
 .sub {
-  margin-top: 30px;
-  max-width: 44ch;
-  font-size: clamp(1rem, 1.4vw, 1.1rem);
+  margin-top: 22px;
+  max-width: 46ch;
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
   color: var(--fg-muted);
   opacity: 0;
-  animation: rise 0.8s ease forwards;
-  animation-delay: 0.4s;
+  animation: rise 0.7s ease forwards;
+  animation-delay: 0.34s;
 }
 
-.scrollHint {
-  position: absolute;
-  bottom: 40px;
-  left: var(--edge);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
+.actions {
+  margin-top: 36px;
   display: flex;
-  align-items: center;
-  gap: 8px;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
   opacity: 0;
-  animation: rise 0.8s ease forwards;
-  animation-delay: 0.6s;
-}
-
-.scrollHint span {
-  display: inline-block;
-  animation: bob 2s ease-in-out infinite;
+  animation: rise 0.7s ease forwards;
+  animation-delay: 0.46s;
 }
 
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -99,29 +79,9 @@
   }
 }
 
-@keyframes draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes bob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .eyebrow, .headline, .sub, .scrollHint {
+  .badge, .headline, .sub, .actions {
     animation: none;
     opacity: 1;
-  }
-
-  .mark path {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
-
-  .scrollHint span {
-    animation: none;
   }
 }

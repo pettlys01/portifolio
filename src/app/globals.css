@@ -1,18 +1,16 @@
 :root {
-  --bg: #10141a;
-  --plate: #171c24;
-  --line: #2a323d;
-  --line-strong: #3d4a5c;
-  --fg: #eef1f0;
-  --fg-muted: #7c8794;
-  --ink: #5aa9b5;
-  --stamp: #c1543a;
+  --bg: #ffffff;
+  --bg-soft: #f6f6f7;
+  --line: #e5e6e9;
+  --line-strong: #d4d5da;
+  --fg: #111114;
+  --fg-muted: #6b6d76;
+  --accent: #111114;
 
-  --font-display: "Zilla Slab", Georgia, serif;
-  --font-body: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: var(--font-poppins), -apple-system, sans-serif;
+  --font-body: var(--font-poppins), -apple-system, sans-serif;
 
-  --space-section: clamp(88px, 13vw, 180px);
+  --space-section: clamp(80px, 11vw, 140px);
   --edge: clamp(20px, 6vw, 80px);
 }
 
@@ -36,10 +34,7 @@ body {
 body {
   min-height: 100%;
   color: var(--fg);
-  background:
-    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 100% 64px,
-    var(--bg);
-  background-attachment: fixed;
+  background: var(--bg);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   font-size: 16px;
@@ -65,19 +60,19 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--fg);
   outline-offset: 3px;
 }
 
 ::selection {
-  background: var(--ink);
+  background: var(--fg);
   color: var(--bg);
 }
 
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .reveal.is-visible {
@@ -85,28 +80,37 @@ button {
   transform: translateY(0);
 }
 
-/* stamp-style CTA button, used throughout */
+/* pill buttons */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 22px;
-  border: 1.5px solid var(--line-strong);
+  padding: 13px 26px;
   border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--fg);
-  transition: background-color 0.25s ease, border-color 0.25s ease,
-    color 0.25s ease, transform 0.25s ease;
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: transform 0.2s ease, background-color 0.2s ease,
+    border-color 0.2s ease, color 0.2s ease;
 }
 
-.btn:hover {
-  background: var(--ink);
-  border-color: var(--ink);
+.btnPrimary {
+  background: var(--fg);
   color: var(--bg);
-  transform: rotate(-2deg);
+}
+
+.btnPrimary:hover {
+  transform: translateY(-1px);
+  background: #2a2a2f;
+}
+
+.btnGhost {
+  border: 1px solid var(--line-strong);
+  color: var(--fg);
+}
+
+.btnGhost:hover {
+  border-color: var(--fg);
+  background: var(--bg-soft);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -120,7 +124,7 @@ button {
     transition: none;
   }
 
-  .btn:hover {
+  .btnPrimary:hover {
     transform: none;
   }
 }

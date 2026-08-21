@@ -1,6 +1,7 @@
 .section {
   padding: var(--space-section) var(--edge);
   border-top: 1px solid var(--line);
+  background: var(--bg-soft);
 }
 
 .grid {
@@ -10,43 +11,42 @@
 }
 
 .label {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--fg-muted);
 }
 
 .statement {
-  font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(1.5rem, 2.8vw, 2.4rem);
-  line-height: 1.28;
+  font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+  line-height: 1.35;
   max-width: 24ch;
+  letter-spacing: -0.01em;
 }
 
 .mark {
   position: relative;
-  color: var(--stamp);
   white-space: nowrap;
 }
 
 .mark svg {
   position: absolute;
-  left: -6%;
-  top: -0.15em;
-  width: 112%;
-  height: 1.5em;
+  left: -3%;
+  bottom: -0.1em;
+  width: 106%;
+  height: 0.3em;
   overflow: visible;
   pointer-events: none;
 }
 
 .mark path {
   fill: none;
-  stroke: var(--stamp);
+  stroke: var(--fg);
   stroke-width: 2.5;
   stroke-linecap: round;
-  opacity: 0.85;
+  opacity: 0.35;
 }
 
 @media (max-width: 880px) {

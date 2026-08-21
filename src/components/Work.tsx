@@ -21,7 +21,7 @@ export default function Work() {
               <span className={styles.category}>{project.category}</span>
               <p className={styles.description}>{project.description}</p>
               <a
-                className="btn"
+                className="btn btnGhost"
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -38,10 +38,6 @@ export default function Work() {
                 rel="noopener noreferrer"
                 aria-label={`Abrir ${project.title}`}
               >
-                <span className={`${styles.corner} ${styles.cornerTL}`} />
-                <span className={`${styles.corner} ${styles.cornerTR}`} />
-                <span className={`${styles.corner} ${styles.cornerBL}`} />
-                <span className={`${styles.corner} ${styles.cornerBR}`} />
                 <span className={styles.placeholder}>{project.title}</span>
               </a>
               <div className={styles.legend}>

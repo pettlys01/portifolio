@@ -7,7 +7,9 @@ export default function Nav() {
       <div className={styles.links}>
         <a href="#work">Trabalhos</a>
         <a href="#about">Sobre</a>
-        <a href="#contact">Contato</a>
+        <a href="#contact" className={styles.cta}>
+          Contato
+        </a>
       </div>
     </nav>
   );
