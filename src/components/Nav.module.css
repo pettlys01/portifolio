@@ -7,34 +7,40 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px var(--edge);
-  mix-blend-mode: difference;
+  padding: 22px var(--edge);
+  background: linear-gradient(var(--bg) 60%, transparent);
 }
 
 .mark {
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-weight: 700;
+  font-size: 1.2rem;
   letter-spacing: 0.02em;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 6px;
+  padding: 2px 9px;
 }
 
 .links {
   display: flex;
   gap: 32px;
-  font-size: 0.85rem;
-  letter-spacing: 0.02em;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .links a {
-  opacity: 0.75;
-  transition: opacity 0.25s ease;
+  color: var(--fg-muted);
+  transition: color 0.25s ease;
 }
 
 .links a:hover {
-  opacity: 1;
+  color: var(--ink);
 }
 
 @media (max-width: 640px) {
   .links {
-    gap: 20px;
+    gap: 18px;
   }
 }

@@ -8,49 +8,101 @@
 }
 
 .eyebrow {
-  font-size: 0.8rem;
-  letter-spacing: 0.14em;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--fg-muted);
-  margin-bottom: 24px;
+  margin-bottom: 22px;
+  opacity: 0;
+  animation: rise 0.7s ease forwards;
+  animation-delay: 0.1s;
 }
 
 .headline {
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(2.6rem, 7vw, 6rem);
-  line-height: 1.02;
-  max-width: 18ch;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  font-size: clamp(2.4rem, 6.4vw, 5.4rem);
+  line-height: 1.06;
+  max-width: 20ch;
+  letter-spacing: -0.005em;
+  opacity: 0;
+  animation: rise 0.8s ease forwards;
+  animation-delay: 0.25s;
 }
 
-.headline em {
-  font-style: italic;
-  color: var(--accent);
+.mark {
+  position: relative;
+  white-space: nowrap;
+}
+
+.mark svg {
+  position: absolute;
+  left: -2%;
+  bottom: -0.08em;
+  width: 104%;
+  height: 0.3em;
+  overflow: visible;
+}
+
+.mark path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 340;
+  stroke-dashoffset: 340;
+  animation: draw 0.9s ease forwards;
+  animation-delay: 1s;
 }
 
 .sub {
-  margin-top: 32px;
-  max-width: 42ch;
-  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  margin-top: 30px;
+  max-width: 44ch;
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
   color: var(--fg-muted);
+  opacity: 0;
+  animation: rise 0.8s ease forwards;
+  animation-delay: 0.4s;
 }
 
 .scrollHint {
   position: absolute;
   bottom: 40px;
   left: var(--edge);
-  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
   color: var(--fg-muted);
   display: flex;
   align-items: center;
   gap: 8px;
+  opacity: 0;
+  animation: rise 0.8s ease forwards;
+  animation-delay: 0.6s;
 }
 
 .scrollHint span {
   display: inline-block;
   animation: bob 2s ease-in-out infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 @keyframes bob {
@@ -59,6 +111,16 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .eyebrow, .headline, .sub, .scrollHint {
+    animation: none;
+    opacity: 1;
+  }
+
+  .mark path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
   .scrollHint span {
     animation: none;
   }

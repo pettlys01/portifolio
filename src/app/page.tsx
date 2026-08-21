@@ -4,12 +4,14 @@ import Hero from "@/components/Hero";
 import Nav from "@/components/Nav";
 import Philosophy from "@/components/Philosophy";
 import TechStrip from "@/components/TechStrip";
+import TitleBlock from "@/components/TitleBlock";
 import Work from "@/components/Work";
 
 export default function Home() {
   return (
     <>
       <Nav />
+      <TitleBlock />
       <main>
         <Hero />
         <Work />
