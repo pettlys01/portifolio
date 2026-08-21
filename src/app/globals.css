@@ -5,7 +5,9 @@
   --line-strong: #d4d5da;
   --fg: #111114;
   --fg-muted: #6b6d76;
-  --accent: #111114;
+  --accent: #4c5fd5;
+  --accent-warm: #e2795a;
+  --accent-soft: #eef0fc;
 
   --font-display: var(--font-poppins), -apple-system, sans-serif;
   --font-body: var(--font-poppins), -apple-system, sans-serif;
@@ -60,13 +62,13 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--fg);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
 ::selection {
-  background: var(--fg);
-  color: var(--bg);
+  background: var(--accent);
+  color: #ffffff;
 }
 
 .reveal {
@@ -109,8 +111,9 @@ button {
 }
 
 .btnGhost:hover {
-  border-color: var(--fg);
-  background: var(--bg-soft);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
 }
 
 @media (prefers-reduced-motion: reduce) {

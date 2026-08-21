@@ -20,7 +20,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--fg);
+  background: var(--accent);
 }
 
 .sheet {

@@ -21,24 +21,6 @@
   mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 92%);
 }
 
-.glow {
-  position: absolute;
-  top: -10%;
-  left: 50%;
-  width: min(900px, 90vw);
-  height: 480px;
-  transform: translateX(-50%);
-  z-index: -2;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 176, 132, 0.28) 0%,
-    rgba(150, 178, 255, 0.22) 45%,
-    transparent 72%
-  );
-  filter: blur(50px);
-  pointer-events: none;
-}
-
 .badge {
   display: inline-flex;
   align-items: center;

@@ -43,10 +43,10 @@
 
 .mark path {
   fill: none;
-  stroke: var(--fg);
+  stroke: var(--accent-warm);
   stroke-width: 2.5;
   stroke-linecap: round;
-  opacity: 0.35;
+  opacity: 0.7;
 }
 
 @media (max-width: 880px) {

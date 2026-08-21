@@ -36,7 +36,7 @@
 }
 
 .links a:hover {
-  color: var(--fg);
+  color: var(--accent);
 }
 
 .cta {
