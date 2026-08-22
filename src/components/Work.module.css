@@ -6,7 +6,7 @@
   display: flex;
   align-items: baseline;
   gap: 14px;
-  margin-bottom: 64px;
+  margin-bottom: 56px;
 }
 
 .headingLabel {
@@ -24,11 +24,7 @@
 }
 
 .project {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 52px;
-  align-items: center;
-  padding: 52px 0;
+  padding: 72px 0;
   border-top: 1px solid var(--line);
 }
 
@@ -36,46 +32,41 @@
   border-bottom: 1px solid var(--line);
 }
 
-.info {
+.top {
   display: flex;
-  flex-direction: column;
+  align-items: baseline;
   gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
 }
 
-.plateNumber {
-  font-size: 0.82rem;
+.top:hover .title {
+  color: var(--accent);
+}
+
+.number {
+  font-size: 0.95rem;
   font-weight: 600;
   color: var(--accent);
 }
 
 .title {
   font-weight: 700;
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
-  line-height: 1.12;
+  font-size: clamp(1.8rem, 3.4vw, 3rem);
   letter-spacing: -0.01em;
+  transition: color 0.2s ease;
 }
 
 .category {
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   color: var(--fg-muted);
-}
-
-.description {
-  color: var(--fg-muted);
-  max-width: 42ch;
-  font-size: 0.98rem;
-}
-
-.plate {
-  display: block;
-  width: 100%;
 }
 
 .visual {
   display: block;
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
   background: var(--bg-soft);
   border: 1px solid var(--line);
   border-radius: 16px;
@@ -85,7 +76,7 @@
 }
 
 .project:hover .visual {
-  box-shadow: 0 16px 32px rgba(17, 17, 20, 0.08);
+  box-shadow: 0 24px 48px rgba(17, 17, 20, 0.1);
   transform: translateY(-3px);
 }
 
@@ -94,20 +85,22 @@
   object-position: top;
 }
 
-.legend {
+.bottom {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  font-size: 0.78rem;
-  color: var(--fg-muted);
-  padding: 12px 4px 0;
+  gap: 16px;
+  margin-top: 24px;
+  flex-wrap: wrap;
 }
 
-@media (max-width: 880px) {
-  .project {
-    grid-template-columns: 1fr;
-  }
+.technologies {
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+}
 
-  .plate {
-    order: -1;
+@media (max-width: 640px) {
+  .visual {
+    aspect-ratio: 4 / 3;
   }
 }

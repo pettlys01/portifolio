@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.brand}>
         <span className={styles.mark}>LCS</span>
-        <span className={styles.tagline}>Estúdio digital — feito à mão, prancha por prancha.</span>
+        <span className={styles.tagline}>Design e desenvolvimento para negócios que querem se destacar.</span>
       </div>
       <div className={styles.right}>
         <div className={styles.links}>

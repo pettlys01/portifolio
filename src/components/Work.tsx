@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { projects } from "@/data/projects";
 import Reveal from "./Reveal";
 import styles from "./Work.module.css";
@@ -8,7 +9,7 @@ export default function Work() {
     <section id="work" className={styles.section}>
       <Reveal>
         <div className={styles.heading}>
-          <span className={styles.headingLabel}>Trabalhos selecionados</span>
+          <span className={styles.headingLabel}>Projetos selecionados</span>
           <span className={styles.headingRule} />
         </div>
       </Reveal>
@@ -16,41 +17,30 @@ export default function Work() {
       {projects.map((project, i) => (
         <Reveal key={project.slug} delay={i * 80}>
           <article className={styles.project}>
-            <div className={styles.info}>
-              <span className={styles.plateNumber}>{project.plate}</span>
+            <Link href={`/projetos/${project.slug}`} className={styles.top}>
+              <span className={styles.number}>{project.number}</span>
               <h3 className={styles.title}>{project.title}</h3>
               <span className={styles.category}>{project.category}</span>
-              <p className={styles.description}>{project.description}</p>
-              <a
-                className="btn btnGhost"
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Ver projeto ↗
-              </a>
-            </div>
+            </Link>
 
-            <div className={styles.plate}>
-              <a
-                className={styles.visual}
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Abrir ${project.title}`}
-              >
-                <Image
-                  src={project.image}
-                  alt={`Captura de tela do site ${project.title}`}
-                  fill
-                  sizes="(max-width: 880px) 100vw, 50vw"
-                  className={styles.image}
-                />
-              </a>
-              <div className={styles.legend}>
-                <span>{project.plate}</span>
-                <span>{project.technologies.join(" · ")}</span>
-              </div>
+            <Link href={`/projetos/${project.slug}`} className={styles.visual}>
+              <Image
+                src={project.image}
+                alt={`Captura de tela do site ${project.title}`}
+                fill
+                sizes="(max-width: 880px) 100vw, 1200px"
+                className={styles.image}
+                priority={i === 0}
+              />
+            </Link>
+
+            <div className={styles.bottom}>
+              <span className={styles.technologies}>
+                {project.technologies.join(" · ")}
+              </span>
+              <Link href={`/projetos/${project.slug}`} className="btn btnGhost">
+                Ver case completo ↗
+              </Link>
             </div>
           </article>
         </Reveal>

@@ -7,12 +7,11 @@ export default function Hero() {
       <HeroGradient />
       <span className={styles.badge}>Estúdio digital — LCS</span>
 
-      <h1 className={styles.headline}>Sites que parecem feitos à mão, não gerados.</h1>
+      <h1 className={styles.headline}>Sites que fazem negócios parecerem maiores.</h1>
 
       <p className={styles.sub}>
-        Direção de arte, desenvolvimento e performance sob o mesmo teto —
-        para negócios que precisam de um site à altura do que já
-        construíram.
+        Design, desenvolvimento e performance sob o mesmo teto — para
+        empresas que precisam de um site à altura do que já construíram.
       </p>
 
       <div className={styles.actions}>
