@@ -1,0 +1,99 @@
+.card {
+  position: relative;
+  height: 100%;
+  min-height: 340px;
+  display: flex;
+  border-radius: 20px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  background:
+    linear-gradient(160deg, rgba(247, 246, 244, 0.07), transparent 55%),
+    var(--bg-card);
+  border: 1px solid var(--line);
+  will-change: transform;
+  --mx: 50%;
+  --my: 50%;
+}
+
+/* brilho especular que acompanha o cursor */
+.sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    360px circle at var(--mx) var(--my),
+    rgba(247, 246, 244, 0.09),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .sheen {
+  opacity: 1;
+}
+
+/* conteúdo empurrado para frente no eixo Z — é isso que dá a
+   sensação de profundidade quando o card inclina */
+.layer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--s-6);
+  transform: translateZ(36px);
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+}
+
+.num {
+  font-family: var(--font-num);
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+}
+
+.title {
+  font-size: 1.55rem;
+  font-weight: 700;
+}
+
+.body {
+  margin-top: var(--s-4);
+  font-size: 1rem;
+  color: var(--fg-muted);
+  line-height: 1.6;
+}
+
+.list {
+  list-style: none;
+  margin-top: auto;
+  padding-top: var(--s-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  border-top: 1px solid var(--line);
+}
+
+.list li {
+  display: flex;
+  gap: var(--s-2);
+  font-size: 0.92rem;
+  color: var(--fg-muted);
+}
+
+.list li::before {
+  content: "—";
+  color: var(--fg);
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .sheen {
+    transition: none;
+  }
+}

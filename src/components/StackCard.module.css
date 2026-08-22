@@ -1,0 +1,120 @@
+.card {
+  position: relative;
+  height: 100%;
+  min-height: 260px;
+  display: flex;
+  border-radius: 18px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  will-change: transform;
+  --mx: 50%;
+  --my: 50%;
+}
+
+/* Banho na cor oficial da marca — a cor é herdada da tecnologia,
+   não escolhida de forma decorativa. */
+.wash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    155deg,
+    color-mix(in srgb, var(--tint) 58%, transparent) 0%,
+    color-mix(in srgb, var(--tint) 22%, transparent) 42%,
+    transparent 78%
+  );
+  opacity: 0.55;
+  transition: opacity 0.35s ease;
+}
+
+.card:hover .wash {
+  opacity: 1;
+}
+
+.sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    320px circle at var(--mx) var(--my),
+    rgba(255, 255, 255, 0.16),
+    transparent 68%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .sheen {
+  opacity: 1;
+}
+
+.layer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--s-5);
+  transform: translateZ(34px);
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(8, 8, 10, 0.45);
+  backdrop-filter: blur(8px);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  margin-top: 6px;
+}
+
+.bottom {
+  margin-top: auto;
+  padding-top: var(--s-6);
+}
+
+.group {
+  font-family: var(--font-num);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.name {
+  margin-top: var(--s-2);
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.role {
+  margin-top: var(--s-2);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .wash,
+  .sheen {
+    transition: none;
+  }
+}

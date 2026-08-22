@@ -1,70 +1,79 @@
 import Reveal from "./Reveal";
-import TechIcon, { type TechSlug } from "./TechIcon";
+import StackCard from "./StackCard";
+import { type TechSlug } from "./TechIcon";
 import styles from "./Stack.module.css";
 
-const groups: {
-  label: string;
-  items: { slug: TechSlug; name: string; role: string }[];
+/* O `tint` de cada card é a cor oficial da marca (Simple Icons),
+   não uma paleta decorativa — a cor vem da tecnologia. */
+const items: {
+  slug: TechSlug;
+  name: string;
+  role: string;
+  tint: string;
+  group: string;
 }[] = [
   {
-    label: "Base",
-    items: [
-      {
-        slug: "html5",
-        name: "HTML",
-        role: "Estrutura semântica — a base do SEO e da acessibilidade.",
-      },
-      {
-        slug: "css",
-        name: "CSS",
-        role: "Layout, grid e responsividade, sem framework pesado por padrão.",
-      },
-      {
-        slug: "javascript",
-        name: "JavaScript",
-        role: "Comportamento e interações, aplicado onde agrega.",
-      },
-    ],
+    slug: "html5",
+    name: "HTML",
+    role: "Estrutura semântica — a base do SEO e da acessibilidade.",
+    tint: "#E34F26",
+    group: "Base",
   },
   {
-    label: "Quando o projeto pede",
-    items: [
-      {
-        slug: "typescript",
-        name: "TypeScript",
-        role: "Tipagem estática em projetos que vão crescer.",
-      },
-      {
-        slug: "react",
-        name: "React",
-        role: "Interfaces com estado e componentes reaproveitáveis.",
-      },
-      {
-        slug: "nextjs",
-        name: "Next.js",
-        role: "Renderização estática, rotas e otimização de imagem.",
-      },
-    ],
+    slug: "css",
+    name: "CSS",
+    role: "Layout, grid e responsividade, sem framework pesado por padrão.",
+    tint: "#663399",
+    group: "Base",
   },
   {
-    label: "Entrega e operação",
-    items: [
-      {
-        slug: "git",
-        name: "Git",
-        role: "Versionamento — todo projeto com histórico rastreável.",
-      },
-      {
-        slug: "vercel",
-        name: "Vercel",
-        role: "Deploy contínuo, HTTPS e CDN global inclusos.",
-      },
-      {
-        slug: "analytics",
-        name: "Analytics",
-        role: "Medição de tráfego para decidir com dado, não achismo.",
-      },
-    ],
+    slug: "javascript",
+    name: "JavaScript",
+    role: "Comportamento e interações, aplicado onde agrega.",
+    tint: "#B59A00",
+    group: "Base",
+  },
+  {
+    slug: "typescript",
+    name: "TypeScript",
+    role: "Tipagem estática em projetos que vão crescer.",
+    tint: "#3178C6",
+    group: "Quando o projeto pede",
+  },
+  {
+    slug: "react",
+    name: "React",
+    role: "Interfaces com estado e componentes reaproveitáveis.",
+    tint: "#1D7A8C",
+    group: "Quando o projeto pede",
+  },
+  {
+    slug: "nextjs",
+    name: "Next.js",
+    role: "Renderização estática, rotas e otimização de imagem.",
+    tint: "#4A4A55",
+    group: "Quando o projeto pede",
+  },
+  {
+    slug: "git",
+    name: "Git",
+    role: "Versionamento — todo projeto com histórico rastreável.",
+    tint: "#F03C2E",
+    group: "Entrega",
+  },
+  {
+    slug: "vercel",
+    name: "Vercel",
+    role: "Deploy contínuo, HTTPS e CDN global inclusos.",
+    tint: "#3D3D48",
+    group: "Entrega",
+  },
+  {
+    slug: "analytics",
+    name: "Analytics",
+    role: "Medição de tráfego para decidir com dado, não achismo.",
+    tint: "#E37400",
+    group: "Entrega",
   },
 ];
 
@@ -84,25 +93,10 @@ export default function Stack() {
         </p>
       </Reveal>
 
-      <div className={styles.groups}>
-        {groups.map((group, i) => (
-          <Reveal key={group.label} delay={i * 80}>
-            <div className={styles.group}>
-              <h3>{group.label}</h3>
-              <ul className={styles.items}>
-                {group.items.map((item) => (
-                  <li key={item.name} className={styles.item}>
-                    <span className={styles.glyph}>
-                      <TechIcon slug={item.slug} size={24} />
-                    </span>
-                    <span>
-                      <span className={styles.name}>{item.name}</span>
-                      <span className={styles.role}>{item.role}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      <div className={styles.grid}>
+        {items.map((item, i) => (
+          <Reveal key={item.name} delay={i * 50}>
+            <StackCard {...item} />
           </Reveal>
         ))}
       </div>

@@ -25,39 +25,18 @@
 .steps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--s-6);
+  gap: var(--s-5);
+  perspective: 1400px;
 }
 
-.step {
-  position: relative;
-  padding-top: var(--s-5);
-  border-top: 2px solid var(--line-strong);
+/* o wrapper de reveal precisa esticar para o card preencher a célula */
+.steps > * {
+  display: flex;
+  height: 100%;
 }
 
-.step:first-child {
-  border-top-color: var(--accent);
-}
-
-.stepNum {
-  font-family: var(--font-num);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  color: var(--fg-muted);
-}
-
-.stepTitle {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.35rem;
-  letter-spacing: -0.01em;
-  margin-top: var(--s-2);
-}
-
-.stepBody {
-  margin-top: var(--s-3);
-  font-size: 0.96rem;
-  color: var(--fg-muted);
-  line-height: 1.6;
+.steps > * > div {
+  width: 100%;
 }
 
 .statement {
