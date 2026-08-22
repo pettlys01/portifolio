@@ -10,7 +10,7 @@ export default function CTA() {
       <Reveal>
         <h2 className={styles.headline}>Tem um projeto em mente?</h2>
         <div className={styles.btnWrap}>
-          <a className="btn btnPrimary" href={`mailto:${CONTACT_EMAIL}`}>
+          <a className="btn btnInverse" href={`mailto:${CONTACT_EMAIL}`}>
             Falar com a LCS ↗
           </a>
         </div>

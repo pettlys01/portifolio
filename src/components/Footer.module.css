@@ -15,8 +15,9 @@
 }
 
 .mark {
-  font-weight: 700;
-  font-size: 1.05rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.1rem;
 }
 
 .tagline {

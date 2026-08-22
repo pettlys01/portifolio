@@ -53,8 +53,9 @@
 }
 
 .title {
+  font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+  font-size: clamp(1.3rem, 1.8vw, 1.7rem);
   letter-spacing: -0.01em;
   transition: color 0.2s ease;
 }
@@ -70,6 +71,7 @@
   display: block;
   position: relative;
   width: 100%;
+  max-width: 480px;
   aspect-ratio: 4 / 3;
   background: var(--bg-soft);
   border: 1px solid var(--line);
