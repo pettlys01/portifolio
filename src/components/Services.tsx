@@ -3,7 +3,7 @@ import styles from "./Services.module.css";
 
 const services = [
   {
-    num: "S01",
+    num: "01",
     title: "Site institucional",
     body: "Para empresas que precisam apresentar serviços, credenciais e diferenciais sem virar catálogo confuso.",
     items: [
@@ -14,7 +14,7 @@ const services = [
     ],
   },
   {
-    num: "S02",
+    num: "02",
     title: "Landing page",
     body: "Página única com um objetivo só: transformar quem chegou em contato, orçamento ou agendamento.",
     items: [
@@ -25,7 +25,7 @@ const services = [
     ],
   },
   {
-    num: "S03",
+    num: "03",
     title: "Redesign",
     body: "Quando o site existe mas trabalha contra o negócio — lento, datado ou impossível de atualizar.",
     items: [
@@ -40,31 +40,37 @@ const services = [
 export default function Services() {
   return (
     <section id="services" className={styles.section}>
-      <Reveal>
-        <div className={styles.heading}>
-          <span className="sectionLabel">Serviços</span>
-          <span className={styles.headingRule} />
-        </div>
-        <h2 className={styles.headingTitle}>
-          O que eu construo, e para quem.
-        </h2>
-      </Reveal>
+      <div className={styles.inner}>
+        <Reveal>
+          <div className={styles.heading}>
+            <span className={styles.label}>Serviços</span>
+            <span className={styles.headingRule} />
+          </div>
+          <h2 className={styles.headingTitle}>
+            O que eu construo, e para quem.
+          </h2>
+        </Reveal>
 
-      <div className={styles.grid}>
-        {services.map((service, i) => (
-          <Reveal key={service.num} delay={i * 80}>
-            <article className={styles.card}>
-              <span className={styles.num}>{service.num}</span>
-              <h3 className={styles.title}>{service.title}</h3>
-              <p className={styles.body}>{service.body}</p>
-              <ul className={styles.list}>
-                {service.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </article>
-          </Reveal>
-        ))}
+        <div className={styles.rows}>
+          {services.map((service, i) => (
+            <Reveal key={service.num} delay={i * 70}>
+              <article className={styles.row}>
+                <span className={styles.num}>{service.num}</span>
+
+                <div>
+                  <h3 className={styles.title}>{service.title}</h3>
+                  <p className={styles.body}>{service.body}</p>
+                </div>
+
+                <ul className={styles.list}>
+                  {service.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -18,21 +18,17 @@
 }
 
 .headingTitle {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 4vw, 3rem);
-  letter-spacing: -0.02em;
-  margin-bottom: var(--s-8);
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  margin-bottom: var(--s-9);
   max-width: 20ch;
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--s-7);
+  gap: var(--s-9) var(--s-7);
 }
 
-/* o wrapper de animação precisa esticar para o card ocupar a célula */
 .grid > * {
   display: flex;
   height: 100%;
@@ -42,43 +38,54 @@
   width: 100%;
 }
 
-/* Cards com altura consistente e rodapé alinhado — grade regular,
-   não itens de alturas arbitrárias (grid-systems.md). */
+/* Sem moldura de card: a imagem é um bloco, o texto é outro. O
+   espaço entre eles é que agrupa (whitespace.md) — não uma borda. */
 .project {
   display: flex;
   flex-direction: column;
-  background: var(--bg-card);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  overflow: hidden;
-  transition: border-color 0.25s ease, transform 0.25s ease;
-}
-
-.project:hover {
-  border-color: var(--line-strong);
-  transform: translateY(-4px);
 }
 
 .visual {
   display: block;
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 11;
+  /* 4:3 é a proporção real da captura — quadrado demais decepa as
+     laterais do site e o print deixa de mostrar o trabalho. */
+  aspect-ratio: 4 / 3;
   background: var(--bg-soft);
-  border-bottom: 1px solid var(--line);
+  border-radius: 18px;
   overflow: hidden;
+  transition: transform 0.35s ease;
+}
+
+.visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  pointer-events: none;
+}
+
+.project:hover .visual {
+  transform: translateY(-6px);
 }
 
 .image {
   object-fit: cover;
   object-position: top;
+  transition: transform 0.6s ease;
+}
+
+.project:hover .image {
+  transform: scale(1.03);
 }
 
 .body {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: var(--s-6);
+  padding-top: var(--s-6);
 }
 
 .top {
@@ -88,35 +95,32 @@
 }
 
 .top:hover .title {
-  color: var(--accent);
+  opacity: 0.62;
 }
 
 .number {
   font-family: var(--font-num);
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--accent);
+  font-size: 0.9rem;
+  color: var(--fg-muted);
 }
 
 .title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
-  letter-spacing: -0.015em;
-  transition: color 0.2s ease;
+  font-size: clamp(1.7rem, 2.6vw, 2.2rem);
+  transition: opacity 0.2s ease;
 }
 
 .category {
   margin-top: var(--s-2);
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--fg-muted);
 }
 
 .description {
   margin-top: var(--s-4);
-  font-size: 0.98rem;
+  font-size: 1.02rem;
   color: var(--fg-muted);
-  line-height: 1.6;
+  line-height: 1.65;
+  max-width: 46ch;
 }
 
 .tags {
@@ -128,29 +132,46 @@
 
 .tag {
   font-family: var(--font-num);
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   letter-spacing: 0.04em;
   color: var(--fg-muted);
   border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 5px 12px;
+  border-radius: 8px;
+  padding: 6px 13px;
 }
 
-/* margin-top:auto empurra o rodapé para baixo, então os botões dos
-   dois cards ficam na mesma linha mesmo com textos de tamanhos
-   diferentes. */
 .footer {
   margin-top: auto;
   padding-top: var(--s-6);
 }
 
-.footer a {
-  width: 100%;
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-variation-settings: "wdth" 108;
+  padding-bottom: var(--s-2);
+  border-bottom: 1.5px solid var(--line-strong);
+  transition: border-color 0.25s ease;
+}
+
+.link:hover {
+  border-color: var(--fg);
+}
+
+.link span {
+  transition: transform 0.25s ease;
+}
+
+.link:hover span {
+  transform: translate(3px, -3px);
 }
 
 @media (max-width: 820px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: var(--s-6);
+    gap: var(--s-8);
   }
 }

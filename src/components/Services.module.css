@@ -1,8 +1,16 @@
+/* Seção invertida: fundo claro no meio de uma página escura. É a
+   quebra de ritmo que impede as seções de parecerem todas iguais —
+   e faz isso sem introduzir matiz nenhum, mantendo a regra de que a
+   única cor da página vem do trabalho. */
 .section {
+  background: #f2f1ee;
+  color: #0f0f12;
   padding: var(--space-section) var(--edge);
+}
+
+.inner {
   max-width: var(--maxw);
   margin: 0 auto;
-  border-top: 1px solid var(--line);
 }
 
 .heading {
@@ -12,94 +20,106 @@
   margin-bottom: var(--s-4);
 }
 
+.label {
+  font-family: var(--font-num);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6a6a72;
+}
+
 .headingRule {
   flex: 1;
   height: 1px;
-  background: var(--line);
+  background: rgba(15, 15, 18, 0.14);
 }
 
 .headingTitle {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 4vw, 3rem);
-  letter-spacing: -0.02em;
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  max-width: 20ch;
   margin-bottom: var(--s-8);
-  max-width: 22ch;
 }
 
-.grid {
+/* Linhas editoriais em vez de cards: cada serviço é uma faixa da
+   largura inteira, com o número à esquerda. */
+.rows {
+  border-top: 1px solid rgba(15, 15, 18, 0.16);
+}
+
+.row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 90px minmax(0, 1.1fr) minmax(0, 1fr);
   gap: var(--s-6);
+  align-items: start;
+  padding: var(--s-7) 0;
+  border-bottom: 1px solid rgba(15, 15, 18, 0.16);
+  transition: background-color 0.25s ease;
 }
 
-.grid > * {
-  display: flex;
-  height: 100%;
-}
-
-.card {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: var(--s-6);
-  background: var(--bg-card);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  transition: border-color 0.25s ease;
-}
-
-.card:hover {
-  border-color: var(--line-strong);
+.row:hover {
+  background: rgba(15, 15, 18, 0.035);
 }
 
 .num {
   font-family: var(--font-num);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  color: var(--accent);
+  font-size: 0.9rem;
+  color: #6a6a72;
+  padding-top: 6px;
 }
 
 .title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.4rem;
-  letter-spacing: -0.01em;
-  margin-top: var(--s-3);
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  letter-spacing: -0.02em;
 }
 
 .body {
   margin-top: var(--s-3);
-  font-size: 0.98rem;
-  color: var(--fg-muted);
+  font-size: 1.02rem;
   line-height: 1.6;
+  color: #52525c;
+  max-width: 42ch;
 }
 
 .list {
   list-style: none;
-  margin-top: var(--s-5);
-  padding-top: var(--s-5);
-  border-top: 1px solid var(--line);
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-2);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-3) var(--s-5);
+  padding-top: 8px;
 }
 
 .list li {
-  font-size: 0.92rem;
-  color: var(--fg-muted);
   display: flex;
   gap: var(--s-2);
+  font-size: 0.98rem;
+  color: #52525c;
 }
 
 .list li::before {
-  content: "—";
-  color: var(--accent);
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0f0f12;
   flex-shrink: 0;
+  margin-top: 0.55em;
 }
 
 @media (max-width: 900px) {
-  .grid {
+  .row {
+    grid-template-columns: 56px 1fr;
+  }
+
+  .list {
+    grid-column: 2;
     grid-template-columns: 1fr;
+    padding-top: var(--s-5);
+  }
+}
+
+@media (max-width: 520px) {
+  .list {
+    grid-column: 1 / -1;
   }
 }

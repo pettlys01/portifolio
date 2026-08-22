@@ -60,7 +60,7 @@ export default async function ProjectPage({
             rel="noopener noreferrer"
             className={`btn btnPrimary ${styles.visitLink}`}
           >
-            Visitar site ↗
+            Visitar site <span className="arrow" aria-hidden="true">↗</span>
           </a>
         </div>
 
@@ -104,7 +104,7 @@ export default async function ProjectPage({
             rel="noopener noreferrer"
             className="btn btnGhost"
           >
-            Visitar site ↗
+            Visitar site <span className="arrow" aria-hidden="true">↗</span>
           </a>
         </div>
 

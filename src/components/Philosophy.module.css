@@ -22,14 +22,17 @@
   background: var(--line);
 }
 
+/* Escalonado, não alinhado: cada etapa desce um degrau em relação à
+   anterior. Lido como progressão — o que uma grade reta de quatro
+   colunas iguais não comunica. */
 .steps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--s-5);
   perspective: 1400px;
+  align-items: start;
 }
 
-/* o wrapper de reveal precisa esticar para o card preencher a célula */
 .steps > * {
   display: flex;
   height: 100%;
@@ -37,6 +40,18 @@
 
 .steps > * > div {
   width: 100%;
+}
+
+.steps > *:nth-child(2) {
+  margin-top: 44px;
+}
+
+.steps > *:nth-child(3) {
+  margin-top: 88px;
+}
+
+.steps > *:nth-child(4) {
+  margin-top: 132px;
 }
 
 .statement {
@@ -54,15 +69,31 @@
   color: var(--accent);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .steps {
     grid-template-columns: 1fr 1fr;
     gap: var(--s-5);
   }
+
+  .steps > *:nth-child(2) {
+    margin-top: 44px;
+  }
+
+  .steps > *:nth-child(3) {
+    margin-top: 0;
+  }
+
+  .steps > *:nth-child(4) {
+    margin-top: 44px;
+  }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 620px) {
   .steps {
     grid-template-columns: 1fr;
+  }
+
+  .steps > *:nth-child(n) {
+    margin-top: 0;
   }
 }

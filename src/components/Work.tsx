@@ -30,7 +30,7 @@ export default function Work() {
                   src={project.image}
                   alt={`Captura de tela do site ${project.title}`}
                   fill
-                  sizes="(max-width: 820px) 100vw, 620px"
+                  sizes="(max-width: 820px) 100vw, 640px"
                   className={styles.image}
                   quality={92}
                   priority={i === 0}
@@ -56,9 +56,9 @@ export default function Work() {
                 <div className={styles.footer}>
                   <Link
                     href={`/projetos/${project.slug}`}
-                    className="btn btnGhost"
+                    className={styles.link}
                   >
-                    Ver case completo ↗
+                    Ver case completo <span aria-hidden="true">↗</span>
                   </Link>
                 </div>
               </div>

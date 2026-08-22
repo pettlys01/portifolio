@@ -16,7 +16,7 @@ export default function CTA() {
         </p>
         <div className={styles.btnWrap}>
           <a className="btn btnPrimary" href={`mailto:${CONTACT_EMAIL}`}>
-            Enviar e-mail ↗
+            Enviar e-mail <span className="arrow" aria-hidden="true">↗</span>
           </a>
           <a className="btn btnGhost" href="#work">
             Ver projetos antes

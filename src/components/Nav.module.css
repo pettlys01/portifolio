@@ -16,12 +16,16 @@
   pointer-events: auto;
 }
 
+/* O logo passa por cima de seções claras e escuras. `difference`
+   inverte contra o que estiver atrás, então ele nunca some. */
 .mark {
   font-family: var(--font-display);
   font-variation-settings: "wdth" 118;
   font-weight: 700;
   font-size: 1.35rem;
   letter-spacing: -0.01em;
+  color: #ffffff;
+  mix-blend-mode: difference;
 }
 
 /* A cápsula flutuante: fundo translúcido com blur, borda de 1px e
