@@ -4,9 +4,6 @@
   background: var(--bg);
 }
 
-/* O corredor 3D é dimensionado em cqw (% da largura do container).
-   Abaixo de 900px os cards ficam pequenos demais para o efeito
-   funcionar e o custo de animação não se paga — some no mobile. */
 .streamOnly {
   display: block;
 }
@@ -27,72 +24,47 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 120px var(--edge) var(--s-8);
+  padding: 140px var(--edge) var(--s-8);
 }
 
+/* Véu radial só o suficiente para o texto respirar sobre as capturas
+   coloridas, sem apagá-las. */
 .content::before {
   content: "";
   position: absolute;
   inset: -5% -8%;
   z-index: -1;
   background: radial-gradient(
-    ellipse 55% 60% at center,
-    var(--bg) 50%,
-    rgba(10, 10, 11, 0.82) 74%,
-    transparent 92%
+    ellipse 48% 54% at center,
+    var(--bg) 38%,
+    rgba(8, 8, 10, 0.78) 64%,
+    transparent 88%
   );
 }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-2);
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  padding: 8px 18px;
-  font-family: var(--font-num);
-  font-size: 0.82rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  opacity: 0;
-  animation: rise 0.6s ease forwards;
-  animation-delay: 0.1s;
-}
-
-.dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
 .headline {
-  font-family: var(--font-display);
+  font-variation-settings: "wdth" 115;
   font-weight: 800;
-  font-size: clamp(2.6rem, 6.4vw, 5.2rem);
-  line-height: 1.02;
-  max-width: 17ch;
-  letter-spacing: -0.025em;
-  margin-top: var(--s-6);
-  opacity: 0;
-  animation: rise 0.7s ease forwards;
-  animation-delay: 0.22s;
-}
-
-.headline em {
-  font-style: normal;
-  color: var(--accent);
+  font-size: clamp(3rem, 7.2vw, 6rem);
+  line-height: 0.98;
+  max-width: 15ch;
+  letter-spacing: -0.035em;
 }
 
 .sub {
-  margin-top: var(--s-5);
-  max-width: 48ch;
-  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  margin-top: var(--s-6);
+  max-width: 46ch;
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
   color: var(--fg-muted);
   opacity: 0;
   animation: rise 0.7s ease forwards;
-  animation-delay: 0.34s;
+  animation-delay: 0.28s;
+}
+
+.headline {
+  opacity: 0;
+  animation: rise 0.75s ease forwards;
+  animation-delay: 0.12s;
 }
 
 .actions {
@@ -103,13 +75,13 @@
   justify-content: center;
   opacity: 0;
   animation: rise 0.7s ease forwards;
-  animation-delay: 0.46s;
+  animation-delay: 0.42s;
 }
 
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
@@ -131,7 +103,7 @@
   .actions {
     flex-direction: column;
     width: 100%;
-    max-width: 320px;
+    max-width: 340px;
   }
 
   .actions a {
@@ -140,7 +112,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .badge,
   .headline,
   .sub,
   .actions {

@@ -7,18 +7,17 @@ export default function Nav() {
       <Link href="/" className={styles.mark} aria-label="LCS — início">
         LCS
       </Link>
-      <div className={styles.links}>
+
+      <div className={styles.pill}>
         <Link href="/#work">Projetos</Link>
-        <Link href="/#services" className={styles.hideSmall}>
-          Serviços
-        </Link>
-        <Link href="/#stack" className={styles.hideSmall}>
-          Stack
-        </Link>
-        <Link href="/#contact" className={styles.cta}>
-          Falar comigo
-        </Link>
+        <Link href="/#services">Serviços</Link>
+        <Link href="/#process">Processo</Link>
+        <Link href="/#stack">Stack</Link>
       </div>
+
+      <Link href="/#contact" className={styles.cta}>
+        Falar comigo <span aria-hidden="true">↗</span>
+      </Link>
     </nav>
   );
 }

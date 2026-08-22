@@ -1,22 +1,21 @@
 :root {
-  /* Preto como cor principal. Laranja é o único sinal cromático —
-     usado com parcimônia deliberada: contraste alto só funciona
-     enquanto é escasso (ver contrast.md na base). */
-  --bg: #0a0a0b;
-  --bg-soft: #141416;
-  --bg-card: #17171a;
-  --line: #26262b;
-  --line-strong: #3a3a41;
-  --fg: #fafafa;
-  --fg-muted: #9a9aa3;
-  --accent: #ff5c1a;
-  --accent-dim: rgba(255, 92, 26, 0.12);
+  /* Monocromático por decisão, não por falta de ideia: a única cor
+     saturada da página são as capturas dos projetos. Como contraste
+     alto depende de escassez do sinal (contrast.md), o trabalho é
+     que recebe a cor — nada mais compete com ele. */
+  --bg: #08080a;
+  --bg-soft: #101013;
+  --bg-card: #131317;
+  --line: #24242b;
+  --line-strong: #3b3b45;
+  --fg: #f7f6f4;
+  --fg-muted: #9d9da8;
+  --accent: #ffffff;
 
-  --font-display: var(--font-display-face), -apple-system, sans-serif;
+  --font-display: var(--font-sans), -apple-system, sans-serif;
   --font-body: var(--font-sans), -apple-system, sans-serif;
   --font-num: var(--font-mono), ui-monospace, monospace;
 
-  /* Escala de espaçamento em múltiplos de 4px (spacing-systems.md) */
   --s-1: 4px;
   --s-2: 8px;
   --s-3: 12px;
@@ -27,9 +26,9 @@
   --s-8: 64px;
   --s-9: 96px;
 
-  --space-section: clamp(88px, 12vw, 160px);
+  --space-section: clamp(96px, 12vw, 168px);
   --edge: clamp(20px, 5vw, 72px);
-  --maxw: 1280px;
+  --maxw: 1300px;
 }
 
 * {
@@ -54,19 +53,24 @@ body {
   color: var(--fg);
   background: var(--bg);
   font-family: var(--font-body);
+  font-variation-settings: "wdth" 100;
   -webkit-font-smoothing: antialiased;
-  font-size: 17px;
+  font-size: 19px;
   line-height: 1.6;
 }
 
-/* Títulos herdavam o line-height 1.6 do corpo, pensado para leitura
-   sustentada — solto demais para display. Título e corpo pedem
-   critérios diferentes (typography.md). */
+/* Display: Archivo em largura expandida e peso alto. Título e corpo
+   pedem critérios diferentes (typography.md) — o título otimiza para
+   impacto, o corpo para leitura sustentada. */
 h1,
 h2,
 h3,
 h4 {
-  line-height: 1.12;
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 112;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
@@ -89,13 +93,13 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--fg);
   outline-offset: 3px;
 }
 
 ::selection {
-  background: var(--accent);
-  color: #0a0a0b;
+  background: var(--fg);
+  color: var(--bg);
 }
 
 .reveal {
@@ -115,9 +119,9 @@ button {
   align-items: center;
   justify-content: center;
   gap: var(--s-2);
-  padding: 18px 34px;
+  padding: 19px 36px;
   border-radius: 999px;
-  font-size: 1rem;
+  font-size: 1.02rem;
   font-weight: 600;
   line-height: 1;
   transition: transform 0.2s ease, background-color 0.2s ease,
@@ -125,13 +129,13 @@ button {
 }
 
 .btnPrimary {
-  background: var(--accent);
-  color: #0a0a0b;
+  background: var(--fg);
+  color: var(--bg);
 }
 
 .btnPrimary:hover {
   transform: translateY(-2px);
-  background: #ff7038;
+  background: #ffffff;
 }
 
 .btnGhost {
@@ -141,27 +145,17 @@ button {
 
 .btnGhost:hover {
   border-color: var(--fg);
-  background: rgba(250, 250, 250, 0.06);
+  background: rgba(247, 246, 244, 0.06);
 }
 
-.btnInverse {
-  background: var(--fg);
-  color: var(--bg);
-}
-
-.btnInverse:hover {
-  transform: translateY(-2px);
-  background: #e4e4e6;
-}
-
-/* ── utilitários de seção ────────────────────────────── */
+/* ── rótulo de seção ─────────────────────────────────── */
 .sectionLabel {
   font-family: var(--font-num);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--fg-muted);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,23 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Bricolage_Grotesque } from "next/font/google";
+import { Archivo, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
+/* Archivo é uma grotesca com eixo de largura variável — em peso alto
+   e largura expandida ela tem energia editorial (usada muito em
+   design esportivo e de revista) sem perder ar profissional. */
+const archivo = Archivo({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  axes: ["wdth"],
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   weight: ["400", "500"],
-});
-
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-display-face",
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -35,10 +32,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="pt-BR"
-      className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable}`}
-    >
+    <html lang="pt-BR" className={`${archivo.variable} ${geistMono.variable}`}>
       <body>{children}</body>
     </html>
   );

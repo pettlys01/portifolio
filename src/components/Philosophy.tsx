@@ -26,7 +26,7 @@ const steps = [
 
 export default function Philosophy() {
   return (
-    <section id="about" className={styles.section}>
+    <section id="process" className={styles.section}>
       <div className={styles.inner}>
         <Reveal>
           <div className={styles.heading}>

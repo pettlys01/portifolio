@@ -9,13 +9,8 @@ const IMAGES = [
 function Content() {
   return (
     <div className={styles.content}>
-      <span className={styles.badge}>
-        <span className={styles.dot} />
-        Estúdio digital
-      </span>
-
       <h1 className={styles.headline}>
-        Sites que fazem negócios parecerem <em>maiores</em>.
+        Sites que fazem negócios parecerem maiores.
       </h1>
 
       <p className={styles.sub}>
@@ -38,12 +33,13 @@ function Content() {
 export default function Hero() {
   return (
     <section id="hero">
-      {/* Desktop: corredor 3D de screenshots ao fundo */}
+      {/* Desktop: corredor 3D com as capturas reais, em cor */}
       <div className={styles.streamOnly}>
         <ImageStreamHero
           images={IMAGES}
           cards={11}
-          speed={11}
+          speed={12}
+          grayscale={false}
           className={styles.hero}
           path={{ cardWidth: 15, cardHeight: 20 }}
         >
@@ -51,7 +47,7 @@ export default function Hero() {
         </ImageStreamHero>
       </div>
 
-      {/* Mobile: mesma composição, sem o corredor */}
+      {/* Mobile: mesma composição, sem o corredor (cqw colapsa) */}
       <div className={styles.plainOnly}>
         <Content />
       </div>

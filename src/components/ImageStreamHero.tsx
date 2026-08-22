@@ -140,7 +140,12 @@ export function ImageStreamHero({
                         height: "100%",
                         objectFit: "cover",
                         objectPosition: "top",
-                        filter: grayscale ? "grayscale(1) contrast(1.05)" : undefined,
+                        /* Sobre fundo preto as capturas somem; um leve
+                           ganho de brilho e saturação devolve presença
+                           sem falsear a cor real do site. */
+                        filter: grayscale
+                          ? "grayscale(1) contrast(1.05)"
+                          : "saturate(1.15) brightness(1.12)",
                       }}
                       draggable={false}
                     />

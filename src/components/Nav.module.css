@@ -1,6 +1,6 @@
 .nav {
   position: fixed;
-  top: 0;
+  top: var(--s-5);
   left: 0;
   right: 0;
   z-index: 50;
@@ -8,71 +8,75 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--s-4);
-  padding: var(--s-4) var(--edge);
-  background: rgba(10, 10, 11, 0.78);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--line);
+  padding: 0 var(--edge);
+  pointer-events: none;
+}
+
+.nav > * {
+  pointer-events: auto;
 }
 
 .mark {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.15rem;
-  letter-spacing: 0.02em;
-  border: 1.5px solid var(--fg);
-  border-radius: 8px;
-  padding: 4px 11px;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  font-variation-settings: "wdth" 118;
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
 }
 
-.mark:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-
-.links {
+/* A cápsula flutuante: fundo translúcido com blur, borda de 1px e
+   raio total — separada do logo e do CTA, como na referência. */
+.pill {
   display: flex;
   align-items: center;
-  gap: var(--s-6);
-  font-size: 0.95rem;
+  gap: var(--s-2);
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(19, 19, 23, 0.72);
+  backdrop-filter: blur(16px);
+}
+
+.pill a {
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 0.96rem;
   font-weight: 500;
-}
-
-.links a {
   color: var(--fg-muted);
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-.links a:hover {
+.pill a:hover {
   color: var(--fg);
+  background: rgba(247, 246, 244, 0.07);
 }
 
 .cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
   background: var(--fg);
   color: var(--bg);
-  padding: 11px 22px;
+  padding: 13px 24px;
   border-radius: 999px;
-  font-size: 0.9rem;
+  font-size: 0.96rem;
   font-weight: 600;
-  transition: background-color 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .cta:hover {
-  background: var(--accent);
-  color: #0a0a0b;
+  transform: translateY(-2px);
 }
 
-@media (max-width: 720px) {
-  .links {
-    gap: var(--s-4);
-    font-size: 0.9rem;
-  }
-
-  .hideSmall {
+@media (max-width: 940px) {
+  .pill {
     display: none;
   }
+}
 
+@media (max-width: 480px) {
   .cta {
-    padding: 10px 18px;
+    padding: 11px 18px;
+    font-size: 0.9rem;
   }
 }

@@ -3,7 +3,11 @@
   border-top: 1px solid var(--line);
   text-align: center;
   background:
-    radial-gradient(ellipse 60% 70% at 50% 0%, var(--accent-dim), transparent 70%),
+    radial-gradient(
+      ellipse 60% 70% at 50% 0%,
+      rgba(247, 246, 244, 0.06),
+      transparent 70%
+    ),
     var(--bg);
 }
 
