@@ -1,42 +1,50 @@
 .footer {
-  padding: 44px var(--edge) 32px;
+  padding: var(--s-8) var(--edge) var(--s-6);
   border-top: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: var(--s-5);
+  max-width: var(--maxw);
+  margin: 0 auto;
 }
 
 .brand {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--s-2);
 }
 
 .mark {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .tagline {
-  font-size: 0.85rem;
+  font-size: 0.92rem;
   color: var(--fg-muted);
+  max-width: 40ch;
 }
 
 .right {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 10px;
-  font-size: 0.85rem;
+  gap: var(--s-3);
+  font-size: 0.9rem;
   color: var(--fg-muted);
 }
 
 .links {
   display: flex;
-  gap: 20px;
+  gap: var(--s-5);
+  flex-wrap: wrap;
+}
+
+.links a {
+  transition: color 0.2s ease;
 }
 
 .links a:hover {

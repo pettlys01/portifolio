@@ -1,20 +1,48 @@
 .section {
   padding: var(--space-section) var(--edge);
+  border-top: 1px solid var(--line);
   text-align: center;
-  background: var(--fg);
-  color: var(--bg);
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 0%, var(--accent-dim), transparent 70%),
+    var(--bg);
+}
+
+.label {
+  display: block;
+  margin-bottom: var(--s-5);
 }
 
 .headline {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2.1rem, 5.4vw, 3.8rem);
-  line-height: 1.1;
-  letter-spacing: -0.015em;
+  font-size: clamp(2.2rem, 5.6vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  max-width: 16ch;
+  margin: 0 auto;
+}
+
+.body {
+  margin: var(--s-5) auto 0;
+  max-width: 46ch;
+  color: var(--fg-muted);
+  font-size: 1.05rem;
 }
 
 .btnWrap {
-  margin-top: 36px;
+  margin-top: var(--s-7);
   display: flex;
   justify-content: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 560px) {
+  .btnWrap {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

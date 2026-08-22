@@ -1,20 +1,35 @@
 :root {
-  --bg: #ffffff;
-  --bg-soft: #f6f6f7;
-  --line: #e5e6e9;
-  --line-strong: #d4d5da;
-  --fg: #111114;
-  --fg-muted: #6b6d76;
-  --accent: #111114;
-  --accent-warm: #111114;
-  --accent-soft: #f0f0f1;
+  /* Preto como cor principal. Laranja é o único sinal cromático —
+     usado com parcimônia deliberada: contraste alto só funciona
+     enquanto é escasso (ver contrast.md na base). */
+  --bg: #0a0a0b;
+  --bg-soft: #141416;
+  --bg-card: #17171a;
+  --line: #26262b;
+  --line-strong: #3a3a41;
+  --fg: #fafafa;
+  --fg-muted: #9a9aa3;
+  --accent: #ff5c1a;
+  --accent-dim: rgba(255, 92, 26, 0.12);
 
   --font-display: var(--font-display-face), -apple-system, sans-serif;
   --font-body: var(--font-sans), -apple-system, sans-serif;
   --font-num: var(--font-mono), ui-monospace, monospace;
 
-  --space-section: clamp(80px, 11vw, 140px);
-  --edge: clamp(20px, 6vw, 80px);
+  /* Escala de espaçamento em múltiplos de 4px (spacing-systems.md) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+
+  --space-section: clamp(88px, 12vw, 160px);
+  --edge: clamp(20px, 5vw, 72px);
+  --maxw: 1280px;
 }
 
 * {
@@ -40,8 +55,19 @@ body {
   background: var(--bg);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* Títulos herdavam o line-height 1.6 do corpo, pensado para leitura
+   sustentada — solto demais para display. Título e corpo pedem
+   critérios diferentes (typography.md). */
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.12;
+  text-wrap: balance;
 }
 
 a {
@@ -69,12 +95,12 @@ button {
 
 ::selection {
   background: var(--accent);
-  color: #ffffff;
+  color: #0a0a0b;
 }
 
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(18px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
@@ -83,48 +109,59 @@ button {
   transform: translateY(0);
 }
 
-/* pill buttons */
+/* ── botões ──────────────────────────────────────────── */
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: var(--s-2);
   padding: 18px 34px;
   border-radius: 999px;
-  font-size: 1.02rem;
+  font-size: 1rem;
   font-weight: 600;
+  line-height: 1;
   transition: transform 0.2s ease, background-color 0.2s ease,
     border-color 0.2s ease, color 0.2s ease;
 }
 
 .btnPrimary {
-  background: var(--fg);
-  color: var(--bg);
+  background: var(--accent);
+  color: #0a0a0b;
 }
 
 .btnPrimary:hover {
-  transform: translateY(-1px);
-  background: #2a2a2f;
+  transform: translateY(-2px);
+  background: #ff7038;
 }
 
 .btnGhost {
-  border: 1.5px solid var(--fg);
+  border: 1.5px solid var(--line-strong);
   color: var(--fg);
 }
 
 .btnGhost:hover {
-  border-color: var(--accent);
-  background: var(--accent-soft);
-  color: var(--accent);
+  border-color: var(--fg);
+  background: rgba(250, 250, 250, 0.06);
 }
 
 .btnInverse {
-  background: var(--bg);
-  color: var(--fg);
+  background: var(--fg);
+  color: var(--bg);
 }
 
 .btnInverse:hover {
-  transform: translateY(-1px);
-  background: #e8e8ea;
+  transform: translateY(-2px);
+  background: #e4e4e6;
+}
+
+/* ── utilitários de seção ────────────────────────────── */
+.sectionLabel {
+  font-family: var(--font-num);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -138,7 +175,7 @@ button {
     transition: none;
   }
 
-  .btnPrimary:hover {
+  .btn:hover {
     transform: none;
   }
 }

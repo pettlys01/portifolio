@@ -4,55 +4,86 @@
   background: var(--bg-soft);
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 48px;
+.inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
 }
 
-.label {
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+.heading {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-4);
+  margin-bottom: var(--s-8);
+}
+
+.headingRule {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-6);
+}
+
+.step {
+  position: relative;
+  padding-top: var(--s-5);
+  border-top: 2px solid var(--line-strong);
+}
+
+.step:first-child {
+  border-top-color: var(--accent);
+}
+
+.stepNum {
+  font-family: var(--font-num);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
   color: var(--fg-muted);
+}
+
+.stepTitle {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+  margin-top: var(--s-2);
+}
+
+.stepBody {
+  margin-top: var(--s-3);
+  font-size: 0.96rem;
+  color: var(--fg-muted);
+  line-height: 1.6;
 }
 
 .statement {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.5rem, 2.8vw, 2.3rem);
-  line-height: 1.3;
-  max-width: 24ch;
-  letter-spacing: -0.015em;
+  font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+  line-height: 1.25;
+  max-width: 26ch;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s-9);
 }
 
-.mark {
-  position: relative;
-  white-space: nowrap;
+.statement em {
+  font-style: normal;
+  color: var(--accent);
 }
 
-.mark svg {
-  position: absolute;
-  left: -3%;
-  bottom: -0.1em;
-  width: 106%;
-  height: 0.3em;
-  overflow: visible;
-  pointer-events: none;
+@media (max-width: 900px) {
+  .steps {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-5);
+  }
 }
 
-.mark path {
-  fill: none;
-  stroke: var(--accent-warm);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  opacity: 0.7;
-}
-
-@media (max-width: 880px) {
-  .grid {
+@media (max-width: 560px) {
+  .steps {
     grid-template-columns: 1fr;
-    gap: 24px;
   }
 }

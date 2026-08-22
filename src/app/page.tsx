@@ -4,6 +4,8 @@ import Hero from "@/components/Hero";
 import Included from "@/components/Included";
 import Nav from "@/components/Nav";
 import Philosophy from "@/components/Philosophy";
+import Services from "@/components/Services";
+import Stack from "@/components/Stack";
 import Work from "@/components/Work";
 
 export default function Home() {
@@ -13,7 +15,9 @@ export default function Home() {
       <main>
         <Hero />
         <Work />
+        <Services />
         <Philosophy />
+        <Stack />
         <Included />
         <CTA />
       </main>

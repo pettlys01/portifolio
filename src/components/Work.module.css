@@ -1,20 +1,14 @@
 .section {
   padding: var(--space-section) var(--edge);
+  max-width: var(--maxw);
+  margin: 0 auto;
 }
 
 .heading {
   display: flex;
   align-items: baseline;
-  gap: 14px;
-  margin-bottom: 48px;
-}
-
-.headingLabel {
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
+  gap: var(--s-4);
+  margin-bottom: var(--s-4);
 }
 
 .headingRule {
@@ -23,22 +17,74 @@
   background: var(--line);
 }
 
+.headingTitle {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s-8);
+  max-width: 20ch;
+}
+
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 56px 40px;
+  gap: var(--s-7);
 }
 
+/* o wrapper de animação precisa esticar para o card ocupar a célula */
+.grid > * {
+  display: flex;
+  height: 100%;
+}
+
+.grid > * > article {
+  width: 100%;
+}
+
+/* Cards com altura consistente e rodapé alinhado — grade regular,
+   não itens de alturas arbitrárias (grid-systems.md). */
 .project {
   display: flex;
   flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.project:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-4px);
+}
+
+.visual {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  object-position: top;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--s-6);
 }
 
 .top {
   display: flex;
   align-items: baseline;
-  gap: 12px;
-  margin-top: 20px;
+  gap: var(--s-3);
 }
 
 .top:hover .title {
@@ -55,59 +101,56 @@
 .title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.3rem, 1.8vw, 1.7rem);
-  letter-spacing: -0.01em;
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  letter-spacing: -0.015em;
   transition: color 0.2s ease;
 }
 
 .category {
-  display: block;
-  margin-top: 4px;
-  font-size: 0.88rem;
+  margin-top: var(--s-2);
+  font-size: 0.95rem;
   color: var(--fg-muted);
 }
 
-.visual {
-  display: block;
-  position: relative;
-  width: 100%;
-  max-width: 480px;
-  aspect-ratio: 4 / 3;
-  background: var(--bg-soft);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(17, 17, 20, 0.04);
-  overflow: hidden;
-  transition: box-shadow 0.25s ease;
-  will-change: transform;
+.description {
+  margin-top: var(--s-4);
+  font-size: 0.98rem;
+  color: var(--fg-muted);
+  line-height: 1.6;
 }
 
-.project:hover .visual {
-  box-shadow: 0 24px 48px rgba(17, 17, 20, 0.1);
-}
-
-.image {
-  object-fit: cover;
-  object-position: top;
-}
-
-.bottom {
+.tags {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-top: 16px;
   flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-5);
 }
 
-.technologies {
-  font-size: 0.82rem;
+.tag {
+  font-family: var(--font-num);
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
   color: var(--fg-muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 12px;
 }
 
-@media (max-width: 780px) {
+/* margin-top:auto empurra o rodapé para baixo, então os botões dos
+   dois cards ficam na mesma linha mesmo com textos de tamanhos
+   diferentes. */
+.footer {
+  margin-top: auto;
+  padding-top: var(--s-6);
+}
+
+.footer a {
+  width: 100%;
+}
+
+@media (max-width: 820px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: var(--s-6);
   }
 }

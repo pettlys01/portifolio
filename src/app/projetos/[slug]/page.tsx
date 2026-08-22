@@ -92,7 +92,11 @@ export default async function ProjectPage({
 
         <div className={styles.footerRow}>
           <span className={styles.technologies}>
-            {project.technologies.join(" · ")}
+            {project.technologies.map((tech) => (
+              <span key={tech} className={styles.tag}>
+                {tech}
+              </span>
+            ))}
           </span>
           <a
             href={project.url}
