@@ -1,0 +1,28 @@
+.wrap {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  --x: 50%;
+  --y: 32%;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 90%);
+  mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 90%);
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    480px circle at var(--x) var(--y),
+    rgba(76, 95, 213, 0.14),
+    transparent 72%
+  );
+  transition: background 0.15s ease-out;
+}

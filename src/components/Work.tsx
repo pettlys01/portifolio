@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/data/projects";
+import ProjectVisual from "./ProjectVisual";
 import Reveal from "./Reveal";
 import styles from "./Work.module.css";
 
@@ -23,16 +23,12 @@ export default function Work() {
               <span className={styles.category}>{project.category}</span>
             </Link>
 
-            <Link href={`/projetos/${project.slug}`} className={styles.visual}>
-              <Image
-                src={project.image}
-                alt={`Captura de tela do site ${project.title}`}
-                fill
-                sizes="(max-width: 880px) 100vw, 1200px"
-                className={styles.image}
-                priority={i === 0}
-              />
-            </Link>
+            <ProjectVisual
+              href={`/projetos/${project.slug}`}
+              src={project.image}
+              alt={`Captura de tela do site ${project.title}`}
+              priority={i === 0}
+            />
 
             <div className={styles.bottom}>
               <span className={styles.technologies}>

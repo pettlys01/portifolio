@@ -70,6 +70,7 @@ export default async function ProjectPage({
             alt={`Captura de tela do site ${project.title}`}
             fill
             sizes="100vw"
+            quality={92}
             priority
           />
         </div>

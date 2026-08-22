@@ -1,15 +1,18 @@
+import Link from "next/link";
 import styles from "./Nav.module.css";
 
 export default function Nav() {
   return (
     <nav className={styles.nav}>
-      <span className={styles.mark}>LCS</span>
+      <Link href="/" className={styles.mark}>
+        LCS
+      </Link>
       <div className={styles.links}>
-        <a href="#work">Trabalhos</a>
-        <a href="#about">Sobre</a>
-        <a href="#contact" className={styles.cta}>
+        <Link href="/#work">Trabalhos</Link>
+        <Link href="/#about">Sobre</Link>
+        <Link href="/#contact" className={styles.cta}>
           Contato
-        </a>
+        </Link>
       </div>
     </nav>
   );

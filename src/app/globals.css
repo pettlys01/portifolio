@@ -9,8 +9,9 @@
   --accent-warm: #e2795a;
   --accent-soft: #eef0fc;
 
-  --font-display: var(--font-poppins), -apple-system, sans-serif;
-  --font-body: var(--font-poppins), -apple-system, sans-serif;
+  --font-display: var(--font-sans), -apple-system, sans-serif;
+  --font-body: var(--font-sans), -apple-system, sans-serif;
+  --font-num: var(--font-mono), ui-monospace, monospace;
 
   --space-section: clamp(80px, 11vw, 140px);
   --edge: clamp(20px, 6vw, 80px);

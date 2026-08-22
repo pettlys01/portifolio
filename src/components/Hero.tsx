@@ -1,10 +1,10 @@
-import HeroGradient from "./HeroGradient";
+import Spotlight from "./Spotlight";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
   return (
     <section id="hero" className={styles.hero}>
-      <HeroGradient />
+      <Spotlight />
       <span className={styles.badge}>Estúdio digital — LCS</span>
 
       <h1 className={styles.headline}>Sites que fazem negócios parecerem maiores.</h1>
