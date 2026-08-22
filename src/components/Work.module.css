@@ -6,7 +6,7 @@
   display: flex;
   align-items: baseline;
   gap: 14px;
-  margin-bottom: 56px;
+  margin-bottom: 48px;
 }
 
 .headingLabel {
@@ -23,21 +23,22 @@
   background: var(--line);
 }
 
-.project {
-  padding: 72px 0;
-  border-top: 1px solid var(--line);
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px 40px;
 }
 
-.project:last-child {
-  border-bottom: 1px solid var(--line);
+.project {
+  display: flex;
+  flex-direction: column;
 }
 
 .top {
   display: flex;
   align-items: baseline;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 28px;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 .top:hover .title {
@@ -46,20 +47,22 @@
 
 .number {
   font-family: var(--font-num);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: var(--accent);
 }
 
 .title {
   font-weight: 700;
-  font-size: clamp(1.8rem, 3.4vw, 3rem);
+  font-size: clamp(1.3rem, 1.8vw, 1.6rem);
   letter-spacing: -0.01em;
   transition: color 0.2s ease;
 }
 
 .category {
-  font-size: 0.9rem;
+  display: block;
+  margin-top: 4px;
+  font-size: 0.88rem;
   color: var(--fg-muted);
 }
 
@@ -67,7 +70,6 @@
   display: block;
   position: relative;
   width: 100%;
-  max-width: 620px;
   aspect-ratio: 4 / 3;
   background: var(--bg-soft);
   border: 1px solid var(--line);
@@ -92,18 +94,18 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-top: 20px;
-  max-width: 620px;
+  margin-top: 16px;
   flex-wrap: wrap;
 }
 
 .technologies {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--fg-muted);
 }
 
-@media (max-width: 640px) {
-  .visual {
-    aspect-ratio: 4 / 3;
+@media (max-width: 780px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
   }
 }

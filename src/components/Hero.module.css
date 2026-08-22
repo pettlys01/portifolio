@@ -1,12 +1,32 @@
 .hero {
+  height: 100svh;
+  width: 100%;
+  background: var(--bg);
+}
+
+.content {
   position: relative;
-  min-height: 100svh;
+  z-index: 10;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 140px var(--edge) 80px;
+  padding: 0 var(--edge);
+}
+
+.content::before {
+  content: "";
+  position: absolute;
+  inset: -24px -48px;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse 60% 65% at center,
+    var(--bg) 55%,
+    rgba(255, 255, 255, 0.6) 78%,
+    transparent 92%
+  );
 }
 
 .badge {
@@ -18,6 +38,7 @@
   padding: 7px 16px;
   font-size: 0.82rem;
   color: var(--fg-muted);
+  background: var(--bg);
   opacity: 0;
   animation: rise 0.6s ease forwards;
   animation-delay: 0.1s;
@@ -25,19 +46,19 @@
 
 .headline {
   font-weight: 700;
-  font-size: clamp(2.4rem, 6vw, 4.6rem);
+  font-size: clamp(2.2rem, 5.6vw, 4.4rem);
   line-height: 1.08;
   max-width: 18ch;
   letter-spacing: -0.015em;
-  margin-top: 28px;
+  margin-top: 26px;
   opacity: 0;
   animation: rise 0.7s ease forwards;
   animation-delay: 0.22s;
 }
 
 .sub {
-  margin-top: 22px;
-  max-width: 46ch;
+  margin-top: 20px;
+  max-width: 44ch;
   font-size: clamp(1rem, 1.3vw, 1.1rem);
   color: var(--fg-muted);
   opacity: 0;
@@ -46,7 +67,7 @@
 }
 
 .actions {
-  margin-top: 36px;
+  margin-top: 32px;
   display: flex;
   gap: 14px;
   flex-wrap: wrap;

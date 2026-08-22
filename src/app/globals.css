@@ -5,9 +5,9 @@
   --line-strong: #d4d5da;
   --fg: #111114;
   --fg-muted: #6b6d76;
-  --accent: #4c5fd5;
-  --accent-warm: #e2795a;
-  --accent-soft: #eef0fc;
+  --accent: #111114;
+  --accent-warm: #111114;
+  --accent-soft: #f0f0f1;
 
   --font-display: var(--font-sans), -apple-system, sans-serif;
   --font-body: var(--font-sans), -apple-system, sans-serif;

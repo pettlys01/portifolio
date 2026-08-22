@@ -58,6 +58,7 @@ export type ImageStreamHeroProps = {
   speed?: number;
   axis?: number;
   path?: CorridorPath;
+  grayscale?: boolean;
   children?: React.ReactNode;
   className?: string;
 };
@@ -68,6 +69,7 @@ export function ImageStreamHero({
   speed = 18,
   axis = 55,
   path,
+  grayscale = true,
   children,
   className,
 }: ImageStreamHeroProps) {
@@ -138,6 +140,7 @@ export function ImageStreamHero({
                         height: "100%",
                         objectFit: "cover",
                         objectPosition: "top",
+                        filter: grayscale ? "grayscale(1) contrast(1.05)" : undefined,
                       }}
                       draggable={false}
                     />

@@ -14,33 +14,35 @@ export default function Work() {
         </div>
       </Reveal>
 
-      {projects.map((project, i) => (
-        <Reveal key={project.slug} delay={i * 80}>
-          <article className={styles.project}>
-            <Link href={`/projetos/${project.slug}`} className={styles.top}>
-              <span className={styles.number}>{project.number}</span>
-              <h3 className={styles.title}>{project.title}</h3>
-              <span className={styles.category}>{project.category}</span>
-            </Link>
+      <div className={styles.grid}>
+        {projects.map((project, i) => (
+          <Reveal key={project.slug} delay={i * 80}>
+            <article className={styles.project}>
+              <ProjectVisual
+                href={`/projetos/${project.slug}`}
+                src={project.image}
+                alt={`Captura de tela do site ${project.title}`}
+                priority={i === 0}
+              />
 
-            <ProjectVisual
-              href={`/projetos/${project.slug}`}
-              src={project.image}
-              alt={`Captura de tela do site ${project.title}`}
-              priority={i === 0}
-            />
-
-            <div className={styles.bottom}>
-              <span className={styles.technologies}>
-                {project.technologies.join(" · ")}
-              </span>
-              <Link href={`/projetos/${project.slug}`} className="btn btnGhost">
-                Ver case completo ↗
+              <Link href={`/projetos/${project.slug}`} className={styles.top}>
+                <span className={styles.number}>{project.number}</span>
+                <h3 className={styles.title}>{project.title}</h3>
               </Link>
-            </div>
-          </article>
-        </Reveal>
-      ))}
+              <span className={styles.category}>{project.category}</span>
+
+              <div className={styles.bottom}>
+                <span className={styles.technologies}>
+                  {project.technologies.join(" · ")}
+                </span>
+                <Link href={`/projetos/${project.slug}`} className="btn btnGhost">
+                  Ver case ↗
+                </Link>
+              </div>
+            </article>
+          </Reveal>
+        ))}
+      </div>
     </section>
   );
 }
