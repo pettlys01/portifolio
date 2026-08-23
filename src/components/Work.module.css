@@ -23,90 +23,118 @@
   max-width: 20ch;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--s-9) var(--s-7);
-}
-
-.grid > * {
-  display: flex;
-  height: 100%;
-}
-
-.grid > * > article {
-  width: 100%;
-}
-
-/* Sem moldura de card: a imagem é um bloco, o texto é outro. O
-   espaço entre eles é que agrupa (whitespace.md) — não uma borda. */
-.project {
+/* Cada projeto ocupa uma faixa inteira, alternando o lado.
+   Dois cards idênticos lado a lado se anulavam: o efeito
+   Von Restorff só funciona quando o item NÃO é homogêneo ao
+   vizinho — em grade simétrica nenhum dos dois se destaca, e os
+   dois lêem como itens intercambiáveis de catálogo. Em faixas
+   separadas cada projeto vira um momento próprio. */
+.list {
   display: flex;
   flex-direction: column;
+  gap: clamp(96px, 12vw, 160px);
 }
 
+.project {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+
+.flipped .visual {
+  order: 2;
+}
+
+/* ── composição desktop + celular ─────────────────────── */
 .visual {
+  position: relative;
+  display: block;
+  padding-bottom: 42px;
+}
+
+.desktop {
   display: block;
   position: relative;
   width: 100%;
-  /* 4:3 é a proporção real da captura — quadrado demais decepa as
-     laterais do site e o print deixa de mostrar o trabalho. */
   aspect-ratio: 4 / 3;
-  background: var(--bg-soft);
-  border-radius: 18px;
+  border-radius: 16px;
   overflow: hidden;
-  transition: transform 0.35s ease;
+  background: var(--bg-soft);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+  transition: transform 0.4s ease;
 }
 
-.visual::after {
+.desktop::after {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   pointer-events: none;
 }
 
-.project:hover .visual {
+.desktopImg {
+  object-fit: cover;
+  object-position: top;
+}
+
+.phone {
+  position: absolute;
+  right: 6%;
+  bottom: 0;
+  width: 21%;
+  min-width: 96px;
+  aspect-ratio: 1 / 2;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--bg-soft);
+  border: 3px solid #17171c;
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.65);
+  transition: transform 0.4s ease;
+}
+
+.flipped .phone {
+  right: auto;
+  left: 6%;
+}
+
+.phoneImg {
+  object-fit: cover;
+  object-position: top;
+}
+
+.project:hover .desktop {
   transform: translateY(-6px);
 }
 
-.image {
-  object-fit: cover;
-  object-position: top;
-  transition: transform 0.6s ease;
+.project:hover .phone {
+  transform: translateY(-12px);
 }
 
-.project:hover .image {
-  transform: scale(1.03);
-}
-
-.body {
+/* ── texto ────────────────────────────────────────────── */
+.info {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  padding-top: var(--s-6);
-}
-
-.top {
-  display: flex;
-  align-items: baseline;
-  gap: var(--s-3);
-}
-
-.top:hover .title {
-  opacity: 0.62;
+  min-width: 0;
 }
 
 .number {
   font-family: var(--font-num);
   font-size: 0.9rem;
   color: var(--fg-muted);
+  padding-bottom: var(--s-4);
+  margin-bottom: var(--s-4);
+  border-bottom: 1px solid var(--line);
 }
 
 .title {
-  font-size: clamp(1.7rem, 2.6vw, 2.2rem);
+  font-size: clamp(2rem, 3.4vw, 2.9rem);
   transition: opacity 0.2s ease;
+}
+
+.title:hover {
+  opacity: 0.65;
 }
 
 .category {
@@ -116,11 +144,33 @@
 }
 
 .description {
-  margin-top: var(--s-4);
-  font-size: 1.02rem;
+  margin-top: var(--s-5);
+  font-size: 1.05rem;
   color: var(--fg-muted);
   line-height: 1.65;
-  max-width: 46ch;
+}
+
+/* Um recorte do case já na home: dá substância sem exigir clique */
+.meta {
+  margin-top: var(--s-6);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--line);
+}
+
+.meta dt {
+  font-family: var(--font-num);
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: var(--s-2);
+}
+
+.meta dd {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--fg);
+  opacity: 0.88;
 }
 
 .tags {
@@ -140,38 +190,41 @@
   padding: 6px 13px;
 }
 
-.footer {
-  margin-top: auto;
-  padding-top: var(--s-6);
-}
-
-.link {
-  display: inline-flex;
-  align-items: center;
+.actions {
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--s-3);
-  font-size: 1.05rem;
-  font-weight: 600;
-  font-variation-settings: "wdth" 108;
-  padding-bottom: var(--s-2);
-  border-bottom: 1.5px solid var(--line-strong);
-  transition: border-color 0.25s ease;
+  margin-top: var(--s-7);
 }
 
-.link:hover {
-  border-color: var(--fg);
-}
-
-.link span {
-  transition: transform 0.25s ease;
-}
-
-.link:hover span {
-  transform: translate(3px, -3px);
-}
-
-@media (max-width: 820px) {
-  .grid {
+@media (max-width: 900px) {
+  .project {
     grid-template-columns: 1fr;
-    gap: var(--s-8);
+    gap: var(--s-7);
+  }
+
+  .flipped .visual {
+    order: 0;
+  }
+
+  .list {
+    gap: 88px;
+  }
+}
+
+@media (max-width: 520px) {
+  .actions a {
+    width: 100%;
+  }
+
+  .phone {
+    width: 26%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project:hover .desktop,
+  .project:hover .phone {
+    transform: none;
   }
 }

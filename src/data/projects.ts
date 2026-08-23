@@ -6,6 +6,7 @@ export type Project = {
   description: string;
   url: string;
   image: string;
+  imageMobile: string;
   technologies: string[];
   challenge: string;
   approach: string;
@@ -22,6 +23,7 @@ export const projects: Project[] = [
       "Presença digital para uma empresa de elevadores que foge do padrão genérico de engenharia — precisão, tecnologia e sofisticação em primeiro plano.",
     url: "https://pettlys01-elevadores.vercel.app",
     image: "/projects/elevadores.png",
+    imageMobile: "/projects/elevadores-mobile.png",
     technologies: ["HTML", "CSS", "JavaScript"],
     challenge:
       "Elevadores é um mercado tradicionalmente representado por sites técnicos e genéricos. O desafio era criar uma presença digital que comunicasse precisão de engenharia sem parecer um catálogo industrial datado.",
@@ -39,6 +41,7 @@ export const projects: Project[] = [
       "Landing page premium para uma clínica odontológica, construída para transmitir confiança através de composição e ritmo visual.",
     url: "https://lumina-tawny-six.vercel.app",
     image: "/projects/odontologia.png",
+    imageMobile: "/projects/odontologia-mobile.png",
     technologies: ["HTML", "CSS", "JavaScript"],
     challenge:
       "Clínicas odontológicas competem por confiança antes de qualquer visita. O site precisava transmitir segurança e cuidado sem recorrer aos clichês do setor — sorrisos genéricos de banco de imagens, azul clínico.",
