@@ -1,0 +1,101 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+  min-width: 0;
+}
+
+.track {
+  display: flex;
+  gap: var(--s-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: var(--s-2);
+  perspective: 1400px;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.slide {
+  flex: 0 0 clamp(240px, 74%, 320px);
+  scroll-snap-align: start;
+  display: flex;
+}
+
+.slide > div {
+  width: 100%;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.dots {
+  display: flex;
+  gap: var(--s-2);
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--line-strong);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.dot:hover {
+  background: var(--fg-muted);
+}
+
+.dotActive {
+  background: var(--fg);
+  transform: scale(1.25);
+}
+
+.arrows {
+  display: flex;
+  gap: var(--s-2);
+}
+
+.arrowBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  border: 1.5px solid var(--line-strong);
+  font-size: 1.25rem;
+  color: var(--fg);
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease, opacity 0.2s ease;
+}
+
+.arrowBtn:hover:not(:disabled) {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--bg);
+  transform: translateY(-2px);
+}
+
+.arrowBtn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    scroll-behavior: auto;
+  }
+
+  .arrowBtn:hover:not(:disabled) {
+    transform: none;
+  }
+}

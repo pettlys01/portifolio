@@ -1,17 +1,11 @@
 import Reveal from "./Reveal";
-import StackCard from "./StackCard";
-import { type TechSlug } from "./TechIcon";
+import StackCarousel, { type StackItem } from "./StackCarousel";
+import IconCloud from "./IconCloud";
 import styles from "./Stack.module.css";
 
-/* O `tint` de cada card é a cor oficial da marca (Simple Icons),
-   não uma paleta decorativa — a cor vem da tecnologia. */
-const items: {
-  slug: TechSlug;
-  name: string;
-  role: string;
-  tint: string;
-  group: string;
-}[] = [
+/* O `tint` de cada card é a cor oficial da marca, não uma paleta
+   decorativa — a cor vem da tecnologia. */
+const items: StackItem[] = [
   {
     slug: "html5",
     name: "HTML",
@@ -23,14 +17,14 @@ const items: {
     slug: "css",
     name: "CSS",
     role: "Layout, grid e responsividade, sem framework pesado por padrão.",
-    tint: "#663399",
+    tint: "#7C42B8",
     group: "Base",
   },
   {
     slug: "javascript",
     name: "JavaScript",
     role: "Comportamento e interações, aplicado onde agrega.",
-    tint: "#B59A00",
+    tint: "#C9A227",
     group: "Base",
   },
   {
@@ -44,7 +38,7 @@ const items: {
     slug: "react",
     name: "React",
     role: "Interfaces com estado e componentes reaproveitáveis.",
-    tint: "#1D7A8C",
+    tint: "#1F8FA6",
     group: "Quando o projeto pede",
   },
   {
@@ -58,7 +52,7 @@ const items: {
     slug: "git",
     name: "Git",
     role: "Versionamento — todo projeto com histórico rastreável.",
-    tint: "#F03C2E",
+    tint: "#D93B2B",
     group: "Entrega",
   },
   {
@@ -72,7 +66,7 @@ const items: {
     slug: "analytics",
     name: "Analytics",
     role: "Medição de tráfego para decidir com dado, não achismo.",
-    tint: "#E37400",
+    tint: "#D96A00",
     group: "Entrega",
   },
 ];
@@ -85,20 +79,27 @@ export default function Stack() {
           <span className="sectionLabel">Stack</span>
           <span className={styles.headingRule} />
         </div>
-        <h2 className={styles.headingTitle}>Ferramenta serve ao projeto.</h2>
-        <p className={styles.headingBody}>
-          Nem todo site precisa de framework. Um institucional de cinco
-          páginas roda melhor em HTML, CSS e JavaScript diretos do que numa
-          stack que só adiciona peso. A escolha vem do problema.
-        </p>
       </Reveal>
 
-      <div className={styles.grid}>
-        {items.map((item, i) => (
-          <Reveal key={item.name} delay={i * 50}>
-            <StackCard {...item} />
-          </Reveal>
-        ))}
+      {/* Duas colunas no desktop, empilhado no celular: a esfera
+          precisa de área quase quadrada para não virar uma faixa
+          achatada, e o carrossel precisa de largura para respirar. */}
+      <div className={styles.split}>
+        <Reveal className={styles.cloudCol}>
+          <div className={styles.cloud}>
+            <IconCloud />
+          </div>
+        </Reveal>
+
+        <Reveal delay={90} className={styles.textCol}>
+          <h2 className={styles.title}>Ferramenta serve ao projeto.</h2>
+          <p className={styles.body}>
+            Nem todo site precisa de framework. Um institucional de cinco
+            páginas roda melhor em HTML, CSS e JavaScript diretos do que
+            numa stack que só adiciona peso. A escolha vem do problema.
+          </p>
+          <StackCarousel items={items} />
+        </Reveal>
       </div>
     </section>
   );

@@ -4,9 +4,9 @@
  * dependência em runtime, e nítido em qualquer tamanho.
  */
 
-type IconData = { title: string; path: string; hex: string };
+export type IconData = { title: string; path: string; hex: string };
 
-const ICONS: Record<string, IconData> = {
+export const ICONS: Record<string, IconData> = {
   html5: {
     title: "HTML5",
     hex: "#E34F26",
