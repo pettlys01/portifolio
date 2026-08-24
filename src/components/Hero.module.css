@@ -1,15 +1,6 @@
 .hero {
-  min-height: 100svh;
-  width: 100%;
-  background: var(--bg);
-}
-
-.streamOnly {
-  display: block;
-}
-
-.plainOnly {
-  display: none;
+  position: relative;
+  overflow: hidden;
   min-height: 100svh;
   width: 100%;
   background: var(--bg);
@@ -86,16 +77,6 @@
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@media (max-width: 900px) {
-  .streamOnly {
-    display: none;
-  }
-
-  .plainOnly {
-    display: block;
   }
 }
 

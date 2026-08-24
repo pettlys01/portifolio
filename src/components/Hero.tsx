@@ -1,10 +1,5 @@
-import ImageStreamHero from "./ImageStreamHero";
+import HeroShader from "./HeroShader";
 import styles from "./Hero.module.css";
-
-const IMAGES = [
-  { src: "/projects/elevadores.webp", alt: "" },
-  { src: "/projects/odontologia.webp", alt: "" },
-];
 
 function Content() {
   return (
@@ -32,25 +27,9 @@ function Content() {
 
 export default function Hero() {
   return (
-    <section id="hero">
-      {/* Desktop: corredor 3D com as capturas reais, em cor */}
-      <div className={styles.streamOnly}>
-        <ImageStreamHero
-          images={IMAGES}
-          cards={11}
-          speed={12}
-          grayscale={false}
-          className={styles.hero}
-          path={{ cardWidth: 15, cardHeight: 20 }}
-        >
-          <Content />
-        </ImageStreamHero>
-      </div>
-
-      {/* Mobile: mesma composição, sem o corredor (cqw colapsa) */}
-      <div className={styles.plainOnly}>
-        <Content />
-      </div>
+    <section id="hero" className={styles.hero}>
+      <HeroShader />
+      <Content />
     </section>
   );
 }
