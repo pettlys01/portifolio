@@ -7,13 +7,17 @@
 
 .split {
   display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
+  grid-template-columns: 0.62fr 1.38fr;
   gap: var(--s-8);
   align-items: center;
 }
 
+/* A esfera é apoio, não protagonista: o texto e o carrossel argumentam
+   "a ferramenta serve ao projeto" — uma esfera dominante diria o
+   oposto. Largura máxima trava o tamanho mesmo em telas muito largas. */
 .cloudCol {
   min-width: 0;
+  max-width: 420px;
 }
 
 .textCol {
@@ -65,8 +69,13 @@
     gap: var(--s-7);
   }
 
+  .cloudCol {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
   .cloud {
     aspect-ratio: 4 / 3;
-    max-height: 380px;
+    max-height: 320px;
   }
 }

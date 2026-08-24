@@ -9,51 +9,36 @@
     linear-gradient(160deg, rgba(247, 246, 244, 0.07), transparent 55%),
     var(--bg-card);
   border: 1px solid var(--line);
-  will-change: transform;
-  --mx: 50%;
-  --my: 50%;
+  transition: border-color 0.3s ease;
 }
 
-/* brilho especular que acompanha o cursor */
-.sheen {
+/* Hover discreto — mesma linguagem do .row:hover do Services (leve
+   tint de fundo), sem rastrear cursor. O que comunica progressão
+   aqui é o escalonamento vertical das etapas, não o card em si. */
+.card::before {
+  content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(
-    360px circle at var(--mx) var(--my),
-    rgba(247, 246, 244, 0.09),
-    transparent 70%
-  );
+  background: rgba(247, 246, 244, 0.035);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-.card:hover .sheen {
+.card:hover {
+  border-color: var(--line-strong);
+}
+
+.card:hover::before {
   opacity: 1;
 }
 
-/* conteúdo empurrado para frente no eixo Z — é isso que dá a
-   sensação de profundidade quando o card inclina */
 .layer {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
   padding: var(--s-6);
-}
-
-/* O 3D só existe onde há mouse. Em toque não há hover — o efeito
-   não faria nada — e `preserve-3d` com `translateZ` dentro de um
-   container com overflow é uma combinação que alguns navegadores
-   móveis achatam ou escondem por completo. */
-@media (hover: hover) and (pointer: fine) {
-  .card {
-    transform-style: preserve-3d;
-  }
-
-  .layer {
-    transform: translateZ(36px);
-  }
 }
 
 .header {
@@ -105,7 +90,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .card,
-  .sheen {
+  .card::before {
     transition: none;
   }
 }

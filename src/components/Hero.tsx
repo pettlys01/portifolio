@@ -2,8 +2,8 @@ import ImageStreamHero from "./ImageStreamHero";
 import styles from "./Hero.module.css";
 
 const IMAGES = [
-  { src: "/projects/elevadores.png", alt: "" },
-  { src: "/projects/odontologia.png", alt: "" },
+  { src: "/projects/elevadores.webp", alt: "" },
+  { src: "/projects/odontologia.webp", alt: "" },
 ];
 
 function Content() {
