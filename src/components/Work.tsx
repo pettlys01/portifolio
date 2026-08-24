@@ -26,14 +26,18 @@ export default function Work() {
                 className={styles.visual}
                 aria-label={`Ver case de ${project.title}`}
               >
+                {/* Dimensões intrínsecas em vez de `fill`: a própria
+                    imagem dá altura à caixa. Com `fill` a altura
+                    dependia de aspect-ratio, e se a imagem falhasse a
+                    caixa colapsava para uma barra fina. */}
                 <span className={styles.desktop}>
                   <Image
                     src={project.image}
                     alt={`Site ${project.title} no desktop`}
-                    fill
+                    width={1600}
+                    height={1200}
                     sizes="(max-width: 900px) 100vw, 760px"
                     className={styles.desktopImg}
-                    quality={92}
                     priority={i === 0}
                   />
                 </span>
@@ -42,10 +46,10 @@ export default function Work() {
                   <Image
                     src={project.imageMobile}
                     alt={`Site ${project.title} no celular`}
-                    fill
-                    sizes="200px"
+                    width={720}
+                    height={1440}
+                    sizes="220px"
                     className={styles.phoneImg}
-                    quality={92}
                   />
                 </span>
               </Link>

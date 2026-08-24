@@ -2,11 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Cloud, renderSimpleIcon, type ICloud } from "react-icon-cloud";
-import { ICONS } from "./TechIcon";
+import TechIcon, { ICONS, type TechSlug } from "./TechIcon";
+import styles from "./IconCloud.module.css";
 
-/* Usa os mesmos logos já embutidos no projeto — nenhuma requisição
-   externa. Repetidos uma vez para a esfera não ficar rala. */
-const SLUGS = [
+const SLUGS: TechSlug[] = [
   "html5",
   "css",
   "javascript",
@@ -18,13 +17,29 @@ const SLUGS = [
   "analytics",
 ];
 
+/* Grade estática: é o que aparece em toque e sempre que a esfera
+   não puder rodar. A esfera roda em canvas e depende de recursos que
+   nem todo navegador de celular entrega — o conteúdo não pode
+   depender disso para existir. */
+function StaticGrid() {
+  return (
+    <ul className={styles.grid}>
+      {SLUGS.map((slug) => (
+        <li key={slug} className={styles.cell} title={ICONS[slug].title}>
+          <TechIcon slug={slug} size={30} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function IconCloud() {
-  const [mounted, setMounted] = useState(false);
-  const [touch, setTouch] = useState(false);
+  const [mode, setMode] = useState<"static" | "cloud">("static");
 
   useEffect(() => {
-    setTouch(!window.matchMedia("(hover: hover) and (pointer: fine)").matches);
-    setMounted(true);
+    const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const wide = window.matchMedia("(min-width: 980px)").matches;
+    if (fine && wide) setMode("cloud");
   }, []);
 
   const icons = useMemo(
@@ -79,18 +94,14 @@ export default function IconCloud() {
         outlineColour: "#0000",
         maxSpeed: 0.028,
         minSpeed: 0.014,
-        /* No toque, o arrasto do dedo acelerava a esfera até travar
-           e ainda roubava o scroll da página. Em toque ela só gira
-           sozinha. */
-        dragControl: !touch,
-        freezeActive: touch,
+        dragControl: true,
         fadeIn: 600,
       },
     }),
-    [touch]
+    []
   );
 
-  if (!mounted) return null;
+  if (mode === "static") return <StaticGrid />;
 
   return <Cloud {...cloudProps}>{icons}</Cloud>;
 }

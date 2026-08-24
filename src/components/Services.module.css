@@ -12,8 +12,13 @@
   margin: 0 auto;
 }
 
+/* Sem réguas entre as linhas: agrupamento por espaço, não por
+   divisor desenhado (whitespace.md). A faixa de fundo aparece só no
+   hover, então a separação existe quando é útil. */
 .rows {
-  border-top: 1px solid rgba(15, 15, 18, 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3vw, 40px);
 }
 
 .row {
@@ -21,8 +26,14 @@
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   gap: clamp(24px, 4vw, 64px);
   align-items: start;
-  padding: clamp(40px, 5vw, 64px) 0;
-  border-bottom: 1px solid rgba(15, 15, 18, 0.14);
+  padding: clamp(32px, 4vw, 48px);
+  margin: 0 calc(-1 * clamp(32px, 4vw, 48px));
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.row:hover {
+  background: rgba(15, 15, 18, 0.045);
 }
 
 .left {
@@ -30,13 +41,17 @@
   flex-direction: column;
 }
 
-/* O número vira elemento de composição, não uma etiqueta miúda */
+/* O número vira elemento de composição. Em contorno, na mesma
+   família dos títulos — a fonte mono dava ar de etiqueta de sistema. */
 .num {
-  font-family: var(--font-num);
-  font-size: clamp(2.4rem, 4vw, 3.4rem);
-  line-height: 1;
-  color: rgba(15, 15, 18, 0.18);
-  margin-bottom: var(--s-4);
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 112;
+  font-weight: 800;
+  font-size: clamp(3.4rem, 6vw, 5.2rem);
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(15, 15, 18, 0.22);
+  margin-bottom: var(--s-5);
 }
 
 .title {

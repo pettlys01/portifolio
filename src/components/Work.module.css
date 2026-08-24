@@ -38,7 +38,6 @@
   display: block;
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
   border-radius: 16px;
   overflow: hidden;
   background: var(--bg-soft);
@@ -56,17 +55,17 @@
 }
 
 .desktopImg {
-  object-fit: cover;
-  object-position: top;
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .phone {
   position: absolute;
-  right: 6%;
+  right: 5%;
   bottom: 0;
-  width: 21%;
-  min-width: 96px;
-  aspect-ratio: 1 / 2;
+  width: 22%;
+  min-width: 104px;
   border-radius: 14px;
   overflow: hidden;
   background: var(--bg-soft);
@@ -81,8 +80,9 @@
 }
 
 .phoneImg {
-  object-fit: cover;
-  object-position: top;
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .project:hover .desktop {

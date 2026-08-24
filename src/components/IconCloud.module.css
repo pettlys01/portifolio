@@ -1,0 +1,26 @@
+.grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-3);
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  min-height: 84px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg-card);
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.cell:hover {
+  border-color: var(--line-strong);
+  background: var(--bg-soft);
+}

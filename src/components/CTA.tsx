@@ -14,7 +14,7 @@ export default function CTA() {
           Respondo com uma ideia de escopo e prazo.
         </p>
         <div className={styles.btnWrap}>
-          <a className="btn btnPrimary" href={`mailto:${CONTACT_EMAIL}`}>
+          <a className="btn btnPrimary btnGlow" href={`mailto:${CONTACT_EMAIL}`}>
             Enviar e-mail <span className="arrow" aria-hidden="true">↗</span>
           </a>
           <a className="btn btnGhost" href="#work">
