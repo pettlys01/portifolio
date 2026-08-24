@@ -8,7 +8,6 @@ export default function CTA() {
   return (
     <section id="contact" className={styles.section}>
       <Reveal>
-        <span className={`sectionLabel ${styles.label}`}>Contato</span>
         <h2 className={styles.headline}>Tem um projeto em mente?</h2>
         <p className={styles.body}>
           Me conta o que o seu negócio faz e o que o site precisa resolver.

@@ -1,64 +1,41 @@
 .section {
   padding: var(--space-section) var(--edge);
-  max-width: var(--maxw);
-  margin: 0 auto;
   border-top: 1px solid var(--line);
 }
 
-.heading {
-  display: flex;
-  align-items: baseline;
-  gap: var(--s-4);
-  margin-bottom: var(--s-4);
+.inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
 }
 
-.headingRule {
-  flex: 1;
-  height: 1px;
-  background: var(--line);
-}
-
-.headingTitle {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 4vw, 3rem);
-  letter-spacing: -0.02em;
-  margin-bottom: var(--s-8);
-  max-width: 22ch;
-}
-
+/* Duas colunas com texto legível, no lugar de quatro colunas de
+   texto miúdo — que liam como rodapé de especificação técnica. */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--s-6);
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 5vw, 72px);
 }
 
 .item {
   padding-top: var(--s-5);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--line-strong);
 }
 
 .item h3 {
-  font-weight: 600;
-  font-size: 1.15rem;
-  margin-bottom: var(--s-3);
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  margin-bottom: var(--s-4);
 }
 
 .item p {
-  font-size: 0.96rem;
+  font-size: 1.05rem;
   color: var(--fg-muted);
-  line-height: 1.6;
+  line-height: 1.65;
+  max-width: 44ch;
 }
 
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr 1fr;
-    row-gap: var(--s-6);
-  }
-}
-
-@media (max-width: 560px) {
+@media (max-width: 780px) {
   .grid {
     grid-template-columns: 1fr;
+    gap: var(--s-7);
   }
 }

@@ -1,7 +1,6 @@
 /* Seção invertida: fundo claro no meio de uma página escura. É a
    quebra de ritmo que impede as seções de parecerem todas iguais —
-   e faz isso sem introduzir matiz nenhum, mantendo a regra de que a
-   única cor da página vem do trabalho. */
+   sem introduzir matiz nenhum. */
 .section {
   background: #f2f1ee;
   color: #0f0f12;
@@ -13,113 +12,81 @@
   margin: 0 auto;
 }
 
-.heading {
-  display: flex;
-  align-items: baseline;
-  gap: var(--s-4);
-  margin-bottom: var(--s-4);
-}
-
-.label {
-  font-family: var(--font-num);
-  font-size: 0.82rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #6a6a72;
-}
-
-.headingRule {
-  flex: 1;
-  height: 1px;
-  background: rgba(15, 15, 18, 0.14);
-}
-
-.headingTitle {
-  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
-  max-width: 20ch;
-  margin-bottom: var(--s-8);
-}
-
-/* Linhas editoriais em vez de cards: cada serviço é uma faixa da
-   largura inteira, com o número à esquerda. */
 .rows {
-  border-top: 1px solid rgba(15, 15, 18, 0.16);
+  border-top: 1px solid rgba(15, 15, 18, 0.14);
 }
 
 .row {
   display: grid;
-  grid-template-columns: 90px minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: var(--s-6);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(24px, 4vw, 64px);
   align-items: start;
-  padding: var(--s-7) 0;
-  border-bottom: 1px solid rgba(15, 15, 18, 0.16);
-  transition: background-color 0.25s ease;
+  padding: clamp(40px, 5vw, 64px) 0;
+  border-bottom: 1px solid rgba(15, 15, 18, 0.14);
 }
 
-.row:hover {
-  background: rgba(15, 15, 18, 0.035);
+.left {
+  display: flex;
+  flex-direction: column;
 }
 
+/* O número vira elemento de composição, não uma etiqueta miúda */
 .num {
   font-family: var(--font-num);
-  font-size: 0.9rem;
-  color: #6a6a72;
-  padding-top: 6px;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  line-height: 1;
+  color: rgba(15, 15, 18, 0.18);
+  margin-bottom: var(--s-4);
 }
 
 .title {
-  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
   letter-spacing: -0.02em;
 }
 
-.body {
+.forWhom {
   margin-top: var(--s-3);
-  font-size: 1.02rem;
-  line-height: 1.6;
-  color: #52525c;
-  max-width: 42ch;
+  font-size: 1rem;
+  color: #6a6a72;
 }
 
-.list {
+.right {
+  padding-top: clamp(0px, 3vw, 52px);
+}
+
+.body {
+  font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+  line-height: 1.65;
+  color: #3a3a44;
+  max-width: 46ch;
+}
+
+/* Chips no lugar da lista em duas colunas: a lista com marcadores
+   lia como texto de preenchimento. */
+.chips {
   list-style: none;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--s-3) var(--s-5);
-  padding-top: 8px;
-}
-
-.list li {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--s-2);
-  font-size: 0.98rem;
-  color: #52525c;
+  margin-top: var(--s-6);
 }
 
-.list li::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #0f0f12;
-  flex-shrink: 0;
-  margin-top: 0.55em;
+.chips li {
+  font-size: 0.95rem;
+  color: #3a3a44;
+  background: rgba(15, 15, 18, 0.05);
+  border: 1px solid rgba(15, 15, 18, 0.08);
+  border-radius: 10px;
+  padding: 9px 16px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 820px) {
   .row {
-    grid-template-columns: 56px 1fr;
-  }
-
-  .list {
-    grid-column: 2;
     grid-template-columns: 1fr;
-    padding-top: var(--s-5);
+    gap: var(--s-5);
   }
-}
 
-@media (max-width: 520px) {
-  .list {
-    grid-column: 1 / -1;
+  .right {
+    padding-top: 0;
   }
 }

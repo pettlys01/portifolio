@@ -9,19 +9,6 @@
   margin: 0 auto;
 }
 
-.heading {
-  display: flex;
-  align-items: baseline;
-  gap: var(--s-4);
-  margin-bottom: var(--s-8);
-}
-
-.headingRule {
-  flex: 1;
-  height: 1px;
-  background: var(--line);
-}
-
 /* Escalonado, não alinhado: cada etapa desce um degrau em relação à
    anterior. Lido como progressão — o que uma grade reta de quatro
    colunas iguais não comunica. */
@@ -29,7 +16,6 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--s-5);
-  perspective: 1400px;
   align-items: start;
 }
 
@@ -54,20 +40,6 @@
   margin-top: 132px;
 }
 
-.statement {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.6rem, 3.2vw, 2.6rem);
-  line-height: 1.25;
-  max-width: 26ch;
-  letter-spacing: -0.02em;
-  margin-bottom: var(--s-9);
-}
-
-.statement em {
-  font-style: normal;
-  color: var(--accent);
-}
 
 @media (max-width: 1100px) {
   .steps {

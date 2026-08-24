@@ -2,20 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/data/projects";
 import Reveal from "./Reveal";
+import SectionIntro from "./SectionIntro";
 import styles from "./Work.module.css";
 
 export default function Work() {
   return (
     <section id="work" className={styles.section}>
-      <Reveal>
-        <div className={styles.heading}>
-          <span className="sectionLabel">Projetos</span>
-          <span className={styles.headingRule} />
-        </div>
-        <h2 className={styles.headingTitle}>
-          Dois projetos, dois problemas diferentes.
-        </h2>
-      </Reveal>
+      <SectionIntro
+        title="Dois projetos, dois problemas diferentes."
+        lead="Um precisava provar competência técnica. O outro, ganhar confiança antes da primeira visita."
+      />
 
       <div className={styles.list}>
         {projects.map((project, i) => (

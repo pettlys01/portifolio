@@ -4,25 +4,6 @@
   margin: 0 auto;
 }
 
-.heading {
-  display: flex;
-  align-items: baseline;
-  gap: var(--s-4);
-  margin-bottom: var(--s-4);
-}
-
-.headingRule {
-  flex: 1;
-  height: 1px;
-  background: var(--line);
-}
-
-.headingTitle {
-  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
-  margin-bottom: var(--s-9);
-  max-width: 20ch;
-}
-
 /* Cada projeto ocupa uma faixa inteira, alternando o lado.
    Dois cards idênticos lado a lado se anulavam: o efeito
    Von Restorff só funciona quando o item NÃO é homogêneo ao

@@ -19,9 +19,10 @@ export default function ProcessCard({
   const reduced = React.useRef(false);
 
   React.useEffect(() => {
-    reduced.current = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    /* Sem mouse não há hover: o tilt nunca dispara em toque. */
+    reduced.current =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      !window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   }, []);
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {

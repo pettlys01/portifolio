@@ -13,7 +13,6 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding-bottom: var(--s-2);
-  perspective: 1400px;
 }
 
 .track::-webkit-scrollbar {

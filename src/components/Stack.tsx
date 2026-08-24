@@ -74,13 +74,6 @@ const items: StackItem[] = [
 export default function Stack() {
   return (
     <section id="stack" className={styles.section}>
-      <Reveal>
-        <div className={styles.heading}>
-          <span className="sectionLabel">Stack</span>
-          <span className={styles.headingRule} />
-        </div>
-      </Reveal>
-
       {/* Duas colunas no desktop, empilhado no celular: a esfera
           precisa de área quase quadrada para não virar uma faixa
           achatada, e o carrossel precisa de largura para respirar. */}

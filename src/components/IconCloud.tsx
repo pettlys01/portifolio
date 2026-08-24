@@ -4,8 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import { Cloud, renderSimpleIcon, type ICloud } from "react-icon-cloud";
 import { ICONS } from "./TechIcon";
 
-/* Ordem em que os ícones entram na esfera. Usa os mesmos logos já
-   embutidos no projeto — nenhuma requisição externa. */
+/* Usa os mesmos logos já embutidos no projeto — nenhuma requisição
+   externa. Repetidos uma vez para a esfera não ficar rala. */
 const SLUGS = [
   "html5",
   "css",
@@ -18,36 +18,14 @@ const SLUGS = [
   "analytics",
 ];
 
-const cloudProps: Omit<ICloud, "children"> = {
-  containerProps: {
-    style: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      width: "100%",
-    },
-  },
-  options: {
-    reverse: true,
-    depth: 1,
-    wheelZoom: false,
-    imageScale: 2,
-    activeCursor: "default",
-    tooltip: "native",
-    initial: [0.08, -0.08],
-    clickToFront: 500,
-    tooltipDelay: 0,
-    outlineColour: "#0000",
-    maxSpeed: 0.035,
-    minSpeed: 0.015,
-  },
-};
-
 export default function IconCloud() {
-  /* TagCanvas mede o DOM ao montar; só renderiza depois que o
-     componente está no cliente. */
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const [touch, setTouch] = useState(false);
+
+  useEffect(() => {
+    setTouch(!window.matchMedia("(hover: hover) and (pointer: fine)").matches);
+    setMounted(true);
+  }, []);
 
   const icons = useMemo(
     () =>
@@ -62,11 +40,10 @@ export default function IconCloud() {
             source: "",
             svg: "",
           },
-          // fundo da seção, para o cálculo de contraste da biblioteca
           bgHex: "#08080a",
           fallbackHex: "#f7f6f4",
           minContrastRatio: 1.6,
-          size: 46,
+          size: 44,
           aProps: {
             href: undefined,
             target: undefined,
@@ -76,6 +53,41 @@ export default function IconCloud() {
         });
       }),
     []
+  );
+
+  const cloudProps: Omit<ICloud, "children"> = useMemo(
+    () => ({
+      containerProps: {
+        style: {
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          height: "100%",
+        },
+      },
+      options: {
+        reverse: true,
+        depth: 0.92,
+        wheelZoom: false,
+        imageScale: 2,
+        activeCursor: "default",
+        tooltip: "native",
+        initial: [0.06, -0.06],
+        clickToFront: 500,
+        tooltipDelay: 0,
+        outlineColour: "#0000",
+        maxSpeed: 0.028,
+        minSpeed: 0.014,
+        /* No toque, o arrasto do dedo acelerava a esfera até travar
+           e ainda roubava o scroll da página. Em toque ela só gira
+           sozinha. */
+        dragControl: !touch,
+        freezeActive: touch,
+        fadeIn: 600,
+      },
+    }),
+    [touch]
   );
 
   if (!mounted) return null;

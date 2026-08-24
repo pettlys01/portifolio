@@ -1,0 +1,19 @@
+.intro {
+  margin-bottom: clamp(56px, 7vw, 88px);
+  max-width: 46ch;
+}
+
+.title {
+  font-size: clamp(2.3rem, 4.8vw, 3.6rem);
+}
+
+.lead {
+  margin-top: var(--s-5);
+  font-size: clamp(1.1rem, 1.5vw, 1.28rem);
+  line-height: 1.6;
+  color: var(--fg-muted);
+}
+
+.light .lead {
+  color: #52525c;
+}

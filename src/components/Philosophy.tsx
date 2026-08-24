@@ -1,5 +1,6 @@
 import ProcessCard from "./ProcessCard";
 import Reveal from "./Reveal";
+import SectionIntro from "./SectionIntro";
 import styles from "./Philosophy.module.css";
 
 const steps = [
@@ -33,16 +34,14 @@ export default function Philosophy() {
   return (
     <section id="process" className={styles.section}>
       <div className={styles.inner}>
-        <Reveal>
-          <div className={styles.heading}>
-            <span className="sectionLabel">Processo</span>
-            <span className={styles.headingRule} />
-          </div>
-          <p className={styles.statement}>
-            Não começo pelo código. Começo pelo <em>problema</em> — hierarquia,
-            ritmo e detalhe antes de qualquer linha escrita.
-          </p>
-        </Reveal>
+        <SectionIntro
+          title={
+            <>
+              Não começo pelo código. Começo pelo problema.
+            </>
+          }
+          lead="Hierarquia, ritmo e detalhe antes de qualquer linha escrita. Quatro etapas, e você aprova cada uma antes da seguinte."
+        />
 
         <div className={styles.steps}>
           {steps.map((step, i) => (

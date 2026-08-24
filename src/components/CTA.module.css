@@ -11,11 +11,6 @@
     var(--bg);
 }
 
-.label {
-  display: block;
-  margin-bottom: var(--s-5);
-}
-
 .headline {
   font-family: var(--font-display);
   font-weight: 800;

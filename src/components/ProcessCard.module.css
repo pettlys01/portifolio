@@ -5,7 +5,6 @@
   display: flex;
   border-radius: 20px;
   overflow: hidden;
-  transform-style: preserve-3d;
   background:
     linear-gradient(160deg, rgba(247, 246, 244, 0.07), transparent 55%),
     var(--bg-card);
@@ -41,7 +40,20 @@
   flex-direction: column;
   width: 100%;
   padding: var(--s-6);
-  transform: translateZ(36px);
+}
+
+/* O 3D só existe onde há mouse. Em toque não há hover — o efeito
+   não faria nada — e `preserve-3d` com `translateZ` dentro de um
+   container com overflow é uma combinação que alguns navegadores
+   móveis achatam ou escondem por completo. */
+@media (hover: hover) and (pointer: fine) {
+  .card {
+    transform-style: preserve-3d;
+  }
+
+  .layer {
+    transform: translateZ(36px);
+  }
 }
 
 .header {
