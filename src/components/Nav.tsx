@@ -10,6 +10,7 @@ function isScrolled() {
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(isScrolled);
+  const [light, setLight] = useState(false);
 
   useEffect(() => {
     function onScroll() {
@@ -19,8 +20,27 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    /* Services é a única seção clara do site — sem isso, o fundo
+       sólido do nav (pensado pro resto, que é escuro) vira uma barra
+       preta destoando de um fundo #f2f1ee. */
+    const target = document.getElementById("services");
+    if (!target || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setLight(entry.isIntersecting),
+      { rootMargin: "-72px 0px -85% 0px" }
+    );
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
+
+  const classes = [styles.nav, scrolled && styles.scrolled, light && styles.light]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <nav className={scrolled ? `${styles.nav} ${styles.scrolled}` : styles.nav}>
+    <nav className={classes}>
       <Link href="/" className={styles.mark} aria-label="LCS — início">
         LCS
       </Link>

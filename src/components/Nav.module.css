@@ -37,6 +37,13 @@
   opacity: 1;
 }
 
+/* Mesmo véu, mas na cor da seção clara (Services, #f2f1ee) — o
+   logo já se resolve sozinho via mix-blend-mode: difference. */
+.nav.light::before {
+  background: #f2f1ee;
+  border-bottom-color: rgba(15, 15, 18, 0.12);
+}
+
 /* O logo passa por cima de seções claras e escuras. `difference`
    inverte contra o que estiver atrás, então ele nunca some. */
 .mark {
