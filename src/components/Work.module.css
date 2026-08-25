@@ -110,7 +110,7 @@
 }
 
 .title {
-  font-size: clamp(2rem, 3.4vw, 2.9rem);
+  font-size: clamp(1.7rem, 2.85vw, 2.4rem);
   transition: opacity 0.2s ease;
 }
 

@@ -50,7 +50,7 @@
 }
 
 .title {
-  font-size: clamp(2.3rem, 4.2vw, 3.4rem);
+  font-size: clamp(1.9rem, 3.5vw, 2.85rem);
   max-width: 16ch;
 }
 
