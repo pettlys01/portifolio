@@ -100,9 +100,94 @@
   transform: translateY(-2px);
 }
 
+.mobileGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+/* Botão hambúrguer — versão compacta da cápsula, mesma linguagem
+   visual (fundo translúcido, blur, borda), só aparece onde a cápsula
+   de texto desaparece. Nada de ícone genérico: duas barras simples. */
+.menuBtn {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(19, 19, 23, 0.72);
+  backdrop-filter: blur(16px);
+}
+
+.menuBtn span {
+  width: 16px;
+  height: 1.5px;
+  background: var(--fg);
+  border-radius: 2px;
+}
+
+/* Lista compacta dos mesmos 4 links da cápsula — não é um menu
+   fullscreen, é a cápsula do desktop virada de lado. */
+.mobileMenu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: var(--edge);
+  right: var(--edge);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--s-2);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(19, 19, 23, 0.92);
+  backdrop-filter: blur(16px);
+  animation: menuIn 0.15s ease;
+}
+
+.mobileMenu a {
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--fg-muted);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.mobileMenu a:hover,
+.mobileMenu a:active {
+  color: var(--fg);
+  background: rgba(247, 246, 244, 0.07);
+}
+
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobileMenu {
+    animation: none;
+  }
+}
+
 @media (max-width: 940px) {
   .pill {
     display: none;
+  }
+
+  .menuBtn {
+    display: flex;
   }
 }
 
