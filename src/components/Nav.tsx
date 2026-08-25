@@ -1,9 +1,26 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./Nav.module.css";
 
+function isScrolled() {
+  return typeof window !== "undefined" && window.scrollY > 40;
+}
+
 export default function Nav() {
+  const [scrolled, setScrolled] = useState(isScrolled);
+
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 40);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <nav className={styles.nav}>
+    <nav className={scrolled ? `${styles.nav} ${styles.scrolled}` : styles.nav}>
       <Link href="/" className={styles.mark} aria-label="LCS — início">
         LCS
       </Link>

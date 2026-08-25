@@ -16,6 +16,27 @@
   pointer-events: auto;
 }
 
+/* No topo da página não há nada pra esconder atrás do nav — a
+   cápsula e o blend-mode do logo já resolvem sozinhos. Rolando a
+   página, porém, o título do Hero (centralizado na tela toda) passa
+   por baixo do nav antes de sair — sem um fundo cobrindo a barra
+   inteira (não só a cápsula), o texto atravessa visualmente o nav.
+   Esse véu só aparece depois de rolar. */
+.nav::before {
+  content: "";
+  position: absolute;
+  inset: -40px 0 -32px 0;
+  z-index: -1;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav.scrolled::before {
+  opacity: 1;
+}
+
 /* O logo passa por cima de seções claras e escuras. `difference`
    inverte contra o que estiver atrás, então ele nunca some. */
 .mark {
