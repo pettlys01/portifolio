@@ -49,9 +49,9 @@
 .headline {
   font-variation-settings: "wdth" 115;
   font-weight: 800;
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  line-height: 0.98;
-  max-width: 15ch;
+  font-size: clamp(2rem, 5.5vw, 4.4rem);
+  line-height: 1.05;
+  max-width: 24ch;
   letter-spacing: -0.035em;
 }
 

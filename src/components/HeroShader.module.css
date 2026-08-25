@@ -1,5 +1,13 @@
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 /* Sem WebGL2, sem animação — mas nunca em branco: um gradiente
-   estático nos mesmos tons, coerente com a paleta do shader. */
+   estático na mesma paleta do shader. */
 .fallback {
   position: absolute;
   inset: 0;
