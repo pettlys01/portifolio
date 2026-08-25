@@ -47,12 +47,12 @@
 }
 
 .headline {
-  font-variation-settings: "wdth" 115;
+  font-variation-settings: "wdth" 102;
   font-weight: 800;
   font-size: clamp(2rem, 5.5vw, 4.4rem);
   line-height: 1.05;
   max-width: 24ch;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.01em;
 }
 
 .sub {

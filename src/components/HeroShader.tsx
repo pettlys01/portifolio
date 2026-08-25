@@ -77,33 +77,17 @@ void main() {
   vec2 p = uv * vec2(1.6, 2.0);
   p += vec2(0.3, -0.15) * t;
   p.x += 0.35 * sin(uv.y * 1.3 + t * 0.12);
-
-  /* Os dois braços do warp evoluem em ritmos sem relação racional
-     simples entre si — depois de minutos de exposição o padrão não
-     fica previsível. */
-  vec2 q = vec2(
-    fbm(p + mouseOffset + vec2(0.021, 0.0) * t, 5),
-    fbm(p + vec2(5.2, 1.3) + mouseOffset + vec2(0.0, -0.013) * t, 5)
-  );
+  vec2 q = vec2(fbm(p + mouseOffset, 5), fbm(p + vec2(5.2, 1.3) + mouseOffset, 5));
   vec2 r = vec2(
-    fbm(p + 3.2 * q + vec2(1.7, 9.2) + 0.083 * t, 5),
-    fbm(p + 3.2 * q + vec2(8.3, 2.8) + 0.121 * t, 5)
+    fbm(p + 3.2 * q + vec2(1.7, 9.2) + 0.09 * t, 5),
+    fbm(p + 3.2 * q + vec2(8.3, 2.8) + 0.07 * t, 5)
   );
   float field = fbm(p + 3.2 * r, 6);
   field = smoothstep(-0.35, 0.75, field);
-
-  /* Centro do vinheteamento puxado um pouco pra baixo — é onde o
-     texto do Hero de fato senta, não o centro geométrico da tela. */
-  float vig = 1.0 - smoothstep(0.35, 1.25, length((uv + vec2(0.0, 0.045)) * vec2(0.85, 1.05)));
+  float vig = 1.0 - smoothstep(0.35, 1.25, length(uv * vec2(0.85, 1.05)));
 
   vec3 col = palette(field * vig, ink, deep, mist, electric, spark);
   col = mix(ink, col, vig);
-
-  /* Dither: sem isso, transições suaves de cor em 8 bits mostram
-     faixas visíveis (banding). Ruído mínimo por pixel, variando por
-     frame, resolve sem ficar granulado. */
-  float dither = (fract(sin(dot(gl_FragCoord.xy + fract(uTime) * 37.0, vec2(12.9898, 78.233))) * 43758.5453) - 0.5) / 255.0;
-  col += dither * 2.0;
 
   fragColor = vec4(col, 1.0);
 }`;
