@@ -166,33 +166,51 @@ export default function HeroShader() {
     }
     window.addEventListener("pointermove", handlePointerMove);
 
+    /* Perda de contexto acontece de verdade em celular sob pressão de
+       memória (troca de app, várias abas). Sem isso, o canvas trava
+       num frame parado pra sempre, sem cair pro fallback. */
+    function handleContextLost(e: Event) {
+      e.preventDefault();
+      cancelAnimationFrame(rafId);
+      setSupported(false);
+    }
+    canvas.addEventListener("webglcontextlost", handleContextLost);
+
     const reduceMotionMQ = window.matchMedia("(prefers-reduced-motion: reduce)");
     let animClock = 0;
     let lastFrame = performance.now();
     let rafId = 0;
 
     function frame(now: number) {
-      const dt = Math.min(0.05, (now - lastFrame) / 1000);
-      lastFrame = now;
+      try {
+        const dt = Math.min(0.05, (now - lastFrame) / 1000);
+        lastFrame = now;
 
-      if (!reduceMotionMQ.matches) {
-        animClock += dt * 0.6;
+        if (!reduceMotionMQ.matches) {
+          animClock += dt * 0.6;
+        }
+
+        mouseSmooth[0] += (mouseTarget[0] - mouseSmooth[0]) * 0.03;
+        mouseSmooth[1] += (mouseTarget[1] - mouseSmooth[1]) * 0.03;
+
+        gl!.uniform2f(uResolution, canvas!.width, canvas!.height);
+        gl!.uniform1f(uTime, animClock);
+        gl!.uniform2f(uMouse, mouseSmooth[0], mouseSmooth[1]);
+        gl!.drawArrays(gl!.TRIANGLES, 0, 3);
+
+        rafId = requestAnimationFrame(frame);
+      } catch (err) {
+        /* Um erro aqui não pode simplesmente parar o loop e deixar o
+           canvas congelado sem explicação — cai pro fallback estático. */
+        console.error("HeroShader: falha no loop de render, caindo pro fallback.", err);
+        setSupported(false);
       }
-
-      mouseSmooth[0] += (mouseTarget[0] - mouseSmooth[0]) * 0.03;
-      mouseSmooth[1] += (mouseTarget[1] - mouseSmooth[1]) * 0.03;
-
-      gl!.uniform2f(uResolution, canvas!.width, canvas!.height);
-      gl!.uniform1f(uTime, animClock);
-      gl!.uniform2f(uMouse, mouseSmooth[0], mouseSmooth[1]);
-      gl!.drawArrays(gl!.TRIANGLES, 0, 3);
-
-      rafId = requestAnimationFrame(frame);
     }
     rafId = requestAnimationFrame(frame);
 
     return () => {
       cancelAnimationFrame(rafId);
+      canvas.removeEventListener("webglcontextlost", handleContextLost);
       ro.disconnect();
       window.removeEventListener("pointermove", handlePointerMove);
       gl.deleteProgram(program);

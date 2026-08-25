@@ -31,18 +31,19 @@
   padding: 140px var(--edge) var(--s-8);
 }
 
-/* Véu radial só o suficiente para o texto respirar sobre as capturas
-   coloridas, sem apagá-las. */
+/* Véu translúcido, não sólido — a fumaça precisa continuar visível
+   por trás do texto (mesmo que discreta). Um núcleo opaco aqui vira
+   um buraco reto contra o movimento orgânico do shader ao redor. */
 .content::before {
   content: "";
   position: absolute;
   inset: -5% -8%;
   z-index: -1;
   background: radial-gradient(
-    ellipse 48% 54% at center,
-    var(--bg) 38%,
-    rgba(8, 8, 10, 0.78) 64%,
-    transparent 88%
+    ellipse 42% 48% at center,
+    rgba(8, 8, 10, 0.5) 0%,
+    rgba(8, 8, 10, 0.28) 48%,
+    transparent 80%
   );
 }
 
