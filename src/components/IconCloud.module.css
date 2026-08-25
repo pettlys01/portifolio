@@ -2,6 +2,11 @@
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  /* align-items:start em vez do stretch padrão do grid — sem isso,
+     cada célula é esticada pra bater com a mais alta da linha, e se
+     aspect-ratio não for respeito à risca nesse navegador, vira uma
+     cápsula alta em vez de um quadrado. */
+  align-items: start;
   gap: var(--s-3);
   width: 100%;
   max-width: 380px;
@@ -12,8 +17,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 1 / 1;
-  min-height: 84px;
+  /* Altura fixa, não deduzida de aspect-ratio — não depende de
+     nenhuma interação entre aspect-ratio, min-height e o stretch do
+     grid pra ficar quadrada. */
+  height: 84px;
   border: 1px solid var(--line);
   border-radius: 14px;
   background: var(--bg-card);
