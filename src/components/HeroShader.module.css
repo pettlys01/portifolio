@@ -1,0 +1,14 @@
+/* Sem WebGL2, sem animação — mas nunca em branco: um gradiente
+   estático nos mesmos tons, coerente com a paleta do shader. */
+.fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 40%,
+    #4338ca 0%,
+    #4c1d95 45%,
+    #04030f 100%
+  );
+}

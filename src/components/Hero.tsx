@@ -29,6 +29,7 @@ export default function Hero() {
   return (
     <section id="hero" className={styles.hero}>
       <HeroShader />
+      <div className={styles.fade} aria-hidden="true" />
       <Content />
     </section>
   );

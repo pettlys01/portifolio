@@ -39,7 +39,11 @@ export default function IconCloud() {
   useEffect(() => {
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     const wide = window.matchMedia("(min-width: 980px)").matches;
-    if (fine && wide) setMode("cloud");
+    /* iPadOS reporta hover:hover + pointer:fine mesmo em toque puro
+       (sem mouse/trackpad) — sem esse filtro, a esfera tenta rodar
+       em tablet e trava sem reagir a arrastar com o dedo. */
+    const touchPrimary = navigator.maxTouchPoints > 0;
+    if (fine && wide && !touchPrimary) setMode("cloud");
   }, []);
 
   const icons = useMemo(
