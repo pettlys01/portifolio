@@ -75,14 +75,23 @@ void main() {
   vec2 mouseOffset = uMouse * 0.07;
 
   /* Duas fitas cruzando em ângulos e velocidades diferentes — t2 é
-     1.5x mais rápido que o relógio base, só pra essas fitas. */
+     1.5x mais rápido que o relógio base, só pra essas fitas.
+     uv.x é normalizado pela ALTURA da tela — numa tela bem mais
+     larga que alta (desktop) isso dá um percurso horizontal amplo;
+     numa tela mais alta que larga (celular) o mesmo cálculo encolhe
+     o percurso pra quase nada, e a fita deixa de atravessar a tela.
+     nx corrige isso: normaliza pela LARGURA de verdade, então o
+     percurso da fita fica proporcional à tela em qualquer formato. */
+  float aspect = uResolution.x / uResolution.y;
+  float nx = uv.x / aspect;
+
   float t2 = t * 1.5;
   float warp1 = fbm(uv * 0.55 + mouseOffset * 0.5 + vec2(0.0, t2 * 0.04), 3);
-  float y1 = -0.15 + uv.x * 0.5 + sin(t2 * 0.05 + uv.x * 1.0) * 0.26 + (warp1 - 0.5) * 0.7;
+  float y1 = -0.15 + nx * 0.85 + sin(t2 * 0.05 + nx * 1.7) * 0.26 + (warp1 - 0.5) * 0.7;
   float band1 = 1.0 - smoothstep(0.0, 0.24, abs(uv.y - y1));
 
   float warp2 = fbm(uv * 0.5 - mouseOffset * 0.4 + vec2(3.0, -t2 * 0.03), 3);
-  float y2 = 0.22 - uv.x * 0.42 + cos(t2 * 0.045 + uv.x * 1.3) * 0.22 + (warp2 - 0.5) * 0.6;
+  float y2 = 0.22 - nx * 0.72 + cos(t2 * 0.045 + nx * 2.2) * 0.22 + (warp2 - 0.5) * 0.6;
   float band2 = 1.0 - smoothstep(0.0, 0.20, abs(uv.y - y2));
 
   float field = clamp(max(band1, band2 * 0.85), 0.0, 1.0);
