@@ -65,7 +65,7 @@ vec3 palette(float t, vec3 ink, vec3 deep, vec3 mist, vec3 electric, vec3 spark)
 void main() {
   vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution.xy) / uResolution.y;
 
-  vec3 ink      = vec3(0.020, 0.008, 0.031);
+  vec3 ink      = vec3(0.016, 0.012, 0.059);
   vec3 deep     = vec3(0.180, 0.063, 0.396);
   vec3 mist     = vec3(0.298, 0.208, 0.459);
   vec3 electric = vec3(0.486, 0.227, 0.929);
@@ -74,17 +74,20 @@ void main() {
   float t = uTime;
   vec2 mouseOffset = uMouse * 0.07;
 
-  vec2 p = uv * vec2(1.6, 2.0);
-  p += vec2(0.3, -0.15) * t;
-  p.x += 0.35 * sin(uv.y * 1.3 + t * 0.12);
-  vec2 q = vec2(fbm(p + mouseOffset, 5), fbm(p + vec2(5.2, 1.3) + mouseOffset, 5));
-  vec2 r = vec2(
-    fbm(p + 3.2 * q + vec2(1.7, 9.2) + 0.09 * t, 5),
-    fbm(p + 3.2 * q + vec2(8.3, 2.8) + 0.07 * t, 5)
-  );
-  float field = fbm(p + 3.2 * r, 6);
-  field = smoothstep(-0.35, 0.75, field);
-  float vig = 1.0 - smoothstep(0.35, 1.25, length(uv * vec2(0.85, 1.05)));
+  /* Duas fitas cruzando em ângulos e velocidades diferentes — t2 é
+     1.5x mais rápido que o relógio base, só pra essas fitas. */
+  float t2 = t * 1.5;
+  float warp1 = fbm(uv * 0.55 + mouseOffset * 0.5 + vec2(0.0, t2 * 0.04), 3);
+  float y1 = -0.15 + uv.x * 0.5 + sin(t2 * 0.05 + uv.x * 1.0) * 0.26 + (warp1 - 0.5) * 0.7;
+  float band1 = 1.0 - smoothstep(0.0, 0.24, abs(uv.y - y1));
+
+  float warp2 = fbm(uv * 0.5 - mouseOffset * 0.4 + vec2(3.0, -t2 * 0.03), 3);
+  float y2 = 0.22 - uv.x * 0.42 + cos(t2 * 0.045 + uv.x * 1.3) * 0.22 + (warp2 - 0.5) * 0.6;
+  float band2 = 1.0 - smoothstep(0.0, 0.20, abs(uv.y - y2));
+
+  float field = clamp(max(band1, band2 * 0.85), 0.0, 1.0);
+  field = pow(field, 0.95);
+  float vig = 1.0 - smoothstep(0.5, 1.3, length(uv * vec2(0.9, 1.0)));
 
   vec3 col = palette(field * vig, ink, deep, mist, electric, spark);
   col = mix(ink, col, vig);
