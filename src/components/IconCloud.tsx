@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import TechIcon, { ICONS, type TechSlug } from "./TechIcon";
 import styles from "./IconCloud.module.css";
 
@@ -16,8 +16,15 @@ const SLUGS: TechSlug[] = [
   "analytics",
 ];
 
-const RADIUS = 138;
-const PERSPECTIVE = 530;
+/* Raio/profundidade foram calibrados numa caixa de 420px (o tamanho
+   real da esfera no desktop) e aprovados pelo usuário nesses termos.
+   No mobile essa caixa encolhe (a seção Stack muda pra 4:3, até
+   320px de altura), e valores fixos em px passavam do espaço
+   disponível — cortando o topo da esfera. Guardar a proporção em vez
+   do valor absoluto resolve isso pra qualquer tamanho de caixa. */
+const CALIBRATION_BOX = 420;
+const RADIUS_RATIO = 138 / CALIBRATION_BOX;
+const PERSPECTIVE_RATIO = 530 / CALIBRATION_BOX;
 const SPEED = (2 * Math.PI) / 9000; // rad/ms — uma volta completa a cada 9s
 const TILT = -0.18; // leve inclinação fixa, pra esfera não parecer um círculo achatado de frente
 
@@ -48,8 +55,24 @@ function spherePoints(count: number, radius: number, tilt: number): Point3D[] {
    por frame, ordens de grandeza mais leve que o redesenho de canvas
    da lib antiga. */
 export default function IconCloud() {
-  const points = useMemo(() => spherePoints(SLUGS.length, RADIUS, TILT), []);
-  const refs = useRef<(HTMLDivElement | null)[]>([]);
+  const sceneRef = useRef<HTMLDivElement | null>(null);
+  const tagRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [box, setBox] = useState(CALIBRATION_BOX);
+
+  useEffect(() => {
+    const el = sceneRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(([entry]) => {
+      const { width, height } = entry.contentRect;
+      setBox(Math.min(width, height));
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const radius = box * RADIUS_RATIO;
+  const perspective = box * PERSPECTIVE_RATIO;
+  const points = useMemo(() => spherePoints(SLUGS.length, radius, TILT), [radius]);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -61,15 +84,15 @@ export default function IconCloud() {
       const cosA = Math.cos(angle);
       const sinA = Math.sin(angle);
 
-      points.forEach((p, i) => {
-        const el = refs.current[i];
+      points.forEach((pt, i) => {
+        const el = tagRefs.current[i];
         if (!el) return;
-        const x = p.x0 * cosA + p.z0 * sinA;
-        const z = -p.x0 * sinA + p.z0 * cosA;
+        const x = pt.x0 * cosA + pt.z0 * sinA;
+        const z = -pt.x0 * sinA + pt.z0 * cosA;
 
-        const scale = PERSPECTIVE / (PERSPECTIVE - z);
-        const depthT = (z + RADIUS) / (2 * RADIUS);
-        el.style.transform = `translate3d(${x}px, ${p.y0}px, 0) scale(${scale})`;
+        const scale = perspective / (perspective - z);
+        const depthT = (z + radius) / (2 * radius);
+        el.style.transform = `translate3d(${x}px, ${pt.y0}px, 0) scale(${scale})`;
         el.style.opacity = String(0.32 + depthT * 0.68);
         el.style.zIndex = String(Math.round(z * 100));
       });
@@ -79,15 +102,15 @@ export default function IconCloud() {
 
     raf = requestAnimationFrame(paint);
     return () => cancelAnimationFrame(raf);
-  }, [points]);
+  }, [points, radius, perspective]);
 
   return (
-    <div className={styles.scene}>
+    <div className={styles.scene} ref={sceneRef}>
       {SLUGS.map((slug, i) => (
         <div
           key={slug}
           ref={(el) => {
-            refs.current[i] = el;
+            tagRefs.current[i] = el;
           }}
           className={styles.tag}
           title={ICONS[slug].title}
