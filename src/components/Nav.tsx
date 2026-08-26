@@ -84,8 +84,9 @@ export default function Nav() {
           <span />
         </button>
 
-        <Link href="/#contact" className={styles.cta}>
-          Falar comigo <span aria-hidden="true">↗</span>
+        <Link href="/#contact" className={styles.cta} aria-label="Falar comigo">
+          <span className={styles.ctaText}>Falar comigo</span>
+          <span aria-hidden="true">↗</span>
         </Link>
       </div>
 

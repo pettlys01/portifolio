@@ -197,3 +197,24 @@
     font-size: 0.9rem;
   }
 }
+
+/* Abaixo disso o logo + hambúrguer + CTA por extenso já não cabem com
+   folga (testado: a 320px sobra zero de margem) — qualquer diferença
+   de fonte do aparelho empurra pra quebra de linha e o botão fica
+   torto. O CTA vira um botão redondo só com a seta, mesma linguagem
+   visual do hambúrguer ao lado; o texto continua para leitor de tela
+   via aria-label no link. */
+@media (max-width: 400px) {
+  .cta {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    gap: 0;
+    justify-content: center;
+    font-size: 1.05rem;
+  }
+
+  .ctaText {
+    display: none;
+  }
+}
