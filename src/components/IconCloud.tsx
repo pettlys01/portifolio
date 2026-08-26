@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import TechIcon, { ICONS, type TechSlug } from "./TechIcon";
 import styles from "./IconCloud.module.css";
 
@@ -25,6 +25,12 @@ const SLUGS: TechSlug[] = [
 const CALIBRATION_BOX = 420;
 const RADIUS_RATIO = 138 / CALIBRATION_BOX;
 const PERSPECTIVE_RATIO = 530 / CALIBRATION_BOX;
+/* O tamanho do card também precisa escalar com a caixa — do
+   contrário, numa caixa pequena o raio encolhe mas o card continua do
+   mesmo tamanho absoluto, e a esfera vira uma pilha de ícones colados
+   uns nos outros. */
+const TAG_RATIO = 60 / CALIBRATION_BOX;
+const ICON_RATIO = 26 / 60;
 const SPEED = (2 * Math.PI) / 9000; // rad/ms — uma volta completa a cada 9s
 const TILT = -0.18; // leve inclinação fixa, pra esfera não parecer um círculo achatado de frente
 
@@ -72,6 +78,8 @@ export default function IconCloud() {
 
   const radius = box * RADIUS_RATIO;
   const perspective = box * PERSPECTIVE_RATIO;
+  const tagSize = box * TAG_RATIO;
+  const iconSize = Math.round(tagSize * ICON_RATIO);
   const points = useMemo(() => spherePoints(SLUGS.length, radius, TILT), [radius]);
 
   useEffect(() => {
@@ -104,8 +112,10 @@ export default function IconCloud() {
     return () => cancelAnimationFrame(raf);
   }, [points, radius, perspective]);
 
+  const sceneStyle = { "--tag-size": `${tagSize}px` } as unknown as CSSProperties;
+
   return (
-    <div className={styles.scene} ref={sceneRef}>
+    <div className={styles.scene} ref={sceneRef} style={sceneStyle}>
       {SLUGS.map((slug, i) => (
         <div
           key={slug}
@@ -115,7 +125,7 @@ export default function IconCloud() {
           className={styles.tag}
           title={ICONS[slug].title}
         >
-          <TechIcon slug={slug} size={26} />
+          <TechIcon slug={slug} size={iconSize} />
         </div>
       ))}
     </div>
