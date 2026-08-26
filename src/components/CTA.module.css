@@ -45,3 +45,113 @@
     margin-right: auto;
   }
 }
+
+/* O formulário troca de lugar com os botões (nunca os dois juntos) —
+   revelado ao clicar em "Falar sobre meu projeto", como divulgação
+   progressiva: só quem já sinalizou intenção vê os campos. */
+.form {
+  margin: var(--s-7) auto 0;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  text-align: left;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.field label {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--fg-muted);
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--fg-muted);
+  opacity: 0.7;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg-card);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 88px;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--fg-muted);
+  opacity: 0.6;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--line-strong);
+  background: var(--bg-soft);
+}
+
+.field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23b0b0bb' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+.formActions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+  margin-top: var(--s-2);
+}
+
+.cancelBtn {
+  color: var(--fg-muted);
+  font-size: 0.92rem;
+  transition: color 0.2s ease;
+}
+
+.cancelBtn:hover {
+  color: var(--fg);
+}
+
+.directLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--s-6);
+  color: var(--fg-muted);
+  font-size: 0.92rem;
+  transition: color 0.2s ease;
+}
+
+.directLink:hover {
+  color: var(--fg);
+}
+
+.directLink span {
+  transition: transform 0.25s ease;
+}
+
+.directLink:hover span {
+  transform: translate(2px, -2px);
+}
