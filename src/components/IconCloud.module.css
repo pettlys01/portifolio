@@ -1,33 +1,53 @@
-.grid {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  /* align-items:start em vez do stretch padrão do grid — sem isso,
-     cada célula é esticada pra bater com a mais alta da linha, e se
-     aspect-ratio não for respeito à risca nesse navegador, vira uma
-     cápsula alta em vez de um quadrado. */
-  align-items: start;
-  gap: var(--s-3);
+.scene {
   width: 100%;
-  max-width: 380px;
-  margin: 0 auto;
-}
-
-.cell {
+  height: 100%;
+  perspective: 800px;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Altura fixa, não deduzida de aspect-ratio — não depende de
-     nenhuma interação entre aspect-ratio, min-height e o stretch do
-     grid pra ficar quadrada. */
-  height: 84px;
+}
+
+.sphere {
+  position: relative;
+  width: 1px;
+  height: 1px;
+  transform-style: preserve-3d;
+  animation: spin 22s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.tag {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid var(--line);
   border-radius: 14px;
   background: var(--bg-card);
+  backface-visibility: hidden;
   transition: border-color 0.25s ease, background-color 0.25s ease;
 }
 
-.cell:hover {
+.tag:hover {
   border-color: var(--line-strong);
   background: var(--bg-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sphere {
+    animation: none;
+  }
 }

@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { Cloud, renderSimpleIcon, type ICloud } from "react-icon-cloud";
+import { useMemo } from "react";
 import TechIcon, { ICONS, type TechSlug } from "./TechIcon";
 import styles from "./IconCloud.module.css";
 
@@ -17,95 +16,43 @@ const SLUGS: TechSlug[] = [
   "analytics",
 ];
 
-/* Grade estática: é o que aparece em toque e sempre que a esfera
-   não puder rodar. A esfera roda em canvas e depende de recursos que
-   nem todo navegador de celular entrega — o conteúdo não pode
-   depender disso para existir. */
-function StaticGrid() {
-  return (
-    <ul className={styles.grid}>
-      {SLUGS.map((slug) => (
-        <li key={slug} className={styles.cell} title={ICONS[slug].title}>
-          <TechIcon slug={slug} size={30} />
-        </li>
-      ))}
-    </ul>
-  );
+const RADIUS = 95;
+
+/* Distribuição de Fibonacci sobre a esfera: espaça N pontos de forma
+   quase uniforme na superfície, sem aglomerar nos polos como uma
+   grade lat/long faria. */
+function sphereTransforms(count: number, radius: number) {
+  return Array.from({ length: count }, (_, i) => {
+    const phi = Math.acos(1 - (2 * (i + 0.5)) / count);
+    const theta = Math.PI * (1 + Math.sqrt(5)) * i;
+    return `rotateY(${theta}rad) rotateX(${Math.PI / 2 - phi}rad) translateZ(${radius}px)`;
+  });
 }
 
+/* Esfera 3D só com CSS: transform-style + uma única animação de
+   rotação no elemento pai (composta na GPU, custo de JS é zero por
+   frame). Substitui o antigo <Cloud> da react-icon-cloud, que
+   redesenhava um <canvas> 2D via TagCanvas/eval() a cada frame — pesado
+   o bastante para travar em celulares mais fracos. backface-visibility
+   esconde a face de trás dos ícones que giraram para longe da câmera,
+   em vez de mostrar o texto espelhado. */
 export default function IconCloud() {
-  const [mode, setMode] = useState<"static" | "cloud">("static");
+  const transforms = useMemo(() => sphereTransforms(SLUGS.length, RADIUS), []);
 
-  useEffect(() => {
-    const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    const wide = window.matchMedia("(min-width: 980px)").matches;
-    /* iPadOS reporta hover:hover + pointer:fine mesmo em toque puro
-       (sem mouse/trackpad) — sem esse filtro, a esfera tenta rodar
-       em tablet e trava sem reagir a arrastar com o dedo. */
-    const touchPrimary = navigator.maxTouchPoints > 0;
-    if (fine && wide && !touchPrimary) setMode("cloud");
-  }, []);
-
-  const icons = useMemo(
-    () =>
-      SLUGS.map((slug) => {
-        const data = ICONS[slug];
-        return renderSimpleIcon({
-          icon: {
-            title: data.title,
-            slug,
-            hex: data.hex.replace("#", ""),
-            path: data.path,
-            source: "",
-            svg: "",
-          },
-          bgHex: "#08080a",
-          fallbackHex: "#f7f6f4",
-          minContrastRatio: 1.6,
-          size: 44,
-          aProps: {
-            href: undefined,
-            target: undefined,
-            rel: undefined,
-            onClick: (e: React.MouseEvent) => e.preventDefault(),
-          },
-        });
-      }),
-    []
+  return (
+    <div className={styles.scene}>
+      <div className={styles.sphere}>
+        {SLUGS.map((slug, i) => (
+          <div
+            key={slug}
+            className={styles.tag}
+            style={{ transform: transforms[i] }}
+            title={ICONS[slug].title}
+          >
+            <TechIcon slug={slug} size={26} />
+          </div>
+        ))}
+      </div>
+    </div>
   );
-
-  const cloudProps: Omit<ICloud, "children"> = useMemo(
-    () => ({
-      containerProps: {
-        style: {
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          height: "100%",
-        },
-      },
-      options: {
-        reverse: true,
-        depth: 0.92,
-        wheelZoom: false,
-        imageScale: 2,
-        activeCursor: "default",
-        tooltip: "native",
-        initial: [0.06, -0.06],
-        clickToFront: 500,
-        tooltipDelay: 0,
-        outlineColour: "#0000",
-        maxSpeed: 0.028,
-        minSpeed: 0.014,
-        dragControl: true,
-        fadeIn: 600,
-      },
-    }),
-    []
-  );
-
-  if (mode === "static") return <StaticGrid />;
-
-  return <Cloud {...cloudProps}>{icons}</Cloud>;
 }
