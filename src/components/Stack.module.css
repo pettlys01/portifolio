@@ -71,13 +71,13 @@
     gap: var(--s-7);
   }
 
+  /* Caixa quadrada, igual ao desktop: a esfera é circular, então uma
+     caixa 4:3 (mais larga que alta) limitava o raio pela altura e
+     sobrava espaço vazio nas laterais — a esfera ficava pequena
+     dentro de uma caixa grande. Largura máxima menor que o desktop
+     controla a altura total ocupada na tela. */
   .cloudCol {
-    max-width: 420px;
+    max-width: 300px;
     margin: 0 auto;
-  }
-
-  .cloud {
-    aspect-ratio: 4 / 3;
-    max-height: 320px;
   }
 }
