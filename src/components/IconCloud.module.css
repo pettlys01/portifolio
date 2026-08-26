@@ -1,27 +1,7 @@
 .scene {
+  position: relative;
   width: 100%;
   height: 100%;
-  perspective: 800px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sphere {
-  position: relative;
-  width: 1px;
-  height: 1px;
-  transform-style: preserve-3d;
-  animation: spin 22s linear infinite;
-}
-
-@keyframes spin {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(360deg);
-  }
 }
 
 .tag {
@@ -37,17 +17,11 @@
   border: 1px solid var(--line);
   border-radius: 14px;
   background: var(--bg-card);
-  backface-visibility: hidden;
+  will-change: transform, opacity;
   transition: border-color 0.25s ease, background-color 0.25s ease;
 }
 
 .tag:hover {
   border-color: var(--line-strong);
   background: var(--bg-soft);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sphere {
-    animation: none;
-  }
 }
