@@ -39,7 +39,7 @@ export const projects: Project[] = [
     category: "Saúde · Landing Page",
     description:
       "Landing page premium para uma clínica odontológica, construída para transmitir confiança através de composição e ritmo visual.",
-    url: "https://lumina-tawny-six.vercel.app",
+    url: "https://lumina-lcs16.vercel.app",
     image: "/projects/odontologia.webp",
     imageMobile: "/projects/odontologia-mobile.webp",
     technologies: ["HTML", "CSS", "JavaScript"],
