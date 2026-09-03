@@ -9,8 +9,8 @@ export default function Footer() {
       <div className={styles.brand}>
         {/* Footer fica sempre sobre o fundo escuro da página (nunca
             sobre a seção clara de Serviços, que termina bem antes) —
-            preta.jpeg sem precisar de troca condicional aqui. */}
-        <Image src="/preta.jpeg" alt="Mirai" width={40} height={40} className={styles.mark} />
+            mirai-mark-light sem precisar de troca condicional aqui. */}
+        <Image src="/mirai-mark-light.png" alt="Mirai" width={421} height={177} className={styles.mark} />
         <span className={styles.tagline}>Design e desenvolvimento para negócios que querem se destacar.</span>
       </div>
       <div className={styles.right}>
@@ -21,7 +21,7 @@ export default function Footer() {
           <a href="#work">Trabalhos</a>
           <a href="#contact">Contato</a>
         </div>
-        <span>© {year} LCS</span>
+        <span>© {year} Mirai</span>
       </div>
     </footer>
   );

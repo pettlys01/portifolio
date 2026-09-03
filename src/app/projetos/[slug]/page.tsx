@@ -24,7 +24,7 @@ export async function generateMetadata({
   if (!project) return {};
 
   return {
-    title: `${project.title} — LCS`,
+    title: `${project.title} — Mirai`,
     description: project.description,
   };
 }

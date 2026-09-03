@@ -19,11 +19,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://portifolio-pi-nine-80.vercel.app"),
-  title: "LCS — Estúdio Digital",
+  title: "Mirai — Criação de Sites e Design Web",
   description:
     "Sites institucionais e landing pages construídos com direção de arte, desenvolvimento e performance sob o mesmo teto.",
   openGraph: {
-    title: "LCS — Estúdio Digital",
+    title: "Mirai — Criação de Sites e Design Web",
     description:
       "Sites institucionais e landing pages construídos com direção de arte, desenvolvimento e performance sob o mesmo teto.",
     type: "website",

@@ -9,7 +9,7 @@ const WHATSAPP_NUMBER = "5511937104630";
 const PROJECT_TYPES = ["Site institucional", "Landing page", "Loja virtual", "Ainda não sei"];
 const TIMELINES = ["Sem pressa", "Até 1 mês", "Tenho urgência"];
 
-const DIRECT_MESSAGE = "Olá! Vim pelo site da LCS e quero saber mais sobre criação de site.";
+const DIRECT_MESSAGE = "Olá! Vim pelo site da Mirai e quero saber mais sobre criação de site.";
 
 function whatsAppUrl(text: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
@@ -37,7 +37,7 @@ export default function CTA() {
     e.preventDefault();
 
     const lines = [
-      "Olá! Vim pelo site da LCS.",
+      "Olá! Vim pelo site da Mirai.",
       "",
       `Meu nome é ${name.trim()}.`,
       `Estou procurando: ${projectType}.`,

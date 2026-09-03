@@ -61,18 +61,19 @@ export default function Nav() {
 
   return (
     <nav className={classes}>
-      {/* Logo em imagem, não mais texto com mix-blend-mode: difference —
-          esse truque só funciona pra texto/cor sólida, não pra um JPEG
-          opaco. Como o fundo da logo é sólido (preto ou branco), a troca
-          é por asset: preta.jpeg no normal, branca.jpeg só quando o nav
-          está sobre a seção clara (Serviços), reaproveitando o mesmo
-          estado `light` que já existe pra isso. */}
+      {/* Logo sem fundo (fundo sólido recortado por chroma-key a partir
+          dos JPEGs originais — nenhum dos dois tinha transparência de
+          verdade) e recortada rente ao conteúdo, pra ocupar o espaço
+          disponível em vez de sobrar moldura. Duas versões por causa do
+          contraste: mark-light (letra clara) sobre fundo escuro, mark-dark
+          (letra escura) só quando o nav está sobre a seção clara
+          (Serviços) — reaproveita o mesmo estado `light` de antes. */}
       <Link href="/" className={styles.mark} aria-label="Mirai — início">
         <Image
-          src={light ? "/branca.jpeg" : "/preta.jpeg"}
+          src={light ? "/mirai-mark-dark.png" : "/mirai-mark-light.png"}
           alt="Mirai"
-          width={40}
-          height={40}
+          width={421}
+          height={177}
           className={styles.markImg}
           priority
         />

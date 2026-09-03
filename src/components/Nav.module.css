@@ -45,18 +45,17 @@
 }
 
 /* O logo passa por cima de seções claras e escuras. Como agora é uma
-   imagem com fundo sólido (não mais texto), a troca de contraste é por
-   asset (ver Nav.tsx: preta.jpeg / branca.jpeg conforme `light`), não
-   por mix-blend-mode. */
+   imagem sem fundo (não mais texto), a troca de contraste é por asset
+   (ver Nav.tsx: mirai-mark-light / mirai-mark-dark conforme `light`),
+   não por mix-blend-mode. */
 .mark {
   display: flex;
   align-items: center;
 }
 
 .markImg {
-  height: 40px;
-  width: 40px;
-  border-radius: 8px;
+  height: 26px;
+  width: auto;
 }
 
 /* A cápsula flutuante: fundo translúcido com blur, borda de 1px e
