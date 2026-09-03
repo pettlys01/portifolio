@@ -16,9 +16,16 @@
   gap: var(--s-2);
 }
 
+/* Sem align-items no .brand, o padrão (stretch) esticava a imagem pra
+   preencher a largura inteira da coluna e distorcia o desenho —
+   align-self trava o próprio tamanho intrínseco (height + width:auto),
+   e object-fit:contain é rede de segurança contra qualquer achatamento
+   se o box ainda ficar menor que o conteúdo por algum outro motivo. */
 .mark {
   height: 30px;
   width: auto;
+  align-self: flex-start;
+  object-fit: contain;
 }
 
 .tagline {
