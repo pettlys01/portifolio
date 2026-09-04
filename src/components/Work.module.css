@@ -100,13 +100,43 @@
   min-width: 0;
 }
 
+.infoTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding-bottom: var(--s-4);
+  margin-bottom: var(--s-4);
+  border-bottom: 1px solid var(--line);
+}
+
 .number {
   font-family: var(--font-num);
   font-size: 0.9rem;
   color: var(--fg-muted);
-  padding-bottom: var(--s-4);
-  margin-bottom: var(--s-4);
-  border-bottom: 1px solid var(--line);
+}
+
+/* Só existe nos projetos revelados pelo "Ver mais" — fecha e volta aos
+   3 principais. Ghost discreto: não é uma ação "de destaque", é a saída. */
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--fg-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.close:hover {
+  border-color: var(--fg-muted);
+  color: var(--fg);
 }
 
 .title {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FEATURED_COUNT, projects } from "@/data/projects";
@@ -12,6 +12,18 @@ export default function Work() {
   const [showAll, setShowAll] = useState(false);
   const visible = showAll ? projects : projects.slice(0, FEATURED_COUNT);
   const hiddenCount = projects.length - FEATURED_COUNT;
+
+  // Ao fechar, a lista encolhe e a rolagem "sobra" acima do que o usuário
+  // estava vendo — sem isso o botão "Ver mais" reaparece longe do clique.
+  // Guardamos onde ele deve pousar (o topo do próprio botão) antes de
+  // colapsar o estado.
+  const moreRef = useRef<HTMLDivElement>(null);
+  function handleCollapse() {
+    setShowAll(false);
+    requestAnimationFrame(() => {
+      moreRef.current?.scrollIntoView({ block: "center" });
+    });
+  }
 
   return (
     <section id="work" className={styles.section}>
@@ -62,7 +74,19 @@ export default function Work() {
               </Link>
 
               <div className={styles.info}>
-                <span className={styles.number}>{project.number}</span>
+                <div className={styles.infoTop}>
+                  <span className={styles.number}>{project.number}</span>
+                  {i >= FEATURED_COUNT && (
+                    <button
+                      type="button"
+                      className={styles.close}
+                      onClick={handleCollapse}
+                      aria-label={`Fechar ${project.title} e voltar aos projetos principais`}
+                    >
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  )}
+                </div>
 
                 <Link href={`/projetos/${project.slug}`}>
                   <h3 className={styles.title}>{project.title}</h3>
@@ -113,7 +137,7 @@ export default function Work() {
       </div>
 
       {!showAll && hiddenCount > 0 && (
-        <div className={styles.more}>
+        <div className={styles.more} ref={moreRef}>
           <button
             type="button"
             className="btn btnGhost"
