@@ -1,10 +1,8 @@
 .card {
   position: relative;
   height: 100%;
-  min-height: 340px;
-  display: flex;
   border-radius: 20px;
-  overflow: hidden;
+  padding: var(--s-5) var(--s-5) var(--s-6);
   background:
     linear-gradient(160deg, rgba(247, 246, 244, 0.07), transparent 55%),
     var(--bg-card);
@@ -12,63 +10,48 @@
   transition: border-color 0.3s ease;
 }
 
-/* Hover discreto — mesma linguagem do .row:hover do Services (leve
-   tint de fundo), sem rastrear cursor. O que comunica progressão
-   aqui é o escalonamento vertical das etapas, não o card em si. */
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: rgba(247, 246, 244, 0.035);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
 .card:hover {
   border-color: var(--line-strong);
 }
 
-.card:hover::before {
-  opacity: 1;
-}
-
-.layer {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: var(--s-6);
-}
-
 .header {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: var(--s-3);
+  position: relative;
 }
 
-.num {
+.node {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   font-family: var(--font-num);
   font-size: 0.85rem;
   color: var(--fg-muted);
+  border: 1.5px solid var(--line-strong);
 }
 
 .title {
-  font-size: 1.55rem;
+  font-size: 1.4rem;
   font-weight: 700;
 }
 
 .body {
   margin-top: var(--s-4);
-  font-size: 1rem;
+  font-size: 0.98rem;
   color: var(--fg-muted);
   line-height: 1.6;
 }
 
 .list {
   list-style: none;
-  margin-top: auto;
-  padding-top: var(--s-5);
+  margin: var(--s-4) 0 0;
+  padding-top: var(--s-4);
   display: flex;
   flex-direction: column;
   gap: var(--s-2);
@@ -78,7 +61,7 @@
 .list li {
   display: flex;
   gap: var(--s-2);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   color: var(--fg-muted);
 }
 
@@ -88,9 +71,70 @@
   flex-shrink: 0;
 }
 
+/* ═══ assinaturas de movimento — uma por etapa, presas ao Reveal já
+   existente (.reveal.is-visible, globals.css): dispara uma vez, ao
+   entrar na tela, sem JS novo nem observer duplicado. ═══ */
+
+/* Entender — pulso de foco atrás do número, como um radar captando
+   informação. */
+.pulse .node::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid var(--fg-muted);
+  opacity: 0;
+}
+
+:global(.reveal.is-visible) .pulse .node::before {
+  animation: pulseRing 900ms ease-out 500ms both;
+}
+
+@keyframes pulseRing {
+  0% { opacity: 0.7; transform: scale(0.6); }
+  100% { opacity: 0; transform: scale(1.8); }
+}
+
+/* Estruturar — os itens da lista entram desalinhados e se organizam
+   em fila. */
+.settle .list li {
+  opacity: 0;
+  transform: translateX(-16px) rotate(-1.5deg);
+}
+
+:global(.reveal.is-visible) .settle .list li {
+  animation: settleIn 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+:global(.reveal.is-visible) .settle .list li:nth-child(1) { animation-delay: 420ms; }
+:global(.reveal.is-visible) .settle .list li:nth-child(2) { animation-delay: 560ms; }
+:global(.reveal.is-visible) .settle .list li:nth-child(3) { animation-delay: 700ms; }
+
+@keyframes settleIn {
+  to { opacity: 1; transform: translateX(0) rotate(0); }
+}
+
+/* Aprovação — o "check" só aparece quando a etapa é confirmada, com
+   uma pequena chegada de mola (não é ambiente como o pulso, é uma
+   confirmação pontual). */
+.check .node {
+  transform: scale(0);
+}
+
+:global(.reveal.is-visible) .check .node {
+  animation: checkPop 420ms cubic-bezier(0.34, 1.56, 0.64, 1) 500ms both;
+}
+
+@keyframes checkPop {
+  to { transform: scale(1); }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .card,
-  .card::before {
-    transition: none;
+  .pulse .node::before,
+  .settle .list li,
+  .check .node {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
   }
 }

@@ -9,63 +9,22 @@
   margin: 0 auto;
 }
 
-/* Escalonado, não alinhado: cada etapa desce um degrau em relação à
-   anterior. Lido como progressão — o que uma grade reta de quatro
-   colunas iguais não comunica. */
-.steps {
+.mediaRow {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: var(--s-5);
-  align-items: start;
 }
 
-.steps > * {
-  display: flex;
-  height: 100%;
+.textRow {
+  margin-top: var(--s-5);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-5);
 }
 
-.steps > * > div {
-  width: 100%;
-}
-
-.steps > *:nth-child(2) {
-  margin-top: 44px;
-}
-
-.steps > *:nth-child(3) {
-  margin-top: 88px;
-}
-
-.steps > *:nth-child(4) {
-  margin-top: 132px;
-}
-
-
-@media (max-width: 1100px) {
-  .steps {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s-5);
-  }
-
-  .steps > *:nth-child(2) {
-    margin-top: 44px;
-  }
-
-  .steps > *:nth-child(3) {
-    margin-top: 0;
-  }
-
-  .steps > *:nth-child(4) {
-    margin-top: 44px;
-  }
-}
-
-@media (max-width: 620px) {
-  .steps {
+@media (max-width: 900px) {
+  .mediaRow,
+  .textRow {
     grid-template-columns: 1fr;
-  }
-
-  .steps > *:nth-child(n) {
-    margin-top: 0;
   }
 }
