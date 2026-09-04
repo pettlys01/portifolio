@@ -21,7 +21,7 @@ export const projects: Project[] = [
     category: "Institucional · B2B",
     description:
       "Presença digital para uma empresa de elevadores que foge do padrão genérico de engenharia — precisão, tecnologia e sofisticação em primeiro plano.",
-    url: "https://pettlys01-elevadores.vercel.app",
+    url: "https://hb-elevadores.vercel.app",
     image: "/projects/elevadores.webp",
     imageMobile: "/projects/elevadores-mobile.webp",
     technologies: ["HTML", "CSS", "JavaScript"],
@@ -39,7 +39,7 @@ export const projects: Project[] = [
     category: "Saúde · Landing Page",
     description:
       "Landing page premium para uma clínica odontológica, construída para transmitir confiança através de composição e ritmo visual.",
-    url: "https://lumina-lcs16.vercel.app",
+    url: "https://lumina-mirai-agencia.vercel.app",
     image: "/projects/odontologia.webp",
     imageMobile: "/projects/odontologia-mobile.webp",
     technologies: ["HTML", "CSS", "JavaScript"],
@@ -50,4 +50,45 @@ export const projects: Project[] = [
     result:
       "Landing page focada em conversão, com prova social (avaliações reais do Google) e caminho direto para o agendamento de avaliação.",
   },
+  {
+    number: "03",
+    slug: "salgados-festas",
+    title: "Salgados & Festas",
+    category: "Alimentação · Catálogo & Encomenda",
+    description:
+      "Catálogo digital para salgaderia/confeitaria, com pedido e orçamento centralizados no WhatsApp — sem depender só de bio de Instagram ou lista de preço solta.",
+    url: "https://confeitaria-template.mirai-agencia.workers.dev",
+    image: "/projects/confeitaria.webp",
+    imageMobile: "/projects/confeitaria-mobile.webp",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    challenge:
+      "O mercado de salgado de festa costuma viver em cardápio solto — print, PDF, mensagem de texto — sem fotos confiáveis dos produtos reais e sem regra clara de pedido mínimo. O cliente decide sem saber se o que chegar bate com o que viu.",
+    approach:
+      "Cada foto do catálogo passa por conferência contra o produto real antes de entrar no ar, nunca banco de imagens. O WhatsApp é o canal primário de pedido, com o iFood como opção secundária discreta.",
+    result:
+      "Catálogo navegável por categoria com regra de pedido mínimo visível em cada item, e caminho direto para o WhatsApp em todo ponto de decisão.",
+  },
+  {
+    number: "04",
+    slug: "nando-guincho",
+    title: "Nando Guincho",
+    category: "Serviço Local · Landing Page",
+    description:
+      "Landing page de conversão para guincho autônomo, construída para decisão sob pressão — carro quebrado, poucos minutos para escolher.",
+    url: "https://nando-guincho.mirai-agencia.workers.dev",
+    image: "/projects/guincho.webp",
+    imageMobile: "/projects/guincho-mobile.webp",
+    technologies: ["React", "TypeScript", "Tailwind CSS"],
+    challenge:
+      "Guincho autônomo compete com uma categoria conhecida por ligação anônima e preço combinado na hora, sem saber se quem atende é o dono do guincho ou um intermediário. Numa decisão sob estresse, essa incerteza custa caro.",
+    approach:
+      "Ancoragem de preço logo no hero, selos de confiança específicos — guincho próprio, CNPJ regularizado, não genéricos — e tempo médio de chegada declarado, para reduzir a pergunta \"esse é confiável?\" antes que ela trave a ligação.",
+    result:
+      "Página de uma tela só, sem formulário, com ligação e WhatsApp como únicas ações — nenhuma etapa entre a decisão e o contato.",
+  },
 ];
+
+/** Quantos projetos aparecem por padrão na home antes do "Ver mais projetos".
+ *  A ordem do array já reflete a curadoria (institucional/saúde primeiro,
+ *  os dois mais recentes revelados sob demanda) — ver memory/pettlys-cloudflare-workers-projects.md. */
+export const FEATURED_COUNT = 3;

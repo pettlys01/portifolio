@@ -1,20 +1,27 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { projects } from "@/data/projects";
+import { FEATURED_COUNT, projects } from "@/data/projects";
 import Reveal from "./Reveal";
 import SectionIntro from "./SectionIntro";
 import styles from "./Work.module.css";
 
 export default function Work() {
+  const [showAll, setShowAll] = useState(false);
+  const visible = showAll ? projects : projects.slice(0, FEATURED_COUNT);
+  const hiddenCount = projects.length - FEATURED_COUNT;
+
   return (
     <section id="work" className={styles.section}>
       <SectionIntro
-        title="Dois projetos, dois problemas diferentes."
-        lead="Um precisava provar competência técnica. O outro, ganhar confiança antes da primeira visita."
+        title="Categorias diferentes, o mesmo problema central."
+        lead="Elevador, clínica, guincho ou salgado — o produto muda. A pergunta que o design precisa responder primeiro não muda: por que essa pessoa deveria confiar agora?"
       />
 
       <div className={styles.list}>
-        {projects.map((project, i) => (
+        {visible.map((project, i) => (
           <Reveal key={project.slug}>
             <article
               className={`${styles.project} ${i % 2 === 1 ? styles.flipped : ""}`}
@@ -104,6 +111,21 @@ export default function Work() {
           </Reveal>
         ))}
       </div>
+
+      {!showAll && hiddenCount > 0 && (
+        <div className={styles.more}>
+          <button
+            type="button"
+            className="btn btnGhost"
+            onClick={() => setShowAll(true)}
+          >
+            Ver mais projetos
+            <span className={styles.moreArrow} aria-hidden="true">
+              ↓
+            </span>
+          </button>
+        </div>
+      )}
     </section>
   );
 }

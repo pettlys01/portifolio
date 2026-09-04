@@ -178,6 +178,25 @@
   margin-top: var(--s-7);
 }
 
+/* Progressive disclosure: revela o resto do portfólio sob demanda, em vez
+   de empilhar todos os cases "flagship" de uma vez — cada um é pesado
+   (composição desktop+celular, prova, 2 CTAs) e compete por atenção com
+   os outros. */
+.more {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(56px, 8vw, 96px);
+}
+
+.moreArrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.more .btn:hover .moreArrow {
+  transform: translateY(3px);
+}
+
 @media (max-width: 900px) {
   .project {
     grid-template-columns: 1fr;
