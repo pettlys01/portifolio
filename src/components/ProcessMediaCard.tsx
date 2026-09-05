@@ -24,9 +24,6 @@ export default function ProcessMediaCard({
           sizes="(max-width: 900px) 100vw, 640px"
           className={styles.img}
         />
-        <span className={styles.tag}>
-          <span className={styles.dot} aria-hidden="true" /> placeholder
-        </span>
       </div>
 
       <div className={styles.body}>

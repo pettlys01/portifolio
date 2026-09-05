@@ -29,31 +29,6 @@
   opacity: 1;
 }
 
-.tag {
-  position: absolute;
-  bottom: var(--s-3);
-  right: var(--s-3);
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 4px 9px 4px 7px;
-  border-radius: 999px;
-  background: rgba(8, 8, 10, 0.6);
-  backdrop-filter: blur(6px);
-  font-family: var(--font-num);
-  font-size: 0.66rem;
-  letter-spacing: 0.03em;
-  color: var(--fg-muted);
-  z-index: 2;
-}
-
-.dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--fg-muted);
-}
-
 .body {
   padding: var(--s-6);
 }
