@@ -7,9 +7,15 @@
   overflow: hidden;
   background: var(--bg-card);
   border: 1px solid var(--line);
-  will-change: transform;
   --mx: 50%;
   --my: 50%;
+}
+
+.tilt {
+  position: relative;
+  display: flex;
+  width: 100%;
+  will-change: transform;
 }
 
 /* Banho na cor oficial da marca — a cor é herdada da tecnologia,
@@ -58,7 +64,7 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .card {
+  .tilt {
     transform-style: preserve-3d;
   }
 

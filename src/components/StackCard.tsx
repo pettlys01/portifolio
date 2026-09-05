@@ -62,24 +62,32 @@ export default function StackCard({
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ ...style, ["--tint" as string]: tint }}
+      style={{ ["--tint" as string]: tint }}
       className={styles.card}
     >
-      <span className={styles.wash} aria-hidden="true" />
-      <span className={styles.sheen} aria-hidden="true" />
+      {/* `overflow: hidden` (cantos arredondados) fica só aqui, num
+          elemento que nunca recebe transform. `rotateX/Y` + `overflow:
+          hidden` no MESMO elemento é um bug real de renderização —
+          o recorte não acompanha a rotação 3D direito e corta a borda
+          em ângulos mais extremos. Girar só o miolo, com o molde
+          arredondado parado por fora, resolve sem perder o tilt. */}
+      <div className={styles.tilt} style={style}>
+        <span className={styles.wash} aria-hidden="true" />
+        <span className={styles.sheen} aria-hidden="true" />
 
-      <div className={styles.layer}>
-        <div className={styles.top}>
-          <span className={styles.icon}>
-            <TechIcon slug={slug} size={22} />
-          </span>
-          <span className={styles.dot} aria-hidden="true" />
-        </div>
+        <div className={styles.layer}>
+          <div className={styles.top}>
+            <span className={styles.icon}>
+              <TechIcon slug={slug} size={22} />
+            </span>
+            <span className={styles.dot} aria-hidden="true" />
+          </div>
 
-        <div className={styles.bottom}>
-          <span className={styles.group}>{group}</span>
-          <h3 className={styles.name}>{name}</h3>
-          <p className={styles.role}>{role}</p>
+          <div className={styles.bottom}>
+            <span className={styles.group}>{group}</span>
+            <h3 className={styles.name}>{name}</h3>
+            <p className={styles.role}>{role}</p>
+          </div>
         </div>
       </div>
     </div>
