@@ -1,222 +1,282 @@
-.nav {
+.header {
   position: fixed;
-  top: var(--s-5);
-  left: 0;
-  right: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--s-4);
-  padding: 0 var(--edge);
+  inset: 0 0 auto 0;
+  z-index: 60;
   pointer-events: none;
 }
 
-.nav > * {
+.header > * {
   pointer-events: auto;
 }
 
-/* No topo da página não há nada pra esconder atrás do nav — a
-   cápsula e o blend-mode do logo já resolvem sozinhos. Rolando a
-   página, porém, o título do Hero (centralizado na tela toda) passa
-   por baixo do nav antes de sair — sem um fundo cobrindo a barra
-   inteira (não só a cápsula), o texto atravessa visualmente o nav.
-   Esse véu só aparece depois de rolar. */
-.nav::before {
-  content: "";
-  position: absolute;
-  inset: -40px 0 -32px 0;
-  z-index: -1;
-  background: var(--bg);
-  border-bottom: 1px solid var(--line);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+/* ── faixa superior ───────────────────────────────────── */
+.bar {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: rgba(40, 40, 42, 0.62);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font-size: 0.76rem;
+  color: rgba(236, 235, 230, 0.86);
+  transition: transform 0.5s var(--ease-out), opacity 0.4s ease;
 }
 
-.nav.scrolled::before {
-  opacity: 1;
+.barTrack {
+  display: flex;
+  width: max-content;
+  animation: barMove 46s linear infinite;
 }
 
-/* Mesmo véu, mas na cor da seção clara (Services, #f2f1ee) — o
-   logo já se resolve sozinho via mix-blend-mode: difference. */
-.nav.light::before {
-  background: #f2f1ee;
-  border-bottom-color: rgba(15, 15, 18, 0.12);
+.barGroup {
+  display: flex;
 }
 
-/* O logo passa por cima de seções claras e escuras. Como agora é uma
-   imagem sem fundo (não mais texto), a troca de contraste é por asset
-   (ver Nav.tsx: mirai-mark-light / mirai-mark-dark conforme `light`),
-   não por mix-blend-mode. */
-.mark {
+.barGroup span {
+  white-space: nowrap;
+  padding-right: 1.4rem;
+}
+
+.barGroup span::after {
+  content: "•";
+  margin-left: 1.4rem;
+  color: var(--sky);
+}
+
+@keyframes barMove {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ── linha do topo (desktop) ──────────────────────────── */
+.row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 14px var(--edge) 0;
+  transition: transform 0.6s var(--ease-out), opacity 0.4s ease;
+}
+
+.logo {
+  justify-self: start;
   display: flex;
   align-items: center;
 }
 
-.markImg {
-  height: 26px;
+.logo img {
+  height: 28px;
   width: auto;
 }
 
-/* A cápsula flutuante: fundo translúcido com blur, borda de 1px e
-   raio total — separada do logo e do CTA, como na referência. */
 .pill {
   display: flex;
   align-items: center;
-  gap: var(--s-2);
-  padding: 6px;
-  border: 1px solid var(--line);
+  gap: 2px;
+  padding: 4px;
   border-radius: 999px;
-  background: rgba(19, 19, 23, 0.72);
-  backdrop-filter: blur(16px);
+  background: rgba(8, 8, 10, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .pill a {
-  padding: 10px 20px;
+  padding: 9px 22px;
   border-radius: 999px;
-  font-size: 0.96rem;
+  font-size: 0.92rem;
   font-weight: 500;
-  color: var(--fg-muted);
-  transition: color 0.2s ease, background-color 0.2s ease;
+  letter-spacing: 0.02em;
+  color: var(--fg);
+  transition: background-color 0.25s ease;
 }
 
 .pill a:hover {
-  color: var(--fg);
-  background: rgba(247, 246, 244, 0.07);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.cta {
-  display: inline-flex;
+.actions {
+  justify-self: end;
+  display: flex;
   align-items: center;
-  gap: var(--s-2);
-  background: var(--fg);
-  color: var(--bg);
-  padding: 13px 24px;
-  border-radius: 999px;
-  font-size: 0.96rem;
-  font-weight: 600;
-  transition: transform 0.2s ease;
+  gap: 10px;
 }
 
-.cta:hover {
+.wa {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #10b981;
+  color: #fff;
+  transition: transform 0.35s var(--ease-out), background-color 0.25s ease;
+}
+
+.wa:hover {
   transform: translateY(-2px);
+  background: #0ea371;
 }
 
-.mobileGroup {
+.scrolled .bar {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.scrolled .row {
+  transform: translateY(-160%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── cápsula presa embaixo depois de rolar ───────────── */
+.dock {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  z-index: 60;
   display: flex;
   align-items: center;
-  gap: var(--s-3);
+  gap: 12px;
+  transform: translate(-50%, 160%);
+  opacity: 0;
+  transition: transform 0.7s var(--ease-out), opacity 0.4s ease;
 }
 
-/* Botão hambúrguer — versão compacta da cápsula, mesma linguagem
-   visual (fundo translúcido, blur, borda), só aparece onde a cápsula
-   de texto desaparece. Nada de ícone genérico: duas barras simples. */
-.menuBtn {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(19, 19, 23, 0.72);
-  backdrop-filter: blur(16px);
+.dockOn {
+  transform: translate(-50%, 0);
+  opacity: 1;
 }
 
-.menuBtn span {
-  width: 16px;
-  height: 1.5px;
-  background: var(--fg);
-  border-radius: 2px;
+.round {
+  border-radius: 50%;
 }
 
-/* Lista compacta dos mesmos 4 links da cápsula — não é um menu
-   fullscreen, é a cápsula do desktop virada de lado. */
-.mobileMenu {
-  position: absolute;
-  top: calc(100% + 10px);
-  left: var(--edge);
-  right: var(--edge);
-  z-index: 40;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: var(--s-2);
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  background: rgba(19, 19, 23, 0.92);
-  backdrop-filter: blur(16px);
-  animation: menuIn 0.15s ease;
-}
-
-.mobileMenu a {
-  padding: 14px 16px;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--fg-muted);
-  transition: color 0.2s ease, background-color 0.2s ease;
-}
-
-.mobileMenu a:hover,
-.mobileMenu a:active {
+.round span {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #0a0a0c;
   color: var(--fg);
-  background: rgba(247, 246, 244, 0.07);
+  font-size: 1rem;
+}
+
+/* ── cápsula do celular ──────────────────────────────── */
+.capsule {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .row,
+  .dock {
+    display: none;
+  }
+
+  .capsule {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 12px 0;
+    padding: 7px 7px 7px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(8, 8, 10, 0.86);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: transform 0.5s var(--ease-out);
+  }
+
+  .scrolled .capsule {
+    transform: translateY(-32px);
+  }
+
+  .capsuleLogo img {
+    height: 22px;
+    width: auto;
+  }
+
+  .capsuleActions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .capsule .wa {
+    width: 38px;
+    height: 38px;
+  }
+
+  .menuBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .menuBtn span {
+    width: 15px;
+    height: 1.5px;
+    border-radius: 2px;
+    background: var(--fg);
+    transition: transform 0.35s var(--ease-out);
+  }
+
+  .menuBtnOpen span:first-child {
+    transform: translateY(3.25px) rotate(45deg);
+  }
+
+  .menuBtnOpen span:last-child {
+    transform: translateY(-3.25px) rotate(-45deg);
+  }
+
+  .menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 14px 18px 20px;
+    border-radius: 26px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(8, 8, 10, 0.95);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    animation: menuIn 0.35s var(--ease-out);
+  }
+
+  .menu a:not(:global(.btnPill)) {
+    width: 100%;
+    padding: 8px 0;
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    line-height: 1.2;
+  }
+
+  .menu :global(.btnPill) {
+    margin-top: 14px;
+  }
 }
 
 @keyframes menuIn {
   from {
     opacity: 0;
-    transform: translateY(-6px);
+    transform: translateY(-8px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mobileMenu {
-    animation: none;
-  }
-}
-
-@media (max-width: 940px) {
-  .pill {
-    display: none;
-  }
-
-  .menuBtn {
-    display: flex;
-  }
-}
-
-@media (max-width: 480px) {
-  .cta {
-    padding: 11px 18px;
-    font-size: 0.9rem;
-  }
-}
-
-/* Abaixo disso o logo + hambúrguer + CTA por extenso já não cabem com
-   folga (testado: a 320px sobra zero de margem) — qualquer diferença
-   de fonte do aparelho empurra pra quebra de linha e o botão fica
-   torto. O CTA vira um botão redondo só com a seta, mesma linguagem
-   visual do hambúrguer ao lado; o texto continua para leitor de tela
-   via aria-label no link. */
-@media (max-width: 400px) {
-  .cta {
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    gap: 0;
-    justify-content: center;
-    font-size: 1.05rem;
-  }
-
-  .ctaText {
-    display: none;
+    transform: none;
   }
 }

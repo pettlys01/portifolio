@@ -1,116 +1,210 @@
 .hero {
   position: relative;
-  overflow: hidden;
-  min-height: 100svh;
-  width: 100%;
-  background: var(--bg);
-}
-
-/* O shader é orgânico — em qualquer instante um trecho claro pode
-   cair exatamente na borda inferior. Sem esse fade, a seção seguinte
-   (fundo sólido) entra como um corte duro, como se o Hero tivesse
-   "pausado" antes de continuar. */
-.fade {
-  position: absolute;
-  inset: auto 0 0 0;
-  height: min(340px, 45%);
-  z-index: 1;
-  background: linear-gradient(to bottom, transparent, var(--bg));
-  pointer-events: none;
-}
-
-.content {
-  position: relative;
-  z-index: 10;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  padding: 150px var(--edge) 0;
+}
+
+.inner {
+  width: 100%;
+  max-width: 1260px;
+  margin: auto auto 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 400px);
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 140px var(--edge) var(--s-8);
+  column-gap: clamp(32px, 6vw, 110px);
 }
 
-/* Véu translúcido, não sólido — a fumaça precisa continuar visível
-   por trás do texto (mesmo que discreta). Um núcleo opaco aqui vira
-   um buraco reto contra o movimento orgânico do shader ao redor. */
-.content::before {
-  content: "";
-  position: absolute;
-  inset: -5% -8%;
-  z-index: -1;
-  background: radial-gradient(
-    ellipse 42% 48% at center,
-    rgba(8, 8, 10, 0.5) 0%,
-    rgba(8, 8, 10, 0.28) 48%,
-    transparent 80%
-  );
+.title {
+  display: grid;
+  justify-items: start;
+  font-size: clamp(2.8rem, 5.5vw, 5.6rem);
+  line-height: 1.14;
 }
 
-.headline {
-  font-variation-settings: "wdth" 102;
-  font-weight: 800;
-  font-size: clamp(2rem, 5.5vw, 4.4rem);
-  line-height: 1.05;
-  max-width: 24ch;
-  letter-spacing: -0.01em;
+/* Cada linha sobe de dentro da própria máscara. */
+.line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.3em;
+  margin-bottom: -0.3em;
+  white-space: nowrap;
 }
 
-.sub {
-  margin-top: var(--s-6);
-  max-width: 46ch;
-  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
-  color: var(--fg-muted);
-  opacity: 0;
-  animation: rise 0.7s ease forwards;
-  animation-delay: 0.28s;
+.line > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32em;
+  animation: lineUp 1.2s var(--ease-out) both;
+  animation-delay: calc(var(--intro-delay) + var(--d, 0s));
 }
 
-.headline {
-  opacity: 0;
-  animation: rise 0.75s ease forwards;
-  animation-delay: 0.12s;
+.l2 {
+  --d: 0.09s;
 }
 
-.actions {
-  margin-top: var(--s-7);
+.l3 {
+  --d: 0.18s;
+  justify-self: end;
+}
+
+.l3 em {
+  font-style: italic;
+}
+
+.rule {
+  display: inline-block;
+  width: clamp(60px, 11vw, 176px);
+  height: 2px;
+  background: var(--fg);
+  transform-origin: left;
+  animation: draw 1.1s var(--ease-out) both;
+  animation-delay: calc(var(--intro-delay) + 0.55s);
+}
+
+.aside {
+  animation: fadeUp 1s var(--ease-out) both;
+  animation-delay: calc(var(--intro-delay) + 0.6s);
+}
+
+.aside p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--fg);
+  opacity: 0.92;
+}
+
+.aside :global(.btnPill) {
+  margin-top: 26px;
+}
+
+/* ── ferramentas (rodapé do hero) ─────────────────────── */
+.tools {
+  width: 100%;
+  max-width: 1260px;
+  margin: auto auto 0;
+  padding: 72px 0 40px;
   display: flex;
-  gap: var(--s-3);
-  flex-wrap: wrap;
-  justify-content: center;
-  opacity: 0;
-  animation: rise 0.7s ease forwards;
-  animation-delay: 0.42s;
+  align-items: center;
+  gap: 40px;
+  animation: fadeUp 1s var(--ease-out) both;
+  animation-delay: calc(var(--intro-delay) + 0.9s);
 }
 
-@keyframes rise {
+.toolsLabel {
+  flex-shrink: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.toolsViewport {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.toolsTrack {
+  display: flex;
+  width: max-content;
+  animation: marquee 34s linear infinite;
+}
+
+.toolsGroup {
+  display: flex;
+  gap: 48px;
+  padding-right: 48px;
+  list-style: none;
+}
+
+.toolsGroup li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  font-size: 1.05rem;
+  opacity: 0.86;
+}
+
+@keyframes lineUp {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 }
 
-@media (max-width: 560px) {
-  .actions {
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Com a serifada mais larga, título e texto lado a lado só cabem em
+   telas largas; abaixo disso empilham. */
+@media (max-width: 1100px) {
+  .inner {
+    grid-template-columns: 1fr;
+    row-gap: 30px;
+  }
+
+  .aside {
+    justify-self: center;
+    max-width: 44ch;
+    text-align: center;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    padding-top: 118px;
+  }
+
+  .title {
+    width: 100%;
+    font-size: clamp(2.3rem, 11vw, 4rem);
+  }
+
+  .line {
+    white-space: normal;
+  }
+
+  .l3 {
+    text-align: right;
+  }
+
+  .aside p {
+    font-size: 1.08rem;
+  }
+
+  .tools {
     flex-direction: column;
-    width: 100%;
-    max-width: 340px;
-  }
-
-  .actions a {
-    width: 100%;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .headline,
-  .sub,
-  .actions {
-    animation: none;
-    opacity: 1;
+    gap: 18px;
+    padding: 56px 0 32px;
   }
 }

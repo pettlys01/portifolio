@@ -1,0 +1,40 @@
+/* 100cqh = altura da moldura: o fim da rolagem é calc(-100% + 100cqh). */
+.frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  container-type: size;
+}
+
+.frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.run img {
+  will-change: transform;
+  animation: scrollShot var(--dur) ease-in-out infinite;
+}
+
+@keyframes scrollShot {
+  0%,
+  8% {
+    transform: translateY(0);
+  }
+  46%,
+  54% {
+    transform: translateY(calc(-100% + 100cqh));
+  }
+  92%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .run img {
+    animation: none;
+  }
+}

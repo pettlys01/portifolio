@@ -1,0 +1,29 @@
+.wrap {
+  --p: 0;
+  padding-inline: calc(var(--edge) * (1 - var(--p)));
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 8.4;
+  max-height: 90vh;
+  overflow: hidden;
+  border-radius: calc(28px * (1 - var(--p)));
+  background: var(--surface);
+}
+
+.frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transform: scale(calc(1.08 - 0.08 * var(--p)));
+  transform-origin: top center;
+}
+
+@media (max-width: 700px) {
+  .frame {
+    aspect-ratio: 4 / 3.3;
+  }
+}

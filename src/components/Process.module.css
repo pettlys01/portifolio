@@ -1,0 +1,188 @@
+.section {
+  padding-block: clamp(110px, 12vw, 160px);
+  overflow: hidden;
+}
+
+/* Título à esquerda alinhado ao container; os cards sangram até a
+   borda direita da tela. */
+.wrap {
+  display: grid;
+  grid-template-columns: minmax(260px, 400px) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+  padding-left: max(var(--edge), calc((100vw - var(--maxw)) / 2 + var(--edge)));
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(2.6rem, 4.2vw, 3.9rem);
+  line-height: 1;
+}
+
+.big {
+  margin-left: 0.3em;
+  font-size: 1.5em;
+  font-style: italic;
+  line-height: 1;
+}
+
+.l3 {
+  margin-left: 0.9em;
+  font-style: italic;
+}
+
+.lead {
+  margin-top: 26px;
+  max-width: 34ch;
+  font-size: 1.1rem;
+  color: var(--fg-muted);
+}
+
+.stage {
+  position: relative;
+  min-width: 0;
+}
+
+.track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 8px var(--edge) 24px 4px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  cursor: grab;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.card {
+  flex: 0 0 min(330px, 78vw);
+  min-height: 470px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  scroll-snap-align: start;
+  border-radius: 26px;
+  border: 1px solid var(--line);
+  background: rgba(23, 23, 26, 0.86);
+}
+
+.media {
+  position: relative;
+  height: 240px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.media img {
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px 24px 26px;
+}
+
+.stepNum {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--violet);
+}
+
+.cardTitle {
+  font-size: 1.75rem;
+  font-style: italic;
+  line-height: 1.1;
+}
+
+.cardBody p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--fg-muted);
+}
+
+/* Bolinha "Arraste" que segue o mouse sobre os cards. */
+.cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 72px;
+  height: 72px;
+  margin: -36px 0 0 -36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 0.74rem;
+  font-weight: 600;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(var(--cx, 0), var(--cy, 0));
+  transition: opacity 0.25s ease;
+}
+
+.cursorOn {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .cursor {
+    display: none;
+  }
+
+  .track {
+    cursor: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    grid-template-columns: 1fr;
+    padding-left: 0;
+  }
+
+  .intro {
+    padding-inline: var(--edge);
+    text-align: center;
+  }
+
+  .title {
+    align-items: center;
+  }
+
+  .big,
+  .l3 {
+    margin-left: 0;
+  }
+
+  .lead {
+    margin-inline: auto;
+  }
+
+  .track {
+    padding-left: var(--edge);
+    scroll-padding-left: var(--edge);
+  }
+
+  .card {
+    min-height: 440px;
+  }
+
+  .media {
+    height: 210px;
+  }
+}

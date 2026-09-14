@@ -1,0 +1,58 @@
+.section {
+  padding-block: clamp(100px, 12vw, 170px);
+}
+
+.kicker {
+  font-size: clamp(1.02rem, 1.4vw, 1.25rem);
+  color: var(--fg-muted);
+}
+
+/* Parágrafo grande em sans, largura cheia e alinhado à esquerda — como
+   o "Business leaders trust us…" da referência. */
+.lead {
+  margin-top: 28px;
+  font-size: clamp(1.45rem, 3vw, 2.75rem);
+  line-height: 1.3;
+}
+
+.factsLabel {
+  margin-top: clamp(80px, 9vw, 130px);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--fg-muted);
+}
+
+.facts {
+  margin-top: 22px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 40px 48px;
+}
+
+.fact h3 {
+  font-size: clamp(1.5rem, 1.8vw, 1.7rem);
+  line-height: 1.15;
+}
+
+.fact p {
+  margin-top: 12px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--fg-muted);
+}
+
+@media (max-width: 900px) {
+  .facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .facts {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}

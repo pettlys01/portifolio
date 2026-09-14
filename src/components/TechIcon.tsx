@@ -59,9 +59,12 @@ export type TechSlug = keyof typeof ICONS;
 export default function TechIcon({
   slug,
   size = 26,
+  mono = false,
 }: {
   slug: TechSlug;
   size?: number;
+  /** Usa a cor do texto em vez da cor oficial — faixa monocromática. */
+  mono?: boolean;
 }) {
   const icon = ICONS[slug];
   if (!icon) return null;
@@ -72,7 +75,7 @@ export default function TechIcon({
       viewBox="0 0 24 24"
       width={size}
       height={size}
-      fill={icon.hex}
+      fill={mono ? "currentColor" : icon.hex}
       aria-hidden="true"
       focusable="false"
     >

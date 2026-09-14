@@ -1,0 +1,153 @@
+.index {
+  position: relative;
+  margin-top: clamp(64px, 8vw, 110px);
+}
+
+.list {
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  padding: 28px 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.thumb {
+  display: none;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.2vw, 3rem);
+  line-height: 1.15;
+  transition: transform 0.6s var(--ease-out), opacity 0.4s ease;
+}
+
+.category {
+  font-size: 1.05rem;
+  color: var(--fg-muted);
+  transition: opacity 0.4s ease;
+}
+
+.go {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.98rem;
+  font-weight: 500;
+}
+
+.go :global(.pillArrow) {
+  transition: transform 0.45s var(--ease-out);
+}
+
+/* Linha sob o cursor avança um pouco; as outras recuam. */
+.on .name {
+  transform: translateX(16px);
+}
+
+.on .go :global(.pillArrow) {
+  transform: rotate(45deg);
+}
+
+.show .row:not(.on) .name,
+.show .row:not(.on) .category {
+  opacity: 0.4;
+}
+
+/* Prévia do site que segue o cursor (posição via transform no JS). */
+.preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: clamp(260px, 24vw, 360px);
+  aspect-ratio: 16 / 10;
+  margin: calc(clamp(260px, 24vw, 360px) * -0.3125) 0 0 calc(clamp(260px, 24vw, 360px) * -0.5);
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.8;
+  transition: opacity 0.35s ease, scale 0.5s var(--ease-out);
+}
+
+.show .preview {
+  opacity: 1;
+  scale: 1;
+}
+
+.preview img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.preview .current {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .preview {
+    display: none;
+  }
+
+  .thumb {
+    display: block;
+    width: 112px;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 10px;
+  }
+
+  .row {
+    grid-template-columns: 112px minmax(0, 1.3fr) minmax(0, 1fr) auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .row {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "thumb name go"
+      "thumb category go";
+    column-gap: 16px;
+    row-gap: 2px;
+    padding: 18px 0;
+  }
+
+  .thumb {
+    grid-area: thumb;
+    width: 96px;
+  }
+
+  .name {
+    grid-area: name;
+    font-size: 1.4rem;
+  }
+
+  .category {
+    grid-area: category;
+    font-size: 0.9rem;
+  }
+
+  .go {
+    grid-area: go;
+  }
+
+  .goText {
+    display: none;
+  }
+}

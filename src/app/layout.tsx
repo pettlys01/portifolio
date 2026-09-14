@@ -1,21 +1,31 @@
 import type { Metadata } from "next";
-import { Archivo, Geist_Mono } from "next/font/google";
+import { Libre_Caslon_Text, Roboto } from "next/font/google";
+import Ambient from "@/components/Ambient";
+import Loader from "@/components/Loader";
 import "./globals.css";
 
-/* Archivo é uma grotesca com eixo de largura variável — em peso alto
-   e largura expandida ela tem energia editorial (usada muito em
-   design esportivo e de revista) sem perder ar profissional. */
-const archivo = Archivo({
+/* Roboto no corpo e na interface — a mesma grotesca da referência,
+   aberta e confortável em parágrafos grandes. */
+const roboto = Roboto({
   variable: "--font-sans",
   subsets: ["latin"],
-  axes: ["wdth"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-mono",
+/* Libre Caslon Text nos títulos: comparada lado a lado com a "memogram"
+   da Creativeans (proprietária), foi a livre mais próxima em largura,
+   peso e itálico. A Instrument Serif anterior era condensada e, com
+   espaçamento negativo, deixava os títulos apertados. */
+const caslon = Libre_Caslon_Text({
+  variable: "--font-serif",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: "400",
+  style: ["normal", "italic"],
 });
+
+/* Roda durante o parse do HTML, antes da primeira pintura: decide se o
+   loader aparece (primeira visita da sessão, sem "reduzir movimento").
+   Sem isso a página pintaria e só depois o loader cobriria — um piscar. */
+const INTRO_SCRIPT = `(function(){try{var d=document.documentElement;var seen=sessionStorage.getItem("mirai-intro")==="1";var rm=window.matchMedia("(prefers-reduced-motion: reduce)").matches;d.classList.add(seen||rm?"intro-done":"intro-run")}catch(e){document.documentElement.classList.add("intro-done")}})();`;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://portifolio-pi-nine-80.vercel.app"),
@@ -32,8 +42,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={`${archivo.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+    <html
+      lang="pt-BR"
+      className={`${roboto.variable} ${caslon.variable}`}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: INTRO_SCRIPT }} />
+      </head>
+      <body>
+        <Loader />
+        <Ambient />
+        {children}
+      </body>
     </html>
   );
 }

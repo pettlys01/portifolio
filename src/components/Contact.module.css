@@ -1,0 +1,168 @@
+.section {
+  padding: clamp(90px, 11vw, 150px) var(--edge);
+}
+
+.frame {
+  max-width: 1040px;
+  margin: 0 auto;
+  border-radius: 30px;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  overflow: hidden;
+  border-radius: 28.5px;
+  background: rgba(12, 12, 14, 0.92);
+}
+
+.visual {
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 34px;
+  background:
+    radial-gradient(90% 70% at 30% 20%, rgba(124, 58, 237, 0.55), transparent 60%),
+    radial-gradient(80% 60% at 80% 90%, rgba(56, 189, 248, 0.32), transparent 60%),
+    radial-gradient(60% 50% at 10% 95%, rgba(244, 114, 182, 0.25), transparent 60%),
+    #0c0c10;
+}
+
+.mark {
+  width: 160px;
+  height: auto;
+}
+
+.caption {
+  font-size: 0.9rem;
+  color: var(--fg-muted);
+}
+
+.content {
+  padding: clamp(28px, 4vw, 54px);
+}
+
+.title {
+  font-size: clamp(2.3rem, 3.8vw, 3.4rem);
+  line-height: 1.12;
+}
+
+.title em {
+  font-style: italic;
+}
+
+.body {
+  margin-top: 18px;
+  max-width: 44ch;
+  font-size: 1.1rem;
+  color: var(--fg-muted);
+}
+
+.actions {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 22px;
+}
+
+.direct {
+  display: inline-block;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--line-strong);
+  font-size: 0.92rem;
+  color: var(--fg-muted);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.direct:hover {
+  color: var(--fg);
+  border-color: var(--fg);
+}
+
+.form {
+  margin-top: 26px;
+  display: grid;
+  gap: 16px;
+  text-align: left;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 0.86rem;
+  color: var(--fg-muted);
+}
+
+.optional {
+  opacity: 0.7;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  font: inherit;
+  color: var(--fg);
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.05);
+  transition: border-color 0.2s ease;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--violet);
+}
+
+.field select option {
+  color: #111;
+}
+
+.formActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.cancel {
+  font-size: 0.92rem;
+  color: var(--fg-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 800px) {
+  .card {
+    grid-template-columns: 1fr;
+  }
+
+  .visual {
+    min-height: 190px;
+    align-items: center;
+  }
+
+  .content {
+    text-align: center;
+  }
+
+  .body {
+    margin-inline: auto;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+}

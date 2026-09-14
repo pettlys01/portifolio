@@ -1,0 +1,290 @@
+/* Proporção travada em 16:10 — a mesma dos prints de computador, pra nada
+   do site ficar cortado. */
+.tile {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: 600px;
+  aspect-ratio: 16 / 10;
+  border-radius: 28px;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(90% 80% at 15% 0%, rgba(124, 58, 237, 0.45), transparent 60%),
+    radial-gradient(80% 70% at 100% 100%, rgba(56, 189, 248, 0.28), transparent 60%),
+    #111116;
+  /* Dentro do carrossel (que anda por transform) o Chromium desenhava
+     camadas fora dos cantos arredondados no Android; o clip-path recorta. */
+  clip-path: inset(0 round 28px);
+}
+
+.grid {
+  width: 100%;
+}
+
+.rest,
+.anim {
+  position: absolute;
+  inset: 0;
+}
+
+.rest img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.anim {
+  transition: opacity 0.3s ease;
+}
+
+/* Enquanto anima, o topo parado some — senão aparece atrás da tela encolhida. */
+.play .rest {
+  visibility: hidden;
+}
+
+.play.out .rest {
+  visibility: visible;
+}
+
+.out .anim {
+  opacity: 0;
+}
+
+/* Molduras com container-type: 100cqh é a altura da moldura, então o fim
+   da rolagem é calc(-100% + 100cqh) em qualquer tamanho de card. */
+.desk,
+.phone {
+  position: absolute;
+  overflow: hidden;
+  container-type: size;
+}
+
+.desk img,
+.phone img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.play .desk img,
+.play .phone img {
+  will-change: transform;
+}
+
+.desk {
+  inset: 0;
+  transform-origin: 0 0;
+}
+
+.phone {
+  top: 9%;
+  right: 6%;
+  height: 70%;
+  aspect-ratio: 9 / 19.5;
+  border: 4px solid #1c1c22;
+  border-radius: 20px;
+  background: #000;
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.55);
+  transform: translateX(180%) rotate(8deg);
+}
+
+/* Linha do tempo (10s, em loop): rola o computador, encolhe ele pro lado,
+   o celular entra e rola, e tudo volta. */
+.play .desk {
+  animation: deskFrame 10s ease-in-out infinite;
+}
+
+.play .desk img {
+  animation: deskScroll 10s ease-in-out infinite;
+}
+
+.play .phone {
+  animation: phoneFrame 10s ease-in-out infinite;
+}
+
+.play .phone img {
+  animation: phoneScroll 10s ease-in-out infinite;
+}
+
+@keyframes deskScroll {
+  0%,
+  6% {
+    transform: translateY(0);
+  }
+  38%,
+  46% {
+    transform: translateY(calc(-100% + 100cqh));
+  }
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes deskFrame {
+  0%,
+  44% {
+    transform: none;
+    border-radius: 0;
+  }
+  54%,
+  88% {
+    transform: translate(5%, 8%) scale(0.58);
+    border-radius: 18px;
+  }
+  98%,
+  100% {
+    transform: none;
+    border-radius: 0;
+  }
+}
+
+@keyframes phoneFrame {
+  0%,
+  46% {
+    transform: translateX(180%) rotate(8deg);
+  }
+  56%,
+  88% {
+    transform: none;
+  }
+  98%,
+  100% {
+    transform: translateX(180%) rotate(8deg);
+  }
+}
+
+@keyframes phoneScroll {
+  0%,
+  58% {
+    transform: translateY(0);
+  }
+  86%,
+  100% {
+    transform: translateY(calc(-100% + 100cqh));
+  }
+}
+
+/* Revelação circular nascendo da base — o mesmo gesto da referência. */
+.reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  clip-path: circle(0% at 50% 100%);
+  transition: clip-path 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.tile:hover .reveal,
+.tile:focus-visible .reveal {
+  clip-path: circle(142% at 50% 100%);
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.3) 34%, transparent 56%);
+}
+
+.info {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px 30px;
+}
+
+.title {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 1.9rem;
+  color: #fff;
+}
+
+.title span {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+}
+
+.tags li {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 0.85rem;
+  color: #fff;
+}
+
+/* Sem hover (toque): o nome fica sempre visível na base do card. */
+@media (hover: none) {
+  .reveal {
+    clip-path: none;
+  }
+
+  .shade {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.82), transparent 36%);
+  }
+
+  .tags {
+    display: none;
+  }
+}
+
+/* Celular: o mesmo card 16:10 do computador. A tela rola e fica parada
+   no fim enquanto encolhe pro lado; só então o celular entra e rola. */
+@media (max-width: 700px) {
+  .tile {
+    width: min(360px, 86vw);
+    border-radius: 20px;
+    clip-path: inset(0 round 20px);
+  }
+
+  .grid {
+    width: 100%;
+  }
+
+  .phone {
+    border-width: 3px;
+    border-radius: 12px;
+  }
+
+  .play .desk img {
+    animation-name: deskScrollHold;
+  }
+
+  .info {
+    gap: 8px;
+    padding: 14px 18px;
+  }
+
+  .title {
+    font-size: 1.35rem;
+  }
+}
+
+@keyframes deskScrollHold {
+  0%,
+  6% {
+    transform: translateY(0);
+  }
+  38%,
+  90% {
+    transform: translateY(calc(-100% + 100cqh));
+  }
+  98%,
+  100% {
+    transform: translateY(0);
+  }
+}

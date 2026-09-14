@@ -88,6 +88,15 @@ export const projects: Project[] = [
   },
 ];
 
+/** Prints longos de cada site no ar (as primeiras telas, no computador e
+ *  no celular). Rolam com transform animado — liso a 60fps, sem vídeo. */
+export function shotsFor(slug: string) {
+  return {
+    desktop: `/shots/${slug}-desktop.webp`,
+    mobile: `/shots/${slug}-mobile.webp`,
+  };
+}
+
 /** Quantos projetos aparecem por padrão na home antes do "Ver mais projetos".
  *  A ordem do array já reflete a curadoria (institucional/saúde primeiro,
  *  os dois mais recentes revelados sob demanda) — ver memory/pettlys-cloudflare-workers-projects.md. */
