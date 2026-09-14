@@ -3,7 +3,6 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import styles from "./Loader.module.css";
 
-const KEY = "mirai-intro";
 const PALETTE = ["#7c3aed", "#a78bfa", "#38bdf8", "#f472b6", "#34d399", "#f5d0fe"];
 
 type Particle = {
@@ -20,7 +19,7 @@ type Particle = {
  * Intro de marca: partículas coloridas giram e se juntam formando o
  * logo da Mirai, depois a tela escura some e o hero entra.
  *
- * Só na primeira visita da sessão e nunca com "reduzir movimento".
+ * Roda a cada carregamento do site, nunca com "reduzir movimento".
  * A decisão de mostrar é tomada por script no <head> (ver layout.tsx);
  * este componente só executa a animação. Rede de segurança no CSS:
  * mesmo que o JS falhe, a tela escura some sozinha em 4,5s.
@@ -32,13 +31,9 @@ export default function Loader() {
 
   useLayoutEffect(() => {
     const root = document.documentElement;
-    let seen = false;
-    try {
-      seen = sessionStorage.getItem(KEY) === "1";
-    } catch {}
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (seen || reduce) {
+    if (reduce) {
       root.classList.add("intro-done");
       setDone(true);
       return;
@@ -52,15 +47,16 @@ export default function Loader() {
     let raf = 0;
 
     function finish() {
-      try {
-        sessionStorage.setItem(KEY, "1");
-      } catch {}
       root.classList.add("intro-done");
       setDone(true);
     }
 
-    timers.push(window.setTimeout(() => setLeaving(true), 1900));
-    timers.push(window.setTimeout(finish, 2350));
+    // Celular e tablet: o logo completo fica mais tempo na tela antes de
+    // sair (lá a imagem chega mais tarde e o nome mal aparecia inteiro).
+    // Mantenha em sincronia com --intro-delay no globals.css.
+    const leaveAt = window.matchMedia("(max-width: 1024px), (pointer: coarse)").matches ? 2700 : 1900;
+    timers.push(window.setTimeout(() => setLeaving(true), leaveAt));
+    timers.push(window.setTimeout(finish, leaveAt + 450));
 
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");

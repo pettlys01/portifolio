@@ -47,6 +47,13 @@
   --intro-delay: 1.9s;
 }
 
+/* Celular e tablet: a intro segura o logo completo por mais tempo. */
+@media (max-width: 1024px), (pointer: coarse) {
+  :root.intro-run {
+    --intro-delay: 2.7s;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

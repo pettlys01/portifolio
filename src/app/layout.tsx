@@ -23,9 +23,9 @@ const caslon = Libre_Caslon_Text({
 });
 
 /* Roda durante o parse do HTML, antes da primeira pintura: decide se o
-   loader aparece (primeira visita da sessão, sem "reduzir movimento").
+   loader aparece (todo carregamento, menos com "reduzir movimento").
    Sem isso a página pintaria e só depois o loader cobriria — um piscar. */
-const INTRO_SCRIPT = `(function(){try{var d=document.documentElement;var seen=sessionStorage.getItem("mirai-intro")==="1";var rm=window.matchMedia("(prefers-reduced-motion: reduce)").matches;d.classList.add(seen||rm?"intro-done":"intro-run")}catch(e){document.documentElement.classList.add("intro-done")}})();`;
+const INTRO_SCRIPT = `(function(){try{var d=document.documentElement;var rm=window.matchMedia("(prefers-reduced-motion: reduce)").matches;d.classList.add(rm?"intro-done":"intro-run")}catch(e){document.documentElement.classList.add("intro-done")}})();`;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://portifolio-pi-nine-80.vercel.app"),
